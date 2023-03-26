@@ -1,20 +1,15 @@
-const mysql=require('mysql2/promise')
-const ssh=require('node-ssh')
-async function runQuery(){
-    const connection=await mysql.connection({
-        host:'192.168.2.1',
-        port:3305,
-        user:'root',
-        password:'ryuty1015',
-        database:'hs_library'        
-    });
-
-    connection.connect((err)=>{
-        if(err){
-            console.error('Error Connecting to MySQL Databases : ' + err.stack)
-            return;
-        }
-        console.log('Connected to MySQL databases with connection id '+connection.threadId)
-    });
-    connection.end();
-}
+const mysql=require('aws-sdk')
+const rds=new AWS.RDS({
+    endpoint:'hslibrary.cxnldqrql9ej.ap-southeast-2.rds.amazonaws.com',
+    port:3306,
+    database:'hslibrary',
+    user:'admin',
+    password:'hslibrary'
+});
+rds.connect((err)=>{
+    if(err){
+        console.err('AWS RDS 연결 실패 : ',err.stack);
+        return;
+    }
+    console.log('AWS RDS 연결 성공');
+})
