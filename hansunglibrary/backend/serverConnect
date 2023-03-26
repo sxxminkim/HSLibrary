@@ -5,7 +5,15 @@ async function runQuery(){
         port:3305,
         user:'root',
         password:'ryuty1015',
-        database:'hs_library'
-        
+        database:'hs_library'        
     });
+
+    connection.connect((err)=>{
+        if(err){
+            console.error('Error Connecting to MySQL Databases : ' + err.stack)
+            return;
+        }
+        console.log('Connected to MySQL databases with connection id '+connection.threadId)
+    });
+    connection.end();
 }
