@@ -1,7 +1,8 @@
 const mysql=require('mysql2/promise')
+const ssh=require('node-ssh')
 async function runQuery(){
     const connection=await mysql.connection({
-        host:'127.0.0.1',
+        host:'192.168.2.1',
         port:3305,
         user:'root',
         password:'ryuty1015',
