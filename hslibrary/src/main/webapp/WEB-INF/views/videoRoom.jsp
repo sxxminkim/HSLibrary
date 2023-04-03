@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <meta charset="UTF-8">
     <title>무릉서원</title>
 </head>
