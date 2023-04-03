@@ -1,15 +1,16 @@
+//router
 import {Button} from '@mui/material';
-import {Link, BrowserRouter, Switch, Route} from 'react-router-dom';
 import './App.css';
-//import ImgCard from 'src/Card.js';
+//라우팅할 페이지 불러오기
+import {Link, BrowserRouter, Switch, Route} from 'react-router-dom';
 import Home from './pages/Home.js';
-//import bookConnect;
 
-import Search from './pages/Search.js';
-import Propose from './pages/Propose.js';
-import Notice from './pages/Notice.js';
-import Use from './pages/Use.js';
-
+import Videos from './pages/Videos.js';
+import Books from './pages/Books.js';
+//import Notice from './pages/Notice.js';
+import BookLent from './pages/BookLent.js';
+import VideoLent from './pages/VideoLent';
+import Members from './pages/Members';
 function HansungLibrary() {
   return (
     
@@ -18,27 +19,31 @@ function HansungLibrary() {
         <Link to="/">
           <Button variant="outlined">Home</Button>
         </Link>
-        <Link to="/Search">
-          <Button variant="outlined">도서검색</Button>
+        <Link to="/Videos">
+          <Button variant="outlined">영상관리</Button>
         </Link>
-        <Link to="/Use">
-          <Button variant="outlined">도서관이용</Button>
+        <Link to="/BookLent">
+          <Button variant="outlined">도서대출</Button>
         </Link>
-        <Link to='/Propose'>
-          <Button variant="outlined">도서추천</Button>
+        <Link to='/Books'>
+          <Button variant="outlined">도서관리</Button>
         </Link>
-        <Link to='/Notice'>
-          <Button variant="outlined">공지사항</Button>
+        <Link to='/VideoLent'>
+          <Button variant="outlined">영상대출</Button>
+        </Link>
+        <Link to='/Members'>
+          <Button variant="outlined">회원관리</Button>
         </Link>
       </header>
       <hr/>
       <main>
         <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/Search" component={Search}/>
-        <Route path="/Use" component={Use}/>
-        <Route path="/Propose" component={Propose}/>
-        <Route path="/Notice" component={Notice}/>
+        <Route path="/Videos" component={Videos}/>
+        <Route path="/BookLent" component={BookLent}/>
+        <Route path="/Books" component={Books}/>
+        <Route path="/VideoLent" component={VideoLent}/>
+        <Route path="/Members" component={Members}/>
         </Switch>
       </main>
     </BrowserRouter>
