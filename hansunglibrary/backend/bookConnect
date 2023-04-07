@@ -4,7 +4,7 @@ const cors = require ('cors');
 const app=express();
 app.use(cors());
 app.use(express.json());
-const pool=musql.createPool({
+const pool=mysql.createPool({
     host : 'hslibrary.cxnldqrql9ej.ap-southeast-2.rds.amazonaws.com',
     user : 'admin',
     password : 'hslibrary',
