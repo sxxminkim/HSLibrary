@@ -1,29 +1,25 @@
 package com.manage.hslibrary.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
-import java.util.Locale;
 
+@Controller
 public class HomeController {
-    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-    /**
-     * Simply selects the home view to render by returning its name.
-     */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(Locale locale, Model model) {
-        logger.info("method [" + Thread.currentThread().getStackTrace()[1].getMethodName() + "]");	// 로그에 메소드명 나타내기x
-        return "home";
+    @GetMapping("/")
+    public String index(){
+        return "index";
     }
-
-    @RequestMapping(value = "/login")
-    public String login(Model model) {
-        logger.info("method [" + Thread.currentThread().getStackTrace()[1].getMethodName() + "]");
-        return "login";	// login.jsp 호출!!!
+    @Bean
+    public ViewResolver viewResolver(){
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
     }
-
 }

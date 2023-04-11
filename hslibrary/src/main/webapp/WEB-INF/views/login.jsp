@@ -12,8 +12,11 @@
 <h2>
     로그인페이지입니다.
 </h2>
-<div>id <input type="text"></div>
-<div>PW <input type="text"></div>
+<form name="login" method="post" action="login">
+    아이디 : <input type="text" id="staff_id" name="staffID" required autofocus required><br>
+    비밀번호 : <input type="password" id="staff_pw" name="staffPW" required><br>
+    <input type="submit" value="로그인">
+</form>
 
 </body>
 </html>

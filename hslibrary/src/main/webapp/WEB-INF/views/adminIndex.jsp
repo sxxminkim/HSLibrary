@@ -9,8 +9,9 @@
     <title>무릉서원</title>
 </head>
 <body>
-
-<h2>무릉서원 도서 대출 페이지입니다.</h2>
-
+<header>
+    <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
+</header>
+<h2>무릉서원 관리자 메인페이지</h2>
 </body>
 </html>
