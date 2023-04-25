@@ -12,6 +12,7 @@
 <header>
     <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
 </header>
+<jsp:include page="navbar.jsp"></jsp:include>
 <h2>무릉서원 관리자 메인페이지</h2>
 </body>
 </html>

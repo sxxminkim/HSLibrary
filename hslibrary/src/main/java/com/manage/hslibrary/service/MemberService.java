@@ -12,33 +12,33 @@ public class MemberService {
     public MemberService(MemberDAO _memberDAO) {
         this.memberDAO = _memberDAO;
     }
-    /*
-    public MemberDTO registMember(MemberDTO _memberDTO) {
+
+    public MemberDTO addMember(MemberDTO _memberDTO) {
         // 회원가입
-        MemberDTO memberDTO = memberDAO.selectByEmail(_memberDTO.getMemberEmail());
+        MemberDTO memberDTO = memberDAO.selectByStaffNUM(_memberDTO.getStaffNUM());
 
         if (memberDTO == null) { // 회원 존재하지 않음 --> 회원가입 진행
             memberDAO.insertMember(_memberDTO);
 
             return _memberDTO; // 가입한 계정 반환
         } else {
-            System.out.println("이미 존재하는 계정입니다.");
+            System.out.println("This staff already exists.");
 
             return null; // null 반환
         }
     }
-     */
 
-    public MemberDTO loginMember(String inputID, String inputPW) {
+
+    public MemberDTO loginMember(String inputStaffNUM, String inputPW) {
         // admin login
-        MemberDTO memberDTO = memberDAO.selectByID(inputID);
+        MemberDTO memberDTO = memberDAO.selectByStaffNUM(inputStaffNUM);
 
         if (memberDTO == null) {
-            System.out.println("아이디 입력 에러");
+            System.out.println("error in inserting StaffNUM");
             return null;
         } else if (!memberDTO.getStaffPW().equals(inputPW)) {
             // 비밀번호 오류
-            System.out.println("비밀번호 에러");
+            System.out.println("error in inserting PW");
             return null;
         }
 

@@ -1,5 +1,6 @@
 package com.manage.hslibrary.DAO;
 
+import com.manage.hslibrary.DTO.BookDTO;
 import com.manage.hslibrary.DTO.MemberDTO;
 import org.springframework.jdbc.core.*;
 import java.util.*;
@@ -13,14 +14,14 @@ public class MemberDAO {
     private JdbcTemplate jdbcTemplate;
     public MemberDAO(DataSource dataSource) {this.jdbcTemplate=new JdbcTemplate(dataSource);}
 
-    public MemberDTO selectByID(String inputID){
+    public MemberDTO selectByStaffNUM(String inputStaffNUM){
 
-
+            //selecting admin by staffID
         try{
-            return this.jdbcTemplate.queryForObject("SELECT * FROM staff_Information WHERE staffID=?;",
-                    (rs, rowNum) -> new MemberDTO(rs.getString("staffID"), rs.getString("staffPW"), rs.getString("staffName"),
-                            rs.getString("staffNUM"),rs.getString("staffAddr"), rs.getString("staffPhone"), rs.getString("staffDeparture")),
-                    inputID);
+            return this.jdbcTemplate.queryForObject("SELECT * FROM staff_Information WHERE staffNUM=?;",
+                    (rs, rowNum) -> new MemberDTO(rs.getString("staffNUM"), rs.getString("staffPW"), rs.getString("staffName"),
+                            rs.getString("staffID"),rs.getString("staffAddr"), rs.getString("staffPhone"), rs.getString("staffDeparture")),
+                    inputStaffNUM);
 
         } catch(Exception Ex){
             return null;
@@ -29,20 +30,23 @@ public class MemberDAO {
     public List<MemberDTO> showAll() {
         // viewing all admin
         List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM staff_Information;", (rs, rowNum) -> {
-            MemberDTO memberDTO = new MemberDTO(rs.getString("staffID"), rs.getString("staffPW"), rs.getString("staffName"),
-                    rs.getString("staffNUM"),rs.getString("staffAddr"), rs.getString("staffPhone"), rs.getString("staffDeparture"));
+            MemberDTO memberDTO = new MemberDTO(rs.getString("staffNUM"), rs.getString("staffPW"), rs.getString("staffName"),
+                    rs.getString("staffID"), rs.getString("staffAddr"),rs.getString("staffPhone"),rs.getString("staffDeparture")
+            );
             return memberDTO;
         });
         return result;
     }
 
+
     public void insertMember(MemberDTO _memberDTO) {
         // adding admin
         this.memberDTO = _memberDTO;
 
-        jdbcTemplate.update("INSERT INTO staff_Information(staffID, staffPW, stafName) VALUES('" + memberDTO.getStaffID() + "', '"
-                + memberDTO.getStaffPW() + "', '" + memberDTO.getStaffName() + "');");
+        jdbcTemplate.update("INSERT INTO staff_Information(staffNUM, staffPW, staffID, staffName, staffAddr, staffPhone, staffDeparture) VALUES('" + memberDTO.getStaffNUM() + "', '"
+                + memberDTO.getStaffPW()+"', '"+ memberDTO.getStaffID() + "', '" + memberDTO.getStaffName() +"', '" + memberDTO.getStaffAddr() +"', '" + memberDTO.getStaffPhone() + "', '" + memberDTO.getStaffDeparture() +"');");
     }
+
     /*
     public void updatePassword(MemberDTO _memberDTO, String newPassword) {
         // 비밀번호 업데이트
@@ -52,7 +56,7 @@ public class MemberDAO {
                 "UPDATE MEMBER SET PASSWORD='" + newPassword + "' WHERE EMAIL='" + memberDTO.getMemberEmail() + "';");
     }
      */
-    public void deleteMember(MemberDTO member) {
+    public void deleteMember(MemberDTO memberDTO) {
 
     }
 }

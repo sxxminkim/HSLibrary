@@ -10,7 +10,20 @@
 </head>
 <body>
 
-<h2>무릉서원 도서 관리 페이지입니다.</h2>
-
+<h2>무릉서원 회원 삭제 페이지입니다.</h2>
+<table>
+    <thead>
+    <tr>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="memberDTO" items="${memberList}">
+        <tr>
+            <td></td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 </body>
 </html>

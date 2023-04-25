@@ -7,13 +7,23 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-
 @Controller
 public class HomeController {
     @GetMapping("/")
     public String index(){
-        return "index";
+        //home-page
+        return ("index");
     }
+
+    @GetMapping("/adminIndex")
+    public String adminIndex(){
+        //admin home-page
+        return "adminIndex";
+    }
+
+
+
+
     @Bean
     public ViewResolver viewResolver(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

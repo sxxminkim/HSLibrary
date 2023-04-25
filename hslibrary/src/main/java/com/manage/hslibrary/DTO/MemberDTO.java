@@ -1,9 +1,8 @@
 package com.manage.hslibrary.DTO;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-@Component
+@Repository
 public class MemberDTO {
     private String staffNUM;
     private String staffPW;
@@ -26,8 +25,10 @@ public class MemberDTO {
         this.staffDeparture=StaffDeparture;
     }
 
-    public MemberDTO(String StaffID, String StaffPW, String StaffName, String StaffDeparture){
+
+    public MemberDTO(String StaffNUM, String StaffID, String StaffPW, String StaffName, String StaffDeparture){
         //getting staff data from
+        this.staffNUM=StaffNUM;
         this.staffID=StaffID;
         this.staffPW=StaffPW;
         this.staffName=StaffName;
