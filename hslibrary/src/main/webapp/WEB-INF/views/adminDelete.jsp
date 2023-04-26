@@ -12,7 +12,9 @@
 <header>
     <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
 </header>
+<jsp:include page="navbar.jsp"></jsp:include>
 <h2>무릉서원 관리자 삭제페이지</h2>
+<h3>리스트에서 퇴사한 관리자를 찾아보세요.</h3>
 <div>
     <table>
         <thead>
@@ -27,20 +29,27 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="memberDTO" items="${memberList}">
+        <c:forEach var="staffDTO" items="${memberList}">
             <tr>
-                <td>${memberDTO.staffNUM}</td>
-                <td>${memberDTO.staffPW}</td>
-                <td>${memberDTO.staffName}</td>
-                <td>${memberDTO.staffID}</td>
-                <td>${memberDTO.staffAddr}</td>
-                <td>${memberDTO.staffPhone}</td>
-                <td>${memberDTO.staffDeparture}</td>
+                <td>${staffDTO.staffNUM}</td>
+                <td>${staffDTO.staffPW}</td>
+                <td>${staffDTO.staffName}</td>
+                <td>${staffDTO.staffID}</td>
+                <td>${staffDTO.staffAddr}</td>
+                <td>${staffDTO.staffPhone}</td>
+                <td>${staffDTO.staffDepartment}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
-
+<div>
+    <form action="${pageContext.request.contextPath}/adminDelete" method="post" enctype="multipart/form-data">
+        관리자ID:<input class="form-control" id="inputStaffNUM" type="text" name="inputStaffNUM"/>
+        관리자이름:<input class="form-control" id="inputStaffName" type="text" name="inputStaffName"/>
+        관리자이름 확인:<input class="form-control" id="inputStaffNameConfirm" type="text" name="inputStaffNameConfirm"/>
+        <input type="submit" value="관리자 삭제">
+    </form>
+</div>
 </body>
 </html>

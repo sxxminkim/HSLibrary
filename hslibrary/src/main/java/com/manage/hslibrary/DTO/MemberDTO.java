@@ -1,60 +1,64 @@
 package com.manage.hslibrary.DTO;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
+import java.sql.Date;
+
 @Repository
 public class MemberDTO {
-    private String staffNUM;
-    private String staffPW;
-    private String staffName;
-    private String staffID;
-    private String staffAddr;
-    private String staffPhone;
-    private String staffDeparture;
-
-    public MemberDTO(String StaffNUM, String StaffPW, String StaffName, String StaffID,
-                     String StaffAddr, String StaffPhone, String StaffDeparture)
-    {
-        //adding new staff data
-        this.staffNUM=StaffNUM;
-        this.staffPW=StaffPW;
-        this.staffName=StaffName;
-        this.staffID=StaffID;
-        this.staffAddr=StaffAddr;
-        this.staffPhone=StaffPhone;
-        this.staffDeparture=StaffDeparture;
-    }
-
-
-    public MemberDTO(String StaffNUM, String StaffID, String StaffPW, String StaffName, String StaffDeparture){
-        //getting staff data from
-        this.staffNUM=StaffNUM;
-        this.staffID=StaffID;
-        this.staffPW=StaffPW;
-        this.staffName=StaffName;
-        this.staffDeparture=StaffDeparture;
-    }
+    private String clientNUM;
+    private String clientName;
+    private String clientID;
+    private String clientPhone;
+    private String clientAddr;
+    private String clientEmail;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date clientRegister;
     public MemberDTO(){}
+    public MemberDTO(String ClientNUM, String ClientName, String ClientID, String ClientPhone,
+                     String ClientAddr, String ClientEmail, Date ClientRegister)
+    {
+        //getting member data
+        this.clientNUM=ClientNUM;
+        this.clientName=ClientName;
+        this.clientID=ClientID;
+        this.clientPhone=ClientPhone;
+        this.clientAddr=ClientAddr;
+        this.clientEmail=ClientEmail;
+        this.clientRegister=ClientRegister;
+    }
+    public MemberDTO(String ClientNUM, String ClientName, String ClientID,
+                     String ClientPhone, String ClientAddr, String ClientEmail)
+    {
+        //adding new member data
+        this.clientNUM=ClientNUM;
+        this.clientName=ClientName;
+        this.clientID=ClientID;
+        this.clientPhone=ClientPhone;
+        this.clientAddr=ClientAddr;
+        this.clientEmail=ClientEmail;
 
-    public String getStaffNUM(){return staffNUM;}
-    public void setStaffNUM(String staffNUM){this.staffNUM=staffNUM;}
-    public String getStaffPW(){return staffPW;}
-    public void setStaffPW(String staffPW){this.staffPW=staffPW;}
-    public String getStaffName(){return staffName;}
-    public void setStaffName(String staffName){this.staffName=staffName;}
-    public String getStaffID(){return staffID;}
-    public void setStaffID(String staffID){this.staffID=staffID;}
-    public String getStaffAddr(){return staffAddr;}
-    public void setStaffAddr(String staffAddr){this.staffAddr=staffAddr;}
-    public String getStaffPhone(){return staffPhone;}
-    public void setStaffPhone(String staffPhone){this.staffPhone=staffPhone;}
-    public String getStaffDeparture(){return staffDeparture;}
-    public void setStaffDeparture(String staffDeparture){this.staffDeparture=staffDeparture;}
+    }
+
+    public String getClientNUM() {return clientNUM;}
+    public void setClientNUM(String clientNUM) {this.clientNUM = clientNUM;}
+    public String getClientName() {return clientName;}
+    public void setClientName(String clientName) {this.clientName = clientName;}
+    public String getClientID() {return clientID;}
+    public void setClientID(String clientID) {this.clientID = clientID;}
+    public String getClientPhone() {return clientPhone;}
+    public void setClientPhone(String clientPhone) {this.clientPhone = clientPhone;}
+    public String getClientAddr() {return clientAddr;}
+    public void setClientAddr(String clientAddr) {this.clientAddr = clientAddr;}
+    public String getClientEmail() {return clientEmail;}
+    public void setClientEmail(String clientEmail) {this.clientEmail = clientEmail;}
+    public Date getClientRegister() {return clientRegister;}
+    public void setClientRegister(Date clientRegister) {this.clientRegister = clientRegister;}
+
     @Override
     public String toString(){
-        return "MemberDTO [staffNUM= "+staffNUM+", staffPW= "+staffPW+", staffName= "
-                +staffName+", staffID= "+staffID+", staffAddr= "+staffAddr+", staffPhone= "
-                +staffPhone+", staffDeparture= "+staffDeparture+"]";
+        return "MemberDTO [clientNUM= "+clientNUM+", clientName= "+clientName+", clientID= "
+                +clientID+", clientPhone= "+clientPhone+", clientAddr= "+clientAddr+ ", clientEmail= "+clientEmail+"]";
     }
-
 }

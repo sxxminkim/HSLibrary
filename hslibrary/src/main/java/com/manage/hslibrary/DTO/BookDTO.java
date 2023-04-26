@@ -8,13 +8,13 @@ public class BookDTO {
     private String bookID;
     private String bookName;
     private String bookWriter;
+    private String bookGenre;
     private String bookCompany;
     private String bookISBN;
     private String bookYear;
     private String bookEdition;
     private String bookVolume;
     private String bookIssue;
-    private String bookGenre;
     private String bookSummary;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date bookRegister;
@@ -55,7 +55,6 @@ public class BookDTO {
         this.bookVolume=BookVolume;
         this.bookIssue=BookIssue;
         this.bookSummary=BookSummary;
-        //this.bookRegister=BookRegister;
     }
 
     public String getBookID(){return bookID;}
@@ -64,6 +63,8 @@ public class BookDTO {
     public void setBookName(String bookName){this.bookName=bookName;}
     public String getBookWriter(){return bookWriter;}
     public void setBookWriter(String bookWriter){this.bookWriter=bookWriter;}
+    public String getBookGenre() {return bookGenre;}
+    public void setBookGenre(String bookGenre) {this.bookGenre = bookGenre;}
     public String getBookCompany(){return bookCompany;}
     public void setBookCompany(String bookCompany){this.bookCompany=bookCompany;}
     public String getBookISBN(){return bookISBN;}
@@ -76,8 +77,6 @@ public class BookDTO {
     public void setBookVolume(String bookVolume){this.bookVolume=bookVolume;}
     public String getBookIssue(){return bookIssue;}
     public void setBookIssue(String bookIssue){this.bookIssue=bookIssue;}
-    public String getBookGenre() {return bookGenre;}
-    public void setBookGenre(String bookGenre) {this.bookGenre = bookGenre;}
     public String getBookSummary() {return bookSummary;}
     public void setBookSummary(String bookSummary) {this.bookSummary = bookSummary;}
 
@@ -88,9 +87,9 @@ public class BookDTO {
     @Override
     public String toString(){
         return "BookDTO [bookID= "+bookID+", bookName= "+bookName+", bookWriter= "+bookWriter+
-        ", bookCompany= "+bookCompany+", bookISBN= "+bookISBN+", bookYear= "+bookYear+
-        ", bookEdition= "+bookEdition+", bookVolume= "+bookVolume+", bookIssue= "+bookIssue+
-        ", bookGenre= "+bookGenre+", bookSummary= "+bookSummary+"]";
+        ", bookGenre= "+bookGenre+", bookCompany= "+bookCompany+", bookISBN= "+bookISBN+
+        ", bookYear= "+bookYear+ ", bookEdition= "+bookEdition+", bookVolume= "+bookVolume+
+        ", bookIssue= "+bookIssue+ ", bookSummary= "+bookSummary+"]";
     }
 
 }

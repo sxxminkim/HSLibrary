@@ -1,7 +1,5 @@
 package com.manage.hslibrary.DAO;
 
-import com.manage.hslibrary.DTO.BookDTO;
-import com.manage.hslibrary.DTO.MemberDTO;
 import com.manage.hslibrary.DTO.VideoDTO;
 import org.springframework.jdbc.core.*;
 import java.util.*;
@@ -45,7 +43,7 @@ public class VideoDAO {
     public void deleteVideo(VideoDTO _videoDTO) {
         this.videoDTO = _videoDTO;
 
-        jdbcTemplate.update("DELETE FROM video WHERE videoID=" + videoDTO.getVideoID() + ";");
+        jdbcTemplate.update("DELETE FROM video WHERE videoID='" + videoDTO.getVideoID() + "';");
     }
 
     public void updateVideo(VideoDTO _videoDTO) {
@@ -53,9 +51,8 @@ public class VideoDAO {
 
         jdbcTemplate.update("UPDATE video SET VideoName='" + videoDTO.getVideoName() + "', videoDirector='" + videoDTO.getVideoDirector()
                 + "', videoCompany='" + videoDTO.getVideoCompany() + "', videoRelease='" + videoDTO.getVideoRelease() + "', " +
-                "videoGenre='" + videoDTO.getVideoGenre() + "', videoSequel='" + videoDTO.getVideoSequel() + "', videoRegister='"
-                + videoDTO.getVideoRegister() +"'WHERE videoID='" + videoDTO.getVideoID()
-                + "';");
+                "videoGenre='" + videoDTO.getVideoGenre() + "', videoSequel='" + videoDTO.getVideoSequel() +
+                 "'WHERE videoID='" + videoDTO.getVideoID() + "';");
     }
 
 

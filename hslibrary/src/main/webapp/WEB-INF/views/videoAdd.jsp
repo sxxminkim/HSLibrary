@@ -9,7 +9,7 @@
     <title>무릉서원</title>
 </head>
 <body>
-
+<jsp:include page="navbar.jsp"></jsp:include>
 <h2>무릉서원 영상 추가 페이지입니다.</h2>
 <div>
     <table>
@@ -40,7 +40,7 @@
     </table>
 </div>
 <div>
-    <form action="./videoAdd" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/videoAdd" method="post" enctype="multipart/form-data">
         videoID:<input class="form-control" id="inputVideoID" type="text" name="inputVideoID"/>
         영상제목:<input class="form-control" id="inputVideoName" type="text" name="inputVideoName"/>
         감독:<input class="form-control" id="inputVideoDirector" type="text" name="inputVideoDirector"/>

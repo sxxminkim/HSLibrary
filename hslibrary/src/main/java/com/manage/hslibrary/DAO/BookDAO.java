@@ -27,7 +27,8 @@ public class BookDAO {
         List<BookDTO> result = jdbcTemplate.query("SELECT * FROM book;", (rs, rowNum) -> {
             BookDTO bookDTO = new BookDTO(rs.getString("bookID"), rs.getString("bookName"), rs.getString("bookWriter"),
                     rs.getString("bookGenre"), rs.getString("bookCompany"),rs.getString("bookISBN"),rs.getString("bookYear"),
-                    rs.getString("bookEdition"),rs.getString("bookVolume"),rs.getString("bookIssue"), rs.getString("bookSummary")
+                    rs.getString("bookEdition"),rs.getString("bookVolume"),rs.getString("bookIssue"), rs.getString("bookSummary"),
+                    rs.getDate("bookRegister")
                     );
             return bookDTO;
         });
@@ -38,7 +39,8 @@ public class BookDAO {
         List<BookDTO> result = jdbcTemplate.query("SELECT * FROM book ORDER BY bookID DESC LIMIT 5;", (rs, rowNum) -> {
             BookDTO bookDTO = new BookDTO(rs.getString("bookID"), rs.getString("bookName"), rs.getString("bookWriter"),
                     rs.getString("bookGenre"), rs.getString("bookCompany"),rs.getString("bookISBN"),rs.getString("bookYear"),
-                    rs.getString("bookEdition"),rs.getString("bookVolume"),rs.getString("bookIssue"), rs.getString("bookSummary")
+                    rs.getString("bookEdition"),rs.getString("bookVolume"),rs.getString("bookIssue"), rs.getString("bookSummary"),
+                    rs.getDate("bookRegister")
                     );
             return bookDTO;
         });
@@ -59,7 +61,7 @@ public class BookDAO {
     public void deleteBook(BookDTO _bookDTO) {
         this.bookDTO = _bookDTO;
 
-        jdbcTemplate.update("DELETE FROM book WHERE bookID=" + bookDTO.getBookID() + ";");
+        jdbcTemplate.update("DELETE FROM book WHERE bookID='" + bookDTO.getBookID() + "';");
     }
 
     public void updateBook(BookDTO _bookDTO) {
@@ -69,7 +71,7 @@ public class BookDAO {
                 + "', bookGenre='" + bookDTO.getBookGenre() + "', bookCompany='" + bookDTO.getBookCompany() + "', bookISBN='"
                 + bookDTO.getBookISBN() + "', bookYear='" + bookDTO.getBookYear() + "', bookEdition='"
                 + bookDTO.getBookEdition() + "', bookVolume='" + bookDTO.getBookVolume() +
-                "', bookVolume='" + bookDTO.getBookVolume() + "', bookSummary='" + bookDTO.getBookSummary() + "', bookRegister='" + bookDTO.getBookRegister() +"'WHERE bookID='" + bookDTO.getBookID()
+                "', bookVolume='" + bookDTO.getBookVolume() + "', bookSummary='" + bookDTO.getBookSummary() +"'WHERE bookID='" + bookDTO.getBookID()
                 + "';");
     }
 

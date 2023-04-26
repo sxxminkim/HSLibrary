@@ -1,27 +1,26 @@
 package com.manage.hslibrary.DAO;
 
-import com.manage.hslibrary.DTO.BookDTO;
 import com.manage.hslibrary.DTO.MemberDTO;
-import org.springframework.jdbc.core.*;
-import java.util.*;
-import org.springframework.stereotype.*;
-import javax.sql.*;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
+import java.util.List;
 
 @Component
 public class MemberDAO {
-
     private MemberDTO memberDTO;
     private JdbcTemplate jdbcTemplate;
     public MemberDAO(DataSource dataSource) {this.jdbcTemplate=new JdbcTemplate(dataSource);}
 
-    public MemberDTO selectByStaffNUM(String inputStaffNUM){
+    public MemberDTO selectByClientNUM(String inputClientNUM){
 
-            //selecting admin by staffID
+        //selecting admin by staffID
         try{
-            return this.jdbcTemplate.queryForObject("SELECT * FROM staff_Information WHERE staffNUM=?;",
-                    (rs, rowNum) -> new MemberDTO(rs.getString("staffNUM"), rs.getString("staffPW"), rs.getString("staffName"),
-                            rs.getString("staffID"),rs.getString("staffAddr"), rs.getString("staffPhone"), rs.getString("staffDeparture")),
-                    inputStaffNUM);
+            return this.jdbcTemplate.queryForObject("SELECT * FROM client_Information WHERE clientNUM=?;",
+                    (rs, rowNum) -> new MemberDTO(rs.getString("clientNUM"), rs.getString("clientName"), rs.getString("clientID"),
+                            rs.getString("clientPhone"),rs.getString("clientAddr"), rs.getString("clientEmail")),
+                    inputClientNUM);
 
         } catch(Exception Ex){
             return null;
@@ -29,10 +28,9 @@ public class MemberDAO {
     }
     public List<MemberDTO> showAll() {
         // viewing all admin
-        List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM staff_Information;", (rs, rowNum) -> {
-            MemberDTO memberDTO = new MemberDTO(rs.getString("staffNUM"), rs.getString("staffPW"), rs.getString("staffName"),
-                    rs.getString("staffID"), rs.getString("staffAddr"),rs.getString("staffPhone"),rs.getString("staffDeparture")
-            );
+        List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM client_Information;", (rs, rowNum) -> {
+            MemberDTO memberDTO = new MemberDTO(rs.getString("clientNUM"), rs.getString("clientName"), rs.getString("clientID"),
+                    rs.getString("clientPhone"),rs.getString("clientAddr"), rs.getString("clientEmail"));
             return memberDTO;
         });
         return result;
@@ -43,22 +41,22 @@ public class MemberDAO {
         // adding admin
         this.memberDTO = _memberDTO;
 
-        jdbcTemplate.update("INSERT INTO staff_Information(staffNUM, staffPW, staffID, staffName, staffAddr, staffPhone, staffDeparture) VALUES('" + memberDTO.getStaffNUM() + "', '"
-                + memberDTO.getStaffPW()+"', '"+ memberDTO.getStaffID() + "', '" + memberDTO.getStaffName() +"', '" + memberDTO.getStaffAddr() +"', '" + memberDTO.getStaffPhone() + "', '" + memberDTO.getStaffDeparture() +"');");
+        jdbcTemplate.update("INSERT INTO client_Information(clientNUM, clientName, clientID, clientPhone, clientAddr, clientEmail, clientRegister) VALUES('" + memberDTO.getClientNUM() + "', '"
+                + memberDTO.getClientName()+"', '"+ memberDTO.getClientID() + "', '" + memberDTO.getClientPhone() +"', '" + memberDTO.getClientAddr() +"', '" + memberDTO.getClientEmail() + "', " + "NOW());");
     }
 
-    /*
-    public void updatePassword(MemberDTO _memberDTO, String newPassword) {
-        // 비밀번호 업데이트
+
+    public void deleteMember(MemberDTO _memberDTO) {
         this.memberDTO = _memberDTO;
 
-        jdbcTemplate.update(
-                "UPDATE MEMBER SET PASSWORD='" + newPassword + "' WHERE EMAIL='" + memberDTO.getMemberEmail() + "';");
-    }
-     */
-    public void deleteMember(MemberDTO memberDTO) {
+        jdbcTemplate.update("DELETE FROM client_Information WHERE clientNUM='" + memberDTO.getClientNUM() + "';");
 
+    }
+    public void updateMember(MemberDTO _memberDTO) {
+        this.memberDTO = _memberDTO;
+
+        jdbcTemplate.update("UPDATE client_Information SET clientName='" + memberDTO.getClientName() + "', clientID='" + memberDTO.getClientID()
+                + "', clientPhone='" + memberDTO.getClientPhone() + "', clientAddr='" + memberDTO.getClientAddr() + "', clientEmail='"
+                + memberDTO.getClientEmail() + "'WHERE clientNUM='" + memberDTO.getClientNUM() + "';");
     }
 }
-
-

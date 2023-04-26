@@ -9,7 +9,7 @@
     <title>무릉서원</title>
 </head>
 <body>
-
+<jsp:include page="navbar.jsp"></jsp:include>
 <h2>무릉서원 도서 추가 페이지입니다.</h2>
 <div>
     <table>
@@ -44,7 +44,7 @@
     </table>
 </div>
 <div>
-    <form action="./bookAdd" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/bookAdd" method="post" enctype="multipart/form-data">
         bookID:<input class="form-control" id="inputBookID" type="text" name="inputBookID"/>
         책제목:<input class="form-control" id="inputBookName" type="text" name="inputBookName"/>
         지은이:<input class="form-control" id="inputBookWriter" type="text" name="inputBookWriter"/>
@@ -56,7 +56,7 @@
         bookVolume:<input class="form-control" id="inputBookVolume" type="text" name="inputBookVolume"/>
         bookIssue:<input class="form-control" id="inputBookIssue" type="text" name="inputBookIssue"/>
         bookSummary:<input class="form-control" id="inputBookSummary" type="text" name="inputBookSummary"/>
-        <input type="submit" value="책 추가">
+        <input type="submit" value="도서 추가">
     </form>
 </div>
 

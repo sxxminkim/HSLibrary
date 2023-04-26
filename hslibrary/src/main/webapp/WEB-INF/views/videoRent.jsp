@@ -9,7 +9,7 @@
     <title>무릉서원</title>
 </head>
 <body>
-
+<jsp:include page="navbar.jsp"></jsp:include>
 <h2>무릉서원 영상 대출 페이지입니다.</h2>
 
 </body>

@@ -40,7 +40,7 @@
             <ul>
                 <li><a href="./videoRent">영상대여</a></li>
                 <li><a href="./videoReturn">영상반납</a></li>
-                <li><a href="./videoExtend">영상연장</a></li>
+                <li><a href="./videoExtend.jsp">영상연장</a></li>
             </ul>
         </li>
         <li><a href="#">영상관람실</a>

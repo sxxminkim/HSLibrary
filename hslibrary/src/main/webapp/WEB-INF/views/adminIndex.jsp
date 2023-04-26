@@ -14,5 +14,6 @@
 </header>
 <jsp:include page="navbar.jsp"></jsp:include>
 <h2>무릉서원 관리자 메인페이지</h2>
+
 </body>
 </html>
