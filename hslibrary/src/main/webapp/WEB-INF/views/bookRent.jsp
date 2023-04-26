@@ -10,8 +10,8 @@
     <title>무릉서원</title>
 </head>
 <body>
-
 <h2>무릉서원 도서 대출 페이지입니다.</h2>
+<jsp:include page="navbar.jsp"></jsp:include>
 
 </body>
 </html>

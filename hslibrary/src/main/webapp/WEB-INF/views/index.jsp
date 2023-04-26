@@ -12,6 +12,7 @@
 <body>
 <header>
     <button><a href="<c:url value="/login"/>" > login </a></button>
+    <button><a href="<c:url value="/"/>">home</a></button>
 </header>
 <h2>무릉서원 메인 페이지입니다.</h2>
 

@@ -10,8 +10,10 @@
     <title>무릉서원</title>
 </head>
 <body>
-
-<h2>무릉서원 영상 관리 페이지입니다.</h2>
-
+<header>
+    <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
+</header>
+<jsp:include page="navbar.jsp"></jsp:include>
+<h2>도서연장페이지입니다.</h2>
 </body>
 </html>
