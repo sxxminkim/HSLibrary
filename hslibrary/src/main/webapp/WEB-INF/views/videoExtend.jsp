@@ -11,9 +11,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>무릉서원</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-
+pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-
+xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous">
+    </script>
 </head>
 <body>
 <header>
@@ -29,7 +38,7 @@
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
-<h2>무릉서원 영상 반납 페이지입니다.</h2>
+<h2>영상연장페이지입니다.</h2>
 <div>
     <a href="./videoRent">영상대출</a>
     <a href="./videoReturn">영상반납</a>
@@ -59,13 +68,12 @@
 </div>
 <hr>
 <div>
-    <form action="${pageContext.request.contextPath}/videoReturn" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/videoExtend" method="post" enctype="multipart/form-data">
         영상대출번호:<input class="form-control" id="inputVideoRentNUM" type="text" name="inputVideoRentNUM"/>
         영상번호:<input class="form-control" id="inputVideoID" type="text" name="inputVideoID"/>
-        영상번호확인:<input class="form-control" id="inputVideoIDConfirm" type="text" name="inputVideoIDConfirm"/>
-        <input type="submit" value="영상 반납">
+        회원번호:<input class="form-control" id="inputClientNUM" type="text" name="inputClientNUM"/>
+        <input type="submit" value="영상 연장">
     </form>
 </div>
-
 </body>
 </html>

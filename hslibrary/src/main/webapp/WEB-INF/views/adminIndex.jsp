@@ -25,11 +25,22 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     </script>
 </head>
 <body>
-<form name="login" method="post" action="login">
-    아이디 : <input type="text" id="inputStaffNUM" name="inputStaffNUM" required autofocus required><br>
-    비밀번호 : <input type="password" id="inputPW" name="inputPW" required><br>
-    <input type="submit" value="로그인">
-</form>
+<header>
+    <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
+</header>
+<jsp:include page="navbar.jsp"></jsp:include>
+무릉서원 관리자 메인페이지입니다.
+<%
+    // 세션값 가져오기
+    if (session.getAttribute("loginStaffName") == null)
+    {
+        // Object 타입이므로 다운캐스팅
+        response.sendRedirect("./login");
+        session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
+    }
+%>
 
+<%=session.getAttribute("loginStaffName")%>님 안녕하세요! <br />
+<%=session.getAttribute("loginStaffName")%>님의 행복한 하루를 기원합니다.<br />
 </body>
 </html>

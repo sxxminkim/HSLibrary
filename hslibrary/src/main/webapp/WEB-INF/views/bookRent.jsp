@@ -28,7 +28,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 <header>
     <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
 </header>
-<h2>무릉서원 도서 반납 페이지입니다.</h2>
+<h2>무릉서원 도서 대출 페이지입니다.</h2>
 <jsp:include page="navbar.jsp"></jsp:include>
 <%
     // 세션값 가져오기
@@ -43,6 +43,46 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     <a href="./bookRent">도서대출</a>
     <a href="./bookReturn">도서반납</a>
     <a href="./bookExtend">도서연장</a>
+</div>
+<div style="float:left;margin-right:20px">
+<table>
+    <thead>
+        <th>bookID</th>
+        <th>책제목</th>
+        <th>지은이</th>
+        <th>출판사</th>
+    </thead>
+    <tbody>
+    <c:forEach var="bookDTO" items="${bookList}">
+        <tr>
+            <td>${bookDTO.bookID}</td>
+            <td>${bookDTO.bookName}</td>
+            <td>${bookDTO.bookWriter}</td>
+            <td>${bookDTO.bookCompany}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+</div>
+<div style="float:left;margin-right:20px">
+    <table>
+        <thead>
+        <th>clientNUM</th>
+        <th>회원이름</th>
+        <th>전화번호</th>
+        <th>이메일</th>
+        </thead>
+        <tbody>
+        <c:forEach var="memberDTO" items="${memberList}">
+            <tr>
+                <td>${memberDTO.clientNUM}</td>
+                <td>${memberDTO.clientName}</td>
+                <td>${memberDTO.clientPhone}</td>
+                <td>${memberDTO.clientEmail}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 <div style="float:left;margin-right:20px">
     <table>
@@ -68,12 +108,13 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 </div>
 <hr>
 <div>
-    <form action="${pageContext.request.contextPath}/bookReturn" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/bookRent" method="post" enctype="multipart/form-data">
         도서대출번호:<input class="form-control" id="inputBookRentNUM" type="text" name="inputBookRentNUM"/>
         도서번호:<input class="form-control" id="inputBookID" type="text" name="inputBookID"/>
-        도서번호확인:<input class="form-control" id="inputBookIDConfirm" type="text" name="inputBookIDConfirm"/>
-        <input type="submit" value="도서 반납">
+        회원아이디:<input class="form-control" id="inputClientNUM" type="text" name="inputClientNUM"/>
+        <input type="submit" value="도서 대출">
     </form>
+
 </div>
 </body>
 </html>

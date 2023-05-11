@@ -26,46 +26,21 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 </head>
 <body>
 <header>
-    <button><a href="<c:url value="/login"/>" > login </a></button>
-    <button><a href="<c:url value="/"/>">home</a></button>
+    <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
 </header>
-<h2>무릉서원에 오신 것을 환영합니다.</h2>
-<hr>
-<h3>공지사항</h3>
+<jsp:include page="navbar.jsp"></jsp:include>
+<%
+    // 세션값 가져오기
+    if (session.getAttribute("loginStaffName") == null)
+    {
+        // Object 타입이므로 다운캐스팅
+        response.sendRedirect("./login");
+        session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
+    }
+%>
+<h2>무릉서원 도서 수정 페이지입니다.</h2>
+<h3>수정하실 도서를 확인해보세요.</h3>
 <div>
-    <table>
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>날짜</th>
-            <th>작성자</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>title</td>
-            <td>2023-05-10</td>
-            <td>박건달</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>title2</td>
-            <td>2023-05-10</td>
-            <td>김수민</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>title3</td>
-            <td>2023-05-11</td>
-            <td>박건달</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<h3>도서/영상 자료</h3>
-<div style="float:left;margin-right:20px">
     <table>
         <thead>
         <tr>
@@ -76,6 +51,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             <th>발행년도</th>
             <th>ISBN</th>
             <th>저자</th>
+            <th>출판사</th>
             <th>분류</th>
         </tr>
         </thead>
@@ -96,33 +72,21 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         </tbody>
     </table>
 </div>
-<div style="float:left;margin-left:20px">
-    <table>
-        <thead>
-        <tr>
-            <th>영상번호</th>
-            <th>영상제목</th>
-            <th>감독</th>
-            <th>배급사</th>
-            <th>개봉연도</th>
-            <th>장르</th>
-            <th>Sequel</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="videoDTO" items="${videoList}">
-            <tr>
-                <td>${videoDTO.videoID}</td>
-                <td>${videoDTO.videoName}</td>
-                <td>${videoDTO.videoDirector}</td>
-                <td>${videoDTO.videoCompany}</td>
-                <td>${videoDTO.videoRelease}</td>
-                <td>${videoDTO.videoGenre}</td>
-                <td>${videoDTO.videoSequel}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+<div>
+    <form action="${pageContext.request.contextPath}/bookUpdate" method="post" enctype="multipart/form-data">
+        bookID:<input class="form-control" id="inputBookID" type="text" name="inputBookID"/>
+        책제목:<input class="form-control" id="inputBookName" type="text" name="inputBookName"/>
+        지은이:<input class="form-control" id="inputBookWriter" type="text" name="inputBookWriter"/>
+        장르:<input class="form-control" id="inputBookGenre" type="text" name="inputBookGenre"/>
+        출판사:<input class="form-control" id="inputBookCompany" type="text" name="inputBookCompany"/>
+        ISBN10:<input class="form-control" id="inputBookISBN" type="text" name="inputBookISBN"/>
+        bookYear:<input class="form-control" id="inputBookYear" type="text" name="inputBookYear"/>
+        bookEdition:<input class="form-control" id="inputBookEdition" type="text" name="inputBookEdition"/>
+        bookVolume:<input class="form-control" id="inputBookVolume" type="text" name="inputBookVolume"/>
+        bookIssue:<input class="form-control" id="inputBookIssue" type="text" name="inputBookIssue"/>
+        bookSummary:<input class="form-control" id="inputBookSummary" type="text" name="inputBookSummary"/>
+        <input type="submit" value="도서 수정">
+    </form>
 </div>
 
 </body>

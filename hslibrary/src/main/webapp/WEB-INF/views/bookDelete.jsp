@@ -11,8 +11,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>무릉서원</title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-
 pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
@@ -28,7 +28,6 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 <header>
     <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
 </header>
-<h2>무릉서원 도서 반납 페이지입니다.</h2>
 <jsp:include page="navbar.jsp"></jsp:include>
 <%
     // 세션값 가져오기
@@ -39,40 +38,45 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
+<h3>삭제하실 도서를 확인해보세요.</h3>
 <div>
-    <a href="./bookRent">도서대출</a>
-    <a href="./bookReturn">도서반납</a>
-    <a href="./bookExtend">도서연장</a>
-</div>
-<div style="float:left;margin-right:20px">
     <table>
         <thead>
-        <th>도서대출번호</th>
-        <th>도서번호</th>
-        <th>회원번호</th>
-        <th>대출일</th>
-        <th>반납예정일</th>
+        <tr>
+            <th>도서번호</th>
+            <th>도서제목</th>
+            <th>volume</th>
+            <th>edition</th>
+            <th>발행년도</th>
+            <th>ISBN</th>
+            <th>저자</th>
+            <th>출판사</th>
+            <th>분류</th>
+        </tr>
         </thead>
         <tbody>
-        <c:forEach var="bookRentDTO" items="${bookRentList}">
+        <c:forEach var="bookDTO" items="${bookList}">
             <tr>
-                <td>${bookRentDTO.bookRentalNUM}</td>
-                <td>${bookRentDTO.bookID}</td>
-                <td>${bookRentDTO.clientNUM}</td>
-                <td>${bookRentDTO.bookRental_start}</td>
-                <td>${bookRentDTO.bookRental_end}</td>
+                <td>${bookDTO.bookID}</td>
+                <td>${bookDTO.bookName}</td>
+                <td>${bookDTO.bookVolume}</td>
+                <td>${bookDTO.bookEdition}</td>
+                <td>${bookDTO.bookYear}</td>
+                <td>${bookDTO.bookISBN}</td>
+                <td>${bookDTO.bookWriter}</td>
+                <td>${bookDTO.bookCompany}</td>
+                <td>${bookDTO.bookGenre}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
-<hr>
 <div>
-    <form action="${pageContext.request.contextPath}/bookReturn" method="post" enctype="multipart/form-data">
-        도서대출번호:<input class="form-control" id="inputBookRentNUM" type="text" name="inputBookRentNUM"/>
-        도서번호:<input class="form-control" id="inputBookID" type="text" name="inputBookID"/>
-        도서번호확인:<input class="form-control" id="inputBookIDConfirm" type="text" name="inputBookIDConfirm"/>
-        <input type="submit" value="도서 반납">
+    <form action="${pageContext.request.contextPath}/bookDelete" method="post" enctype="multipart/form-data">
+        bookID:<input class="form-control" id="inputBookID" type="text" name="inputBookID"/>
+        책제목:<input class="form-control" id="inputBookName" type="text" name="inputBookName"/>
+        책제목확인:<input class="form-control" id="inputBookNameConfirm" type="text" name="inputBookNameConfirm"/>
+        <input type="submit" value="도서 삭제">
     </form>
 </div>
 </body>

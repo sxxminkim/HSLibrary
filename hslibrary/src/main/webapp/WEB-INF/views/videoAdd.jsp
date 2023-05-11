@@ -11,8 +11,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>무릉서원</title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-
 pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
@@ -28,7 +28,6 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 <header>
     <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
 </header>
-<h2>무릉서원 도서 반납 페이지입니다.</h2>
 <jsp:include page="navbar.jsp"></jsp:include>
 <%
     // 세션값 가져오기
@@ -39,41 +38,47 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
+<h2>무릉서원 영상 추가 페이지입니다.</h2>
 <div>
-    <a href="./bookRent">도서대출</a>
-    <a href="./bookReturn">도서반납</a>
-    <a href="./bookExtend">도서연장</a>
-</div>
-<div style="float:left;margin-right:20px">
     <table>
         <thead>
-        <th>도서대출번호</th>
-        <th>도서번호</th>
-        <th>회원번호</th>
-        <th>대출일</th>
-        <th>반납예정일</th>
+        <tr>
+            <th>영상번호</th>
+            <th>영상제목</th>
+            <th>감독</th>
+            <th>배급사</th>
+            <th>개봉연도</th>
+            <th>장르</th>
+            <th>Sequel</th>
+        </tr>
         </thead>
         <tbody>
-        <c:forEach var="bookRentDTO" items="${bookRentList}">
+        <c:forEach var="videoDTO" items="${videoList}">
             <tr>
-                <td>${bookRentDTO.bookRentalNUM}</td>
-                <td>${bookRentDTO.bookID}</td>
-                <td>${bookRentDTO.clientNUM}</td>
-                <td>${bookRentDTO.bookRental_start}</td>
-                <td>${bookRentDTO.bookRental_end}</td>
+                <td>${videoDTO.videoID}</td>
+                <td>${videoDTO.videoName}</td>
+                <td>${videoDTO.videoDirector}</td>
+                <td>${videoDTO.videoCompany}</td>
+                <td>${videoDTO.videoRelease}</td>
+                <td>${videoDTO.videoGenre}</td>
+                <td>${videoDTO.videoSequel}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
-<hr>
 <div>
-    <form action="${pageContext.request.contextPath}/bookReturn" method="post" enctype="multipart/form-data">
-        도서대출번호:<input class="form-control" id="inputBookRentNUM" type="text" name="inputBookRentNUM"/>
-        도서번호:<input class="form-control" id="inputBookID" type="text" name="inputBookID"/>
-        도서번호확인:<input class="form-control" id="inputBookIDConfirm" type="text" name="inputBookIDConfirm"/>
-        <input type="submit" value="도서 반납">
+    <form action="${pageContext.request.contextPath}/videoAdd" method="post" enctype="multipart/form-data">
+        videoID:<input class="form-control" id="inputVideoID" type="text" name="inputVideoID"/>
+        영상제목:<input class="form-control" id="inputVideoName" type="text" name="inputVideoName"/>
+        감독:<input class="form-control" id="inputVideoDirector" type="text" name="inputVideoDirector"/>
+        배급사:<input class="form-control" id="inputVideoCompany" type="text" name="inputVideoCompany"/>
+        개봉연도:<input class="form-control" id="inputVideoRelease" type="text" name="inputVideoRelease"/>
+        장르:<input class="form-control" id="inputVideoGenre" type="text" name="inputVideoGenre"/>
+        sequel:<input class="form-control" id="inputVideoSequel" type="text" name="inputVideoSequel"/>
+        <input type="submit" value="영상 추가">
     </form>
 </div>
+
 </body>
 </html>

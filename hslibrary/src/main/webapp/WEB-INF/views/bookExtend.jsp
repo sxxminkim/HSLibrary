@@ -28,7 +28,6 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 <header>
     <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
 </header>
-<h2>무릉서원 도서 반납 페이지입니다.</h2>
 <jsp:include page="navbar.jsp"></jsp:include>
 <%
     // 세션값 가져오기
@@ -39,6 +38,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
+<h2>도서연장페이지입니다.</h2>
 <div>
     <a href="./bookRent">도서대출</a>
     <a href="./bookReturn">도서반납</a>
@@ -68,11 +68,11 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 </div>
 <hr>
 <div>
-    <form action="${pageContext.request.contextPath}/bookReturn" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/bookExtend" method="post" enctype="multipart/form-data">
         도서대출번호:<input class="form-control" id="inputBookRentNUM" type="text" name="inputBookRentNUM"/>
         도서번호:<input class="form-control" id="inputBookID" type="text" name="inputBookID"/>
-        도서번호확인:<input class="form-control" id="inputBookIDConfirm" type="text" name="inputBookIDConfirm"/>
-        <input type="submit" value="도서 반납">
+        회원번호:<input class="form-control" id="inputClientNUM" type="text" name="inputClientNUM"/>
+        <input type="submit" value="도서 연장">
     </form>
 </div>
 </body>
