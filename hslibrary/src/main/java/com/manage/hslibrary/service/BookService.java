@@ -3,8 +3,8 @@ package com.manage.hslibrary.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.manage.hslibrary.DTO.BookDTO;
-import com.manage.hslibrary.DAO.BookDAO;
+import com.manage.hslibrary.DTO.*;
+import com.manage.hslibrary.DAO.*;
 
 @Service
 public class BookService {
@@ -52,5 +52,4 @@ public class BookService {
             return _bookDTO;
         }
     }
-
 }

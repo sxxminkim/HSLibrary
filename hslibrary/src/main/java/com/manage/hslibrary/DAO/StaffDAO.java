@@ -46,15 +46,15 @@ public class StaffDAO {
                 + staffDTO.getStaffPW()+"', '"+ staffDTO.getStaffID() + "', '" + staffDTO.getStaffName() +"', '" + staffDTO.getStaffAddr() +"', '" + staffDTO.getStaffPhone() + "', '" + staffDTO.getStaffDepartment() +"');");
     }
 
-    /*
+
     public void updatePassword(StaffDTO _staffDTO, String newPassword) {
         // 비밀번호 업데이트
-        this.memberDTO = _staffDTO;
+        this.staffDTO = _staffDTO;
 
         jdbcTemplate.update(
-                "UPDATE MEMBER SET PASSWORD='" + newPassword + "' WHERE EMAIL='" + memberDTO.getMemberEmail() + "';");
+                "UPDATE staff_Information SET staffPW='" + newPassword + "' WHERE staffNUM='" + staffDTO.getStaffNUM() + "';");
     }
-     */
+
     public void deleteStaff(StaffDTO _staffDTO) {
         this.staffDTO = _staffDTO;
 

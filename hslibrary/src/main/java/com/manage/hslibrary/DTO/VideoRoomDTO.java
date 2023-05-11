@@ -7,15 +7,17 @@ public class VideoRoomDTO {
 
     private String vid_roomNUM;
     private String vid_roomName;
-
+/*
     public VideoRoomDTO(String Vid_RoomNUM)
     {
         //getting video room data from
         this.vid_roomNUM=Vid_RoomNUM;
     }
+
+ */
     public VideoRoomDTO(String Vid_RoomNUM, String Vid_RoomName)
     {
-        //setting video room data
+        //getting and adding video room data
         this.vid_roomNUM=Vid_RoomNUM;
         this.vid_roomName=Vid_RoomName;
     }
