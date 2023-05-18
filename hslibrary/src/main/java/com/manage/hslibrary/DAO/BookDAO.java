@@ -35,17 +35,6 @@ public class BookDAO {
         return result;
     }
 
-    public List<BookDTO> showFive() {
-        List<BookDTO> result = jdbcTemplate.query("SELECT * FROM book ORDER BY bookID DESC LIMIT 5;", (rs, rowNum) -> {
-            BookDTO bookDTO = new BookDTO(rs.getString("bookID"), rs.getString("bookName"), rs.getString("bookWriter"),
-                    rs.getString("bookGenre"), rs.getString("bookCompany"),rs.getString("bookISBN"),rs.getString("bookYear"),
-                    rs.getString("bookEdition"),rs.getString("bookVolume"),rs.getString("bookIssue"), rs.getString("bookSummary"),
-                    rs.getDate("bookRegister")
-                    );
-            return bookDTO;
-        });
-        return result;
-    }
     public void insertBook(BookDTO _bookDTO) {
         this.bookDTO = _bookDTO;
 
@@ -74,6 +63,4 @@ public class BookDAO {
                 "', bookVolume='" + bookDTO.getBookVolume() + "', bookSummary='" + bookDTO.getBookSummary() +"'WHERE bookID='" + bookDTO.getBookID()
                 + "';");
     }
-
-
 }

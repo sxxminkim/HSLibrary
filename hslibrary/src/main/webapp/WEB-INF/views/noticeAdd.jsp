@@ -11,8 +11,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <meta charset="UTF-8">
     <title>무릉서원</title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-
 pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
@@ -39,44 +39,42 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
-<h2>무릉서원 영상 삭제 페이지입니다.</h2>
+<div>
+    <a href="./noticeAdd">공지사항 등록</a>
+    <a href="./noticeDelete">공지사항 삭제</a>
+    <a href="./noticeUpdate">공지사항 수정</a>
+</div>
 <div>
     <table>
         <thead>
         <tr>
-            <th>영상번호</th>
-            <th>영상제목</th>
-            <th>감독</th>
-            <th>배급사</th>
-            <th>개봉연도</th>
-            <th>장르</th>
-            <th>Sequel</th>
+            <th>공지 번호</th>
+            <th>제목</th>
+            <th>날짜</th>
+            <th>작성자</th>
+            <th>공지 링크</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="videoDTO" items="${videoList}">
+        <c:forEach var="noticeDTO" items="${noticeList}">
             <tr>
-                <td>${videoDTO.videoID}</td>
-                <td>${videoDTO.videoName}</td>
-                <td>${videoDTO.videoDirector}</td>
-                <td>${videoDTO.videoCompany}</td>
-                <td>${videoDTO.videoRelease}</td>
-                <td>${videoDTO.videoGenre}</td>
-                <td>${videoDTO.videoSequel}</td>
+                <td>${noticeDTO.noticeNUM}</td>
+                <td>${noticeDTO.noticeTitle}</td>
+                <td>${noticeDTO.noticeDate}</td>
+                <td>${noticeDTO.noticeAuthor}</td>
+                <td><input type="button" value="자세히" onclick="location.href='${pageContext.request.contextPath}/notice_subview?noticeNUM=${noticeDTO.noticeNUM}'" /></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
-<div>
-    <form action="${pageContext.request.contextPath}/videoDelete" method="post" enctype="multipart/form-data">
-        videoID:<input class="form-control" id="inputVideoID" type="text" name="inputVideoID"/>
-        영상제목:<input class="form-control" id="inputVideoName" type="text" name="inputVideoName"/>
-        영상제목확인:<input class="form-control" id="inputVideoNameConfirm" type="text" name="inputVideoNameConfirm"/>
-        <input type="submit" value="영상 삭제">
+<div class="container">
+    <form action="${pageContext.request.contextPath}/noticeAdd" method="post" enctype="multipart/form-data">
+        제목:<input class="form-control" id="inputNoticeTitle" type="text" name="inputNoticeTitle"/>
+        작성자:<input class="form-control" id="inputNoticeAuthor" type="text" name="inputNoticeAuthor"/>
+        내용:<input class="form-control" id="inputNoticeMain" type="text" name="inputNoticeMain"/>
+        <input type="submit" value="공지사항 등록">
     </form>
 </div>
-
-
 </body>
 </html>

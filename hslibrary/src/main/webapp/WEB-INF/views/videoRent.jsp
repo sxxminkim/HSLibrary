@@ -14,10 +14,40 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <meta charset="UTF-8">
     <title>무릉서원</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-
+pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-
+xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous">
+    </script>
+    <style>
+        table{
+            border: 1px solid #444444;
+            font-size: 20px;
+            width: 400px;
+            height:200px;
+            outline: dashed 1px black;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid #444444;
+            padding: 10px;
+        }
+        .div1{
+            width:500px;
+            height:300px;
+            padding: 10px;
+            font-size:20px;
+        }
+    </style>
 </head>
 <body>
 <header>
     <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
+    <button><a href="<c:url value="./adminIndex"/>">홈</a></button>
 </header>
 <jsp:include page="navbar.jsp"></jsp:include>
 <h2>무릉서원 영상 대출 페이지입니다.</h2>
@@ -97,8 +127,8 @@
         </tbody>
     </table>
 </div>
-<hr>
-<div>
+
+<div class="div1">
     <form action="${pageContext.request.contextPath}/videoRent" method="post" enctype="multipart/form-data">
         영상대출번호:<input class="form-control" id="inputVideoRentNUM" type="text" name="inputVideoRentNUM"/>
         영상번호:<input class="form-control" id="inputVideoID" type="text" name="inputVideoID"/>

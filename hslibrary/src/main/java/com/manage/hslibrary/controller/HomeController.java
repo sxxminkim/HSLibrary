@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ViewResolver;
@@ -22,23 +21,39 @@ public class HomeController {
     BookDAO bookDAO;
     @Autowired
     VideoDAO videoDAO;
-    @RequestMapping(value="/index", method= RequestMethod.GET)
+    @Autowired
+    NoticeDAO noticeDAO;
+    @Autowired
+    MemberDAO memberDAO;
+    @RequestMapping(value="/", method= RequestMethod.GET)
     public String index(Model model){
         List<BookDTO> bookList=bookDAO.showAll();
         List<VideoDTO> videoList=videoDAO.showAll();
+        List<NoticeDTO> noticeList=noticeDAO.showAll();
         model.addAttribute("bookList",bookList);
         model.addAttribute("videoList",videoList);
+        model.addAttribute("noticeList", noticeList);
 
         //home-page
         return ("index");
     }
 
-    @GetMapping("/adminIndex")
-    public String adminIndex(){
-        //admin home-page
-        return "adminIndex";
-    }
+    @RequestMapping(value="/adminIndex", method= RequestMethod.GET)
+    public String adminIndex(Model model){
+        List<BookDTO> bookList=bookDAO.showAll();
+        List<VideoDTO> videoList=videoDAO.showAll();
+        List<NoticeDTO> noticeList=noticeDAO.showAll();
+        List<MemberDTO> bookBlackList=memberDAO.showBook();
+        List<MemberDTO> videoBlackList=memberDAO.showVideo();
+        model.addAttribute("bookList",bookList);
+        model.addAttribute("videoList",videoList);
+        model.addAttribute("noticeList", noticeList);
+        model.addAttribute("bookBlackList", bookBlackList);
+        model.addAttribute("videoBlackList", videoBlackList);
 
+        //home-page
+        return ("adminIndex");
+    }
 
     @Bean
     public ViewResolver viewResolver(){

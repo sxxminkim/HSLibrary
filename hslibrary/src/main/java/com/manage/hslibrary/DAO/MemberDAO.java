@@ -1,6 +1,6 @@
 package com.manage.hslibrary.DAO;
 
-import com.manage.hslibrary.DTO.MemberDTO;
+import com.manage.hslibrary.DTO.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +29,22 @@ public class MemberDAO {
     public List<MemberDTO> showAll() {
         // viewing all admin
         List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM client_Information;", (rs, rowNum) -> {
+            MemberDTO memberDTO = new MemberDTO(rs.getString("clientNUM"), rs.getString("clientName"), rs.getString("clientID"),
+                    rs.getString("clientPhone"),rs.getString("clientAddr"), rs.getString("clientEmail"));
+            return memberDTO;
+        });
+        return result;
+    }
+    public List<MemberDTO> showBook(){
+        List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM client_Information INNER JOIN bookRental on client_Information.clientNUM = bookRental.clientNUM WHERE bookRental_end>NOW();", (rs, rowNum) -> {
+            MemberDTO memberDTO = new MemberDTO(rs.getString("clientNUM"), rs.getString("clientName"), rs.getString("clientID"),
+                    rs.getString("clientPhone"),rs.getString("clientAddr"), rs.getString("clientEmail"));
+            return memberDTO;
+        });
+        return result;
+    }
+    public List<MemberDTO> showVideo(){
+        List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM client_Information INNER JOIN videoRental on client_Information.clientNUM = videoRental.clientNUM WHERE videoRental_end>NOW();", (rs, rowNum) -> {
             MemberDTO memberDTO = new MemberDTO(rs.getString("clientNUM"), rs.getString("clientName"), rs.getString("clientID"),
                     rs.getString("clientPhone"),rs.getString("clientAddr"), rs.getString("clientEmail"));
             return memberDTO;

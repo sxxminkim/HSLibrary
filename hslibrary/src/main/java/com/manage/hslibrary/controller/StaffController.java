@@ -1,5 +1,6 @@
 package com.manage.hslibrary.controller;
 
+import com.manage.hslibrary.DTO.MemberDTO;
 import com.manage.hslibrary.DTO.StaffDTO;
 import com.manage.hslibrary.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,6 @@ import java.util.List;
 import com.manage.hslibrary.DAO.StaffDAO;
 import com.manage.hslibrary.service.StaffService;
 @ComponentScan(basePackages={"com.manage.hslibrary.DTO.StaffDTO"})
-
-
 @Controller
 public class StaffController {
     @Autowired
@@ -195,7 +194,41 @@ public class StaffController {
         }
 
     }
+    //changing password
+    @RequestMapping(value = "/changePW", method = RequestMethod.GET)
+    public String adminChangePW() {
+        return "adminChangePW";
+    }
 
+    @PostMapping("/adminChangePW")
+    public void adminChangePW(HttpSession session, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        try {
+            StaffDTO staffDTO = (StaffDTO) session.getAttribute("loginMemberDTO");
 
+            String inputOldPW = request.getParameter("inputOldPW");
+            String inputNewPW = request.getParameter("inputNewPW");
+            String inputNewPWConfirm = request.getParameter("inputNewPWConfirm");
+
+            if (staffDTO.getStaffPW().equals(inputOldPW)) {
+                if (inputNewPW.equals(inputNewPWConfirm)) {
+                    staffDAO.updatePassword(staffDTO, inputNewPW);
+
+                    response.sendRedirect("./adminIndex");
+                } else
+                    throw new NotMatchingException("비밀번호가 맞지 않습니다.");
+            } else
+                throw new NotMatchingException("비밀번호가 맞지 않습니다.");
+
+        } catch (NotMatchingException ex) {
+            response.setContentType("text/html; charset=UTF-8");
+
+            PrintWriter out = response.getWriter();
+
+            out.println("<script>alert('비밀번호가 맞지 않습니다.'); location.href='./adminChangePW';</script>");
+
+            out.flush();
+        }
+    }
 }
 

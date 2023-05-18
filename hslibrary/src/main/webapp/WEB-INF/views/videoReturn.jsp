@@ -18,6 +18,7 @@
 <body>
 <header>
     <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
+    <button><a href="<c:url value="./adminIndex"/>">홈</a></button>
 </header>
 <jsp:include page="navbar.jsp"></jsp:include>
 <%

@@ -8,7 +8,8 @@
                         <a class="navbar-brand" href="./videoAdd">영상관리</a>
                         <a class="navbar-brand" href="./bookRent">도서대여/반납/연장</a>
                         <a class="navbar-brand" href="./videoRent">영상대여/반납/연장</a>
-                        <a class="navbar-brand" href="./videoRoom">영상관람실</a>
+                        <a class="navbar-brand" href="./VideoRoomRent">영상관람실</a>
+                        <a class="navbar-brand" href="./noticeAdd">공지사항</a>
                 </div>
         </div>
 </nav>

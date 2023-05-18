@@ -108,7 +108,6 @@ public class BookController {
     @RequestMapping(value = "/bookDelete", method = RequestMethod.GET)
     public String bookDelete(Model model) {
         List<BookDTO> bookList = bookDAO.showAll();
-        List<BookRentDTO> bookRentDTOLIst=bookRentDAO.showAll();
 
         model.addAttribute("bookList", bookList);
 
@@ -179,7 +178,7 @@ public class BookController {
 
             PrintWriter out = response.getWriter();
 
-            out.println("<script>alert('해당 도서를 대여한 회원이 있습니다.'); location.href='/admin/book/delete';</script>");
+            out.println("<script>alert('해당 도서를 대여한 회원이 있습니다.'); location.href='/bookDelete';</script>");
 
             out.flush();
         }

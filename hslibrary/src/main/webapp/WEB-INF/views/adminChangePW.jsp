@@ -39,44 +39,13 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
-<h2>무릉서원 영상 삭제 페이지입니다.</h2>
 <div>
-    <table>
-        <thead>
-        <tr>
-            <th>영상번호</th>
-            <th>영상제목</th>
-            <th>감독</th>
-            <th>배급사</th>
-            <th>개봉연도</th>
-            <th>장르</th>
-            <th>Sequel</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="videoDTO" items="${videoList}">
-            <tr>
-                <td>${videoDTO.videoID}</td>
-                <td>${videoDTO.videoName}</td>
-                <td>${videoDTO.videoDirector}</td>
-                <td>${videoDTO.videoCompany}</td>
-                <td>${videoDTO.videoRelease}</td>
-                <td>${videoDTO.videoGenre}</td>
-                <td>${videoDTO.videoSequel}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
-<div>
-    <form action="${pageContext.request.contextPath}/videoDelete" method="post" enctype="multipart/form-data">
-        videoID:<input class="form-control" id="inputVideoID" type="text" name="inputVideoID"/>
-        영상제목:<input class="form-control" id="inputVideoName" type="text" name="inputVideoName"/>
-        영상제목확인:<input class="form-control" id="inputVideoNameConfirm" type="text" name="inputVideoNameConfirm"/>
-        <input type="submit" value="영상 삭제">
+    <form action="${pageContext.request.contextPath}/adminRegister" method="post" enctype="multipart/form-data">
+        이전 비밀번호:<input class="form-control" id="inputOldPW" type="text" name="inputOldPW"/>
+        새 비밀번호:<input class="form-control" id="inputNewPW" type="text" name="inputNewPW"/>
+        새 비밀번호 확인:<input class="form-control" id="inputNewPWConfirm" type="text" name="inputNewPWConfirm"/>
+        <input type="submit" value="비밀번호 변경">
     </form>
 </div>
-
-
 </body>
 </html>

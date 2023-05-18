@@ -1,12 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="true" %>
+<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@page import="com.manage.hslibrary.service.*"%>
-<%@page import="com.manage.hslibrary.DAO.*"%>
-<%@page import="com.manage.hslibrary.DTO.*"%>
-<%@page import="java.sql.*"%>
-<%@page import="java.util.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -23,6 +18,20 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
             crossorigin="anonymous">
     </script>
+    <style>
+        table{
+            border: 1px solid #444444;
+            font-size: 20px;
+            width: 800px;
+            height:200px;
+            outline: dashed 1px black;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid #444444;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -36,34 +45,27 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     <table>
         <thead>
         <tr>
-            <th>번호</th>
+            <th>공지 번호</th>
             <th>제목</th>
             <th>날짜</th>
             <th>작성자</th>
+            <th>공지 링크</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>title</td>
-            <td>2023-05-10</td>
-            <td>박건달</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>title2</td>
-            <td>2023-05-10</td>
-            <td>김수민</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>title3</td>
-            <td>2023-05-11</td>
-            <td>박건달</td>
-        </tr>
+        <c:forEach var="noticeDTO" items="${noticeList}">
+            <tr>
+                <td>${noticeDTO.noticeNUM}</td>
+                <td>${noticeDTO.noticeTitle}</td>
+                <td>${noticeDTO.noticeDate}</td>
+                <td>${noticeDTO.noticeAuthor}</td>
+                <td><input type="button" value="자세히" onclick="location.href='${pageContext.request.contextPath}/notice_detail?noticeNUM=${noticeDTO.noticeNUM}'" /></td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>
+<hr>
 <h3>도서/영상 자료</h3>
 <div style="float:left;margin-right:20px">
     <table>
@@ -76,6 +78,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             <th>발행년도</th>
             <th>ISBN</th>
             <th>저자</th>
+            <th>출판사</th>
             <th>분류</th>
         </tr>
         </thead>

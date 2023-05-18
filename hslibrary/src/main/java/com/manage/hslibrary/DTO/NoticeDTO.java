@@ -12,26 +12,24 @@ public class NoticeDTO {
     private Date noticeDate;
     private String noticeMain;
     private String noticeAuthor;
-    private String noticeLink;
 
-    public NoticeDTO(int NoticeNUM, String NoticeTitle, String NoticeMain, String NoticeAuthor,
-                     String NoticeLink)
+    public NoticeDTO(String NoticeTitle, String NoticeMain, String NoticeAuthor)
     {
         //adding notice info
-        this.noticeNUM=NoticeNUM;
+        //this.noticeNUM=0;
         this.noticeTitle=NoticeTitle;
         this.noticeMain=NoticeMain;
         this.noticeAuthor=NoticeAuthor;
-        this.noticeLink=NoticeLink;
+
     }
     public NoticeDTO(int NoticeNUM, String NoticeTitle, String NoticeMain, String NoticeAuthor,
-                     String NoticeLink, Date NoticeDate)
+                     Date NoticeDate)
     {
+        //getting notice information
         this.noticeNUM=NoticeNUM;
         this.noticeTitle=NoticeTitle;
         this.noticeMain=NoticeMain;
         this.noticeAuthor=NoticeAuthor;
-        this.noticeLink=NoticeLink;
         this.noticeDate=NoticeDate;
     }
     public NoticeDTO(){}
@@ -74,18 +72,5 @@ public class NoticeDTO {
 
     public void setNoticeAuthor(String noticeAuthor) {
         this.noticeAuthor = noticeAuthor;
-    }
-
-    public String getNoticeLink() {
-        return noticeLink;
-    }
-
-    public void setNoticeLink(String noticeLink) {
-        this.noticeLink = noticeLink;
-    }
-    @Override
-    public String toString(){
-        return "NoticeDTO [noticeNUM= "+noticeNUM+", noticeTitle= "+noticeTitle+", noticeAuthor= "+noticeAuthor+
-        ", noticeMain= "+noticeMain+", noticeLink= "+noticeLink+ "]";
     }
 }
