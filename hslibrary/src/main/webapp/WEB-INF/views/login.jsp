@@ -62,15 +62,15 @@
   <body>
     <div class="login">
       <h1 class="text-center">Please sign in</h1>
-      <form>
+      <form action="${pageContext.request.contextPath}/login" method="post" enctype="multipart/form-data">
         <div class="form-group">
-          <label class="form-label" for="email">Email address</label>
-          <input class="form-control" type="email" id="email">
+          <label class="form-label" for="inputStaffNUM">ID</label>
+          <input class="form-control" type="text" id="inputStaffNUM" name="inputStaffNUM">
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="password">Password</label>
-          <input class="form-control" type="password" id="password">
+          <label class="form-label" for="inputStaffPW">Password</label>
+          <input class="form-control" type="password" id="inputStaffPW" name="inputStaffPW">
         </div>
 
         <div class="form-group form-check">
