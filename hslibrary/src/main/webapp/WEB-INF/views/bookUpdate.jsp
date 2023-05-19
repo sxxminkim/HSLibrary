@@ -45,15 +45,16 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     <table>
         <thead>
         <tr>
-            <th>도서번호</th>
-            <th>도서제목</th>
-            <th>volume</th>
-            <th>edition</th>
-            <th>발행년도</th>
+            <th>별치기호</th>
+            <th>제목</th>
+            <th>권</th>
+            <th>출간 판</th>
+            <th>출간 연도</th>
             <th>ISBN</th>
             <th>저자</th>
             <th>출판사</th>
             <th>분류</th>
+            <th>종이책(1)/전자책(2)</th>
         </tr>
         </thead>
         <tbody>
@@ -68,6 +69,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
                 <td>${bookDTO.bookWriter}</td>
                 <td>${bookDTO.bookCompany}</td>
                 <td>${bookDTO.bookGenre}</td>
+                <td>${bookDTO.bookType}</td>
             </tr>
         </c:forEach>
         </tbody>
@@ -86,6 +88,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         bookVolume:<input class="form-control" id="inputBookVolume" type="text" name="inputBookVolume"/>
         bookIssue:<input class="form-control" id="inputBookIssue" type="text" name="inputBookIssue"/>
         bookSummary:<input class="form-control" id="inputBookSummary" type="text" name="inputBookSummary"/>
+        종이책(1)/전자책(2):<input class="form-control" id="inputBookType" type="text" name="inputBookType"/>
         <input type="submit" value="도서 수정">
     </form>
 </div>

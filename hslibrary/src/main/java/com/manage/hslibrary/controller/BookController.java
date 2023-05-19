@@ -56,6 +56,7 @@ public class BookController {
             String inputBookVolume = request.getParameter("inputBookVolume");
             String inputBookIssue = request.getParameter("inputBookIssue");
             String inputBookSummary = request.getParameter("inputBookSummary").replaceAll("\r\n", "<br />");
+            String inputBookType = request.getParameter("inputBookType");
 
 
             BookDTO bookDTO = bookDAO.selectByBookID(inputBookID);
@@ -66,7 +67,7 @@ public class BookController {
             if (inputBookID.equals("") || inputBookName.equals("") || inputBookWriter.equals("")
                     || inputBookGenre.equals("") || inputBookCompany.equals("")|| inputBookISBN.equals("")
                     || inputBookYear.equals("")|| inputBookEdition.equals("")|| inputBookVolume.equals("")
-                    || inputBookIssue.equals("")|| inputBookSummary.equals(""))
+                    || inputBookIssue.equals("")|| inputBookSummary.equals("")|| inputBookType.equals(""))
                 throw new FillOutInformationException("모든 정보를 입력해주세요.");
 
 
@@ -74,7 +75,7 @@ public class BookController {
 
             bookDTO = new BookDTO(inputBookID, inputBookName, inputBookWriter, inputBookGenre,
                     inputBookCompany, inputBookISBN, inputBookYear, inputBookEdition, inputBookVolume,
-                    inputBookIssue, inputBookSummary);
+                    inputBookIssue, inputBookSummary, Integer.parseInt(inputBookType));
 
             bookDTO = bookService.addBook(bookDTO);
 
@@ -209,7 +210,7 @@ public class BookController {
             String inputBookVolume = request.getParameter("inputBookVolume");
             String inputBookIssue = request.getParameter("inputBookIssue");
             String inputBookSummary = request.getParameter("inputBookSummary").replaceAll("\r\n", "<br />");
-
+            String inputBookType=request.getParameter("inputBookType");
             BookDTO bookDTO = bookDAO.selectByBookID(inputBookID);
 
             if (bookDTO == null)
@@ -218,13 +219,13 @@ public class BookController {
             if (inputBookID.equals("") || inputBookName.equals("") || inputBookWriter.equals("")
                     || inputBookGenre.equals("") || inputBookCompany.equals("")|| inputBookISBN.equals("")
                     || inputBookYear.equals("")|| inputBookEdition.equals("")|| inputBookVolume.equals("")
-                    || inputBookIssue.equals("")|| inputBookSummary.equals(""))
+                    || inputBookIssue.equals("")|| inputBookSummary.equals("")|| inputBookType.equals(""))
                 throw new FillOutInformationException("모든 정보를 입력해주세요.");
 
 
             bookDTO = new BookDTO(inputBookID, inputBookName, inputBookWriter, inputBookGenre,
                     inputBookCompany, inputBookISBN, inputBookYear, inputBookEdition, inputBookVolume,
-                    inputBookIssue, inputBookSummary);
+                    inputBookIssue, inputBookSummary,Integer.parseInt(inputBookType));
 
             bookDTO = bookService.updateBook(bookDTO);
 
@@ -441,6 +442,17 @@ public class BookController {
             out.flush();
 
         }
+    }
+
+    @RequestMapping(value = "/book_detail", method = RequestMethod.GET)
+    public String book_detail(Model model, @RequestParam(defaultValue ="1")String bookID) {
+        //List<NoticeDTO> noticeDTO=noticeDAO.showOne(noticeNUM);
+        model.addAttribute("bookID", bookID);
+        BookDTO bookDTO = bookDAO.selectByBookID(bookID);
+
+        model.addAttribute("bookDTO", bookDTO);
+
+        return "book_detail";
     }
 
 }

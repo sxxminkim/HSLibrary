@@ -38,7 +38,6 @@ public class NoticeController {
     }
     @RequestMapping(value = "/notice_subview", method = RequestMethod.GET)
     public String notice_subview(Model model, @RequestParam(defaultValue ="1")int noticeNUM) {
-        //List<NoticeDTO> noticeDTO=noticeDAO.showOne(noticeNUM);
         model.addAttribute("noticeNUM", noticeNUM);
         NoticeDTO noticeDTO = noticeDAO.selectByNoticeNUM(noticeNUM);
 

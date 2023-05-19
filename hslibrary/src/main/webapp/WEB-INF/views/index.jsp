@@ -68,6 +68,42 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 <hr>
 <h3>도서/영상 자료</h3>
 <div style="float:left;margin-right:20px">
+    <p>종이책</p>
+    <table>
+        <thead>
+        <tr>
+            <th>별치기호</th>
+            <th>제목</th>
+            <th>권</th>
+            <th>출간 판</th>
+            <th>출간 연도</th>
+            <th>ISBN</th>
+            <th>저자</th>
+            <th>출판사</th>
+            <th>분류</th>
+            <th>자세히</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="bookDTO" items="${paperBookList}">
+            <tr>
+                <td>${bookDTO.bookID}</td>
+                <td>${bookDTO.bookName}</td>
+                <td>${bookDTO.bookVolume}</td>
+                <td>${bookDTO.bookEdition}</td>
+                <td>${bookDTO.bookYear}</td>
+                <td>${bookDTO.bookISBN}</td>
+                <td>${bookDTO.bookWriter}</td>
+                <td>${bookDTO.bookCompany}</td>
+                <td>${bookDTO.bookGenre}</td>
+                <td><input type="button" value="자세히" onclick="location.href='${pageContext.request.contextPath}/book_detail?bookID=${bookDTO.bookID}'" /></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
+<div style="float:left;margin-right:20px">
+    <p>전자책</p>
     <table>
         <thead>
         <tr>
@@ -83,7 +119,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="bookDTO" items="${bookList}">
+        <c:forEach var="bookDTO" items="${eBookList}">
             <tr>
                 <td>${bookDTO.bookID}</td>
                 <td>${bookDTO.bookName}</td>
@@ -109,7 +145,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             <th>배급사</th>
             <th>개봉연도</th>
             <th>장르</th>
-            <th>Sequel</th>
+            <th>시리즈</th>
         </tr>
         </thead>
         <tbody>

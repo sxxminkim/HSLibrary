@@ -44,14 +44,15 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     <table>
         <thead>
         <tr>
-            <th>도서번호</th>
-            <th>도서제목</th>
-            <th>volume</th>
-            <th>edition</th>
-            <th>발행년도</th>
+            <th>별치기호</th>
+            <th>제목</th>
+            <th>권</th>
+            <th>출간 판</th>
+            <th>출간 연도</th>
             <th>ISBN</th>
             <th>저자</th>
             <th>출판사</th>
+            <th>분류</th>
             <th>분류</th>
         </tr>
         </thead>

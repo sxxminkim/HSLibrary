@@ -23,6 +23,20 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
             crossorigin="anonymous">
     </script>
+    <style>
+        table{
+            border: 1px solid #444444;
+            font-size: 20px;
+            width: 2000px;
+            height:200px;
+            outline: dashed 1px black;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid #444444;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -43,15 +57,16 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     <table>
         <thead>
         <tr>
-            <th>도서번호</th>
-            <th>도서제목</th>
-            <th>volume</th>
-            <th>edition</th>
-            <th>발행년도</th>
+            <th>별치기호</th>
+            <th>제목</th>
+            <th>권</th>
+            <th>출간 판</th>
+            <th>출간 연도</th>
             <th>ISBN</th>
             <th>저자</th>
             <th>출판사</th>
             <th>분류</th>
+            <th>종이책(1)/ebook(2)</th>
         </tr>
         </thead>
         <tbody>
@@ -66,6 +81,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
                 <td>${bookDTO.bookWriter}</td>
                 <td>${bookDTO.bookCompany}</td>
                 <td>${bookDTO.bookGenre}</td>
+                <td>${bookDTO.bookType}</td>
             </tr>
         </c:forEach>
         </tbody>
@@ -84,6 +100,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         bookVolume:<input class="form-control" id="inputBookVolume" type="text" name="inputBookVolume"/>
         bookIssue:<input class="form-control" id="inputBookIssue" type="text" name="inputBookIssue"/>
         bookSummary:<input class="form-control" id="inputBookSummary" type="text" name="inputBookSummary"/>
+        종이책(1)/전자책(2):<input class="form-control" id="inputBookType" type="text" name="inputBookType"/>
         <input type="submit" value="도서 추가">
     </form>
 </div>

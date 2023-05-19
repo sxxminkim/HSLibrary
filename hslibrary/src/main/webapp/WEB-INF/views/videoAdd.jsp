@@ -50,7 +50,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             <th>배급사</th>
             <th>개봉연도</th>
             <th>장르</th>
-            <th>Sequel</th>
+            <th>시리즈</th>
         </tr>
         </thead>
         <tbody>
@@ -76,7 +76,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         배급사:<input class="form-control" id="inputVideoCompany" type="text" name="inputVideoCompany"/>
         개봉연도:<input class="form-control" id="inputVideoRelease" type="text" name="inputVideoRelease"/>
         장르:<input class="form-control" id="inputVideoGenre" type="text" name="inputVideoGenre"/>
-        sequel:<input class="form-control" id="inputVideoSequel" type="text" name="inputVideoSequel"/>
+        시리즈:<input class="form-control" id="inputVideoSequel" type="text" name="inputVideoSequel"/>
         <input type="submit" value="영상 추가">
     </form>
 </div>

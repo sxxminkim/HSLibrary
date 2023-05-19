@@ -50,7 +50,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             <th>배급사</th>
             <th>개봉연도</th>
             <th>장르</th>
-            <th>Sequel</th>
+            <th>시리즈</th>
         </tr>
         </thead>
         <tbody>

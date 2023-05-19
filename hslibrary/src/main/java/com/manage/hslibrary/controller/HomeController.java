@@ -27,10 +27,12 @@ public class HomeController {
     MemberDAO memberDAO;
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String index(Model model){
-        List<BookDTO> bookList=bookDAO.showAll();
+        List<BookDTO> paperBookList=bookDAO.showPaper();
+        List<BookDTO> eBookList=bookDAO.showEbook();
         List<VideoDTO> videoList=videoDAO.showAll();
         List<NoticeDTO> noticeList=noticeDAO.showAll();
-        model.addAttribute("bookList",bookList);
+        model.addAttribute("bookList",paperBookList);
+        model.addAttribute("eBookList",eBookList);
         model.addAttribute("videoList",videoList);
         model.addAttribute("noticeList", noticeList);
 

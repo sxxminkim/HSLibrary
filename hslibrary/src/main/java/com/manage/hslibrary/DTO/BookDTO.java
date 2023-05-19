@@ -16,6 +16,7 @@ public class BookDTO {
     private String bookVolume;
     private String bookIssue;
     private String bookSummary;
+    private int bookType;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date bookRegister;
     public BookDTO(){}
@@ -23,7 +24,7 @@ public class BookDTO {
 
     public BookDTO(String BookID, String BookName, String BookWriter, String BookGenre, String BookCompany, String BookISBN,
                    String BookYear, String BookEdition, String BookVolume, String BookIssue,
-                   String BookSummary, Date BookRegister)
+                   String BookSummary, int BookType, Date BookRegister)
     {
         //getting book data
         this.bookID=BookID;
@@ -37,11 +38,12 @@ public class BookDTO {
         this.bookVolume=BookVolume;
         this.bookIssue=BookIssue;
         this.bookSummary=BookSummary;
+        this.bookType=BookType;
         this.bookRegister=BookRegister;
     }
     public BookDTO(String BookID, String BookName, String BookWriter, String BookGenre, String BookCompany,
                    String BookISBN, String BookYear, String BookEdition, String BookVolume, String BookIssue,
-                    String BookSummary)
+                    String BookSummary, int BookType)
     {
         //adding book data
         this.bookID=BookID;
@@ -55,6 +57,7 @@ public class BookDTO {
         this.bookVolume=BookVolume;
         this.bookIssue=BookIssue;
         this.bookSummary=BookSummary;
+        this.bookType=BookType;
     }
 
     public String getBookID(){return bookID;}
@@ -80,16 +83,22 @@ public class BookDTO {
     public String getBookSummary() {return bookSummary;}
     public void setBookSummary(String bookSummary) {this.bookSummary = bookSummary;}
 
+    public int getBookType() {
+        return bookType;
+    }
+
+    public void setBookType(int bookType) {
+        this.bookType = bookType;
+    }
+
     public Date getBookRegister() {return bookRegister;}
-
     public void setBookRegister(Date bookRegister) {this.bookRegister = bookRegister;}
-
     @Override
     public String toString(){
         return "BookDTO [bookID= "+bookID+", bookName= "+bookName+", bookWriter= "+bookWriter+
         ", bookGenre= "+bookGenre+", bookCompany= "+bookCompany+", bookISBN= "+bookISBN+
         ", bookYear= "+bookYear+ ", bookEdition= "+bookEdition+", bookVolume= "+bookVolume+
-        ", bookIssue= "+bookIssue+ ", bookSummary= "+bookSummary+"]";
+        ", bookIssue= "+bookIssue+ ", bookSummary= "+bookSummary+", bookType= "+bookType+"]";
     }
 
 }

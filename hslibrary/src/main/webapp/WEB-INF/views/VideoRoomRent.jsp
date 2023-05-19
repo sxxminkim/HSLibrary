@@ -32,6 +32,9 @@
 %>
 <h2>무릉서원 시청각실 대여 페이지입니다.</h2>
 <div>
+    <a href="<c:url value="/VideoRoomAdd"/>">시청각실 추가</a>
+</div>
+<div>
     <table>
         <thead>
         <tr>

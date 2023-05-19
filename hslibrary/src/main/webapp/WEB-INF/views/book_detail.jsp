@@ -11,8 +11,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <meta charset="UTF-8">
     <title>무릉서원</title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-
 pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
@@ -25,27 +25,19 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     </script>
 </head>
 <body>
-<header>
-    <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
-    <button><a href="<c:url value="./adminIndex"/>">홈</a></button>
-</header>
-<jsp:include page="navbar.jsp"></jsp:include>
-<%
-    // 세션값 가져오기
-    if (session.getAttribute("loginStaffName") == null)
-    {
-        // Object 타입이므로 다운캐스팅
-        response.sendRedirect("./login");
-        session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
-    }
-%>
-<div>
-    <form action="${pageContext.request.contextPath}/adminChangePW" method="post" enctype="multipart/form-data">
-        이전 비밀번호:<input class="form-control" id="inputOldPW" type="text" name="inputOldPW"/>
-        새 비밀번호:<input class="form-control" id="inputNewPW" type="text" name="inputNewPW"/>
-        새 비밀번호 확인:<input class="form-control" id="inputNewPWConfirm" type="text" name="inputNewPWConfirm"/>
-        <input type="submit" value="비밀번호 변경">
-    </form>
-</div>
+<h2>책 상세 설명</h2>
+<p>별치기호: ${bookDTO.bookID}</p>
+<p>제목: ${bookDTO.bookName}</p>
+<p>권: ${bookDTO.bookVolume}</p>
+<p>저자: ${bookDTO.bookWriter}</p>
+<p>출판사: ${bookDTO.bookCompany}</p>
+<p>분류: ${bookDTO.bookGenre}</p>
+<p>ISBN10/ISBN13: ${bookDTO.bookISBN}</p>
+<p>출간연도: ${bookDTO.bookYear}</p>
+<p>출간 판: ${bookDTO.bookEdition}</p>
+<p>(잡지 호: )${bookDTO.bookIssue}</p>
+<p>줄거리: ${bookDTO.bookSummary}</p>
+<p>대출을 원하신다면 도서관에서 관리자에게 문의하세요.</p>
+<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/'" />
 </body>
 </html>
