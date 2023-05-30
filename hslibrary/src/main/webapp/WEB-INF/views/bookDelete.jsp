@@ -39,45 +39,37 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
-<h3>삭제하실 도서를 확인해보세요.</h3>
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>별치기호</th>
-            <th>제목</th>
-            <th>권</th>
-            <th>출간 판</th>
-            <th>출간 연도</th>
-            <th>ISBN</th>
-            <th>저자</th>
-            <th>출판사</th>
-            <th>분류</th>
-            <th>분류</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="bookDTO" items="${bookList}">
-            <tr>
-                <td>${bookDTO.bookID}</td>
-                <td>${bookDTO.bookName}</td>
-                <td>${bookDTO.bookVolume}</td>
-                <td>${bookDTO.bookEdition}</td>
-                <td>${bookDTO.bookYear}</td>
-                <td>${bookDTO.bookISBN}</td>
-                <td>${bookDTO.bookWriter}</td>
-                <td>${bookDTO.bookCompany}</td>
-                <td>${bookDTO.bookGenre}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
+<div class="container">
+    <div class="text-center">
+        <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+            <h1 class="display-4 mt-5 mb-4">삭제하실 도서가 맞는지 확인하세요.</h1>
+            <p class="lead my-3">별치기호: ${bookDTO.bookID}</p>
+            <p class="lead my-3">제목: ${bookDTO.bookName}</p>
+            <p class="lead my-3">권: ${bookDTO.bookVolume}</p>
+            <p class="lead my-3">저자: ${bookDTO.bookWriter}</p>
+            <p class="lead my-3">출판사: ${bookDTO.bookCompany}</p>
+            <p class="lead my-3">분류: ${bookDTO.bookGenre}</p>
+            <p class="lead my-3">ISBN10/ISBN13: ${bookDTO.bookISBN}</p>
+            <p class="lead my-3">출간연도: ${bookDTO.bookYear}</p>
+            <p class="lead my-3">출간 판: ${bookDTO.bookEdition}</p>
+            <p class="lead my-3">(잡지 호: )${bookDTO.bookIssue}</p>
+            <p class="lead my-3">줄거리: ${bookDTO.bookSummary}</p>
+        </div>
+    </div>
 <div>
     <form action="${pageContext.request.contextPath}/bookDelete" method="post" enctype="multipart/form-data">
-        bookID:<input class="form-control" id="inputBookID" type="text" name="inputBookID"/>
-        책제목:<input class="form-control" id="inputBookName" type="text" name="inputBookName"/>
-        책제목확인:<input class="form-control" id="inputBookNameConfirm" type="text" name="inputBookNameConfirm"/>
+        <div class="mb-3">
+            <label for="bookID" class="form-label">별치기호</label>
+            <input type="text" class="form-control" id="bookID" placeholder="bookID" name="inputBookID"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputBookName" class="form-label">제목</label>
+            <input type="text" class="form-control" id="inputBookName" placeholder="ID" name="inputBookName"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputBookNameConfirm" class="form-label">저자</label>
+            <input type="text" class="form-control" id="inputBookNameConfirm" placeholder="ID" name="inputBookNameConfirm"/>
+        </div>
         <input type="submit" value="도서 삭제">
     </form>
 </div>

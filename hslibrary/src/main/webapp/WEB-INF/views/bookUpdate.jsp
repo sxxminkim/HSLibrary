@@ -39,59 +39,76 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
-<h2>무릉서원 도서 수정 페이지입니다.</h2>
-<h3>수정하실 도서를 확인해보세요.</h3>
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>별치기호</th>
-            <th>제목</th>
-            <th>권</th>
-            <th>출간 판</th>
-            <th>출간 연도</th>
-            <th>ISBN</th>
-            <th>저자</th>
-            <th>출판사</th>
-            <th>분류</th>
-            <th>종이책(1)/전자책(2)</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="bookDTO" items="${bookList}">
-            <tr>
-                <td>${bookDTO.bookID}</td>
-                <td>${bookDTO.bookName}</td>
-                <td>${bookDTO.bookVolume}</td>
-                <td>${bookDTO.bookEdition}</td>
-                <td>${bookDTO.bookYear}</td>
-                <td>${bookDTO.bookISBN}</td>
-                <td>${bookDTO.bookWriter}</td>
-                <td>${bookDTO.bookCompany}</td>
-                <td>${bookDTO.bookGenre}</td>
-                <td>${bookDTO.bookType}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="text-center">
+        <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+            <h1 class="display-4 mt-5 mb-4">책 상세 설명</h1>
+            <p class="lead my-3">별치기호: ${bookDTO.bookID}</p>
+            <p class="lead my-3">제목: ${bookDTO.bookName}</p>
+            <p class="lead my-3">권: ${bookDTO.bookVolume}</p>
+            <p class="lead my-3">저자: ${bookDTO.bookWriter}</p>
+            <p class="lead my-3">출판사: ${bookDTO.bookCompany}</p>
+            <p class="lead my-3">분류: ${bookDTO.bookGenre}</p>
+            <p class="lead my-3">ISBN10/ISBN13: ${bookDTO.bookISBN}</p>
+            <p class="lead my-3">출간연도: ${bookDTO.bookYear}</p>
+            <p class="lead my-3">출간 판: ${bookDTO.bookEdition}</p>
+            <p class="lead my-3">(잡지 호: )${bookDTO.bookIssue}</p>
+            <p class="lead my-3">줄거리: ${bookDTO.bookSummary}</p>
+        </div>
+    </div>
+    <div class="container">
+        <form action="${pageContext.request.contextPath}/bookAdd" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="bookID" class="form-label">별치기호</label>
+                <input type="text" class="form-control" id="bookID" placeholder="bookID" name="inputBookID"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookName" class="form-label">제목</label>
+                <input type="text" class="form-control" id="inputBookName" placeholder="ID" name="inputBookName"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookWriter" class="form-label">저자</label>
+                <input type="text" class="form-control" id="inputBookWriter" placeholder="ID" name="inputBookWriter"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookGenre" class="form-label">분류</label>
+                <input type="text" class="form-control" id="inputBookGenre" placeholder="ID" name="inputBookGenre"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookCompany" class="form-label">출판사</label>
+                <input type="text" class="form-control" id="inputBookCompany" placeholder="ID" name="inputBookCompany"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookISBN" class="form-label">ISBN</label>
+                <input type="text" class="form-control" id="inputBookISBN" placeholder="ID" name="inputBookISBN"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookYear" class="form-label">출간연도</label>
+                <input type="text" class="form-control" id="inputBookYear" placeholder="ID" name="inputBookYear"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookEdition" class="form-label">출간판</label>
+                <input type="text" class="form-control" id="inputBookEdition" placeholder="ID" name="inputBookEdition"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookVolume" class="form-label">권</label>
+                <input type="text" class="form-control" id="inputBookVolume" placeholder="ID" name="inputBookVolume"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookIssue" class="form-label">(잡지) 호</label>
+                <input type="text" class="form-control" id="inputBookIssue" placeholder="ID" name="inputBookIssue"/>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookSummary" class="form-label">줄거리</label>
+                <textarea class="form-control" id="inputBookSummary" rows="3"  name="inputBookSummary"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="inputBookType" class="form-label">종이책(1)/전자책(2)</label>
+                <input type="text" class="form-control" id="inputBookType" placeholder="ID" name="inputBookType"/>
+            </div>
+            <input type="submit" value="도서 추가">
+        </form>
+    </div>
 </div>
-<div>
-    <form action="${pageContext.request.contextPath}/bookUpdate" method="post" enctype="multipart/form-data">
-        bookID:<input class="form-control" id="inputBookID" type="text" name="inputBookID"/>
-        책제목:<input class="form-control" id="inputBookName" type="text" name="inputBookName"/>
-        지은이:<input class="form-control" id="inputBookWriter" type="text" name="inputBookWriter"/>
-        장르:<input class="form-control" id="inputBookGenre" type="text" name="inputBookGenre"/>
-        출판사:<input class="form-control" id="inputBookCompany" type="text" name="inputBookCompany"/>
-        ISBN10:<input class="form-control" id="inputBookISBN" type="text" name="inputBookISBN"/>
-        bookYear:<input class="form-control" id="inputBookYear" type="text" name="inputBookYear"/>
-        bookEdition:<input class="form-control" id="inputBookEdition" type="text" name="inputBookEdition"/>
-        bookVolume:<input class="form-control" id="inputBookVolume" type="text" name="inputBookVolume"/>
-        bookIssue:<input class="form-control" id="inputBookIssue" type="text" name="inputBookIssue"/>
-        bookSummary:<input class="form-control" id="inputBookSummary" type="text" name="inputBookSummary"/>
-        종이책(1)/전자책(2):<input class="form-control" id="inputBookType" type="text" name="inputBookType"/>
-        <input type="submit" value="도서 수정">
-    </form>
-</div>
-
 </body>
 </html>

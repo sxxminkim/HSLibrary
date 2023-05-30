@@ -1,7 +1,10 @@
 package com.manage.hslibrary.controller;
 
 import com.manage.hslibrary.DAO.MemberDAO;
+import com.manage.hslibrary.DTO.BookDTO;
 import com.manage.hslibrary.DTO.MemberDTO;
+import com.manage.hslibrary.DTO.NoticeDTO;
+import com.manage.hslibrary.DTO.VideoDTO;
 import com.manage.hslibrary.exception.*;
 import com.manage.hslibrary.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -201,5 +204,15 @@ public class MemberController {
 
             out.flush();
         }
+    }
+    @RequestMapping(value="/delayList", method= RequestMethod.GET)
+    public String delayList(Model model){
+        List<MemberDTO> bookBlackList=memberDAO.showBook();
+        List<MemberDTO> videoBlackList=memberDAO.showVideo();
+        model.addAttribute("bookBlackList", bookBlackList);
+        model.addAttribute("videoBlackList", videoBlackList);
+
+        //home-page
+        return ("delayList");
     }
 }

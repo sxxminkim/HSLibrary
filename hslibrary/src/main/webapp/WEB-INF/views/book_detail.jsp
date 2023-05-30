@@ -25,19 +25,25 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     </script>
 </head>
 <body>
-<h2>책 상세 설명</h2>
-<p>별치기호: ${bookDTO.bookID}</p>
-<p>제목: ${bookDTO.bookName}</p>
-<p>권: ${bookDTO.bookVolume}</p>
-<p>저자: ${bookDTO.bookWriter}</p>
-<p>출판사: ${bookDTO.bookCompany}</p>
-<p>분류: ${bookDTO.bookGenre}</p>
-<p>ISBN10/ISBN13: ${bookDTO.bookISBN}</p>
-<p>출간연도: ${bookDTO.bookYear}</p>
-<p>출간 판: ${bookDTO.bookEdition}</p>
-<p>(잡지 호: )${bookDTO.bookIssue}</p>
-<p>줄거리: ${bookDTO.bookSummary}</p>
-<p>대출을 원하신다면 도서관에서 관리자에게 문의하세요.</p>
-<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/'" />
+<div class="container">
+    <div class="text-center">
+        <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+            <h1 class="display-4 mt-5 mb-4">책 상세 설명</h1>
+            <p class="lead my-3">별치기호: ${bookDTO.bookID}</p>
+            <p class="lead my-3">제목: ${bookDTO.bookName}</p>
+            <p class="lead my-3">권: ${bookDTO.bookVolume}</p>
+            <p class="lead my-3">저자: ${bookDTO.bookWriter}</p>
+            <p class="lead my-3">출판사: ${bookDTO.bookCompany}</p>
+            <p class="lead my-3">분류: ${bookDTO.bookGenre}</p>
+            <p class="lead my-3">ISBN10/ISBN13: ${bookDTO.bookISBN}</p>
+            <p class="lead my-3">출간연도: ${bookDTO.bookYear}</p>
+            <p class="lead my-3">출간 판: ${bookDTO.bookEdition}</p>
+            <p class="lead my-3">(잡지 호: )${bookDTO.bookIssue}</p>
+            <p class="lead my-3">줄거리: ${bookDTO.bookSummary}</p>
+            <p class="lead my-3">대출을 원하신다면 도서관에서 관리자에게 문의하세요.</p>
+            <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/'" />
+        </div>
+    </div>
+</div>
 </body>
 </html>

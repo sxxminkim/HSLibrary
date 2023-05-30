@@ -24,15 +24,15 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             crossorigin="anonymous">
     </script>
     <style>
-        .container1{
-
-        }
-        .container{
+        .list{
+            box-sizing: border-box;
             position: absolute;
             width: 1645px;
             height: 686px;
             left: 136px;
-            top: 500px;
+            top: 306px;
+            border: 1px solid #918F8F;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -51,27 +51,34 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
-<div class="container1">
+<div>
     <a href="./noticeAdd">공지사항 등록</a>
     <a href="./noticeDelete">공지사항 삭제</a>
     <a href="./noticeUpdate">공지사항 수정</a>
 </div>
-<div class="container">
-    <form action="${pageContext.request.contextPath}/noticeAdd" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="inputNoticeTitle" class="form-label">제목</label>
-            <input type="text" class="form-control" id="inputNoticeTitle" placeholder="제목" name="inputNoticeTitle">
-        </div>
-        <div class="mb-3">
-            <label for="inputNoticeAuthor" class="form-label">글쓴이</label>
-            <input type="text" class="form-control" id="inputNoticeAuthor" placeholder="글쓴이" name="inputNoticeAuthor">
-        </div>
-        <div class="mb-3">
-            <label for="inputNoticeMain" class="form-label">내용</label>
-            <textarea class="form-control" id="inputNoticeMain" rows="3"  name="inputNoticeMain"></textarea>
-        </div>
-        <input type="submit" value="공지사항 등록">
-    </form>
+<div class="list">
+    <table>
+        <thead>
+        <tr>
+            <th>공지 번호</th>
+            <th>제목</th>
+            <th>날짜</th>
+            <th>작성자</th>
+            <th>공지 링크</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="noticeDTO" items="${noticeList}">
+            <tr>
+                <td>${noticeDTO.noticeNUM}</td>
+                <td>${noticeDTO.noticeTitle}</td>
+                <td>${noticeDTO.noticeDate}</td>
+                <td>${noticeDTO.noticeAuthor}</td>
+                <td><input type="button" value="자세히" onclick="location.href='${pageContext.request.contextPath}/notice_subview?noticeNUM=${noticeDTO.noticeNUM}'" /></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

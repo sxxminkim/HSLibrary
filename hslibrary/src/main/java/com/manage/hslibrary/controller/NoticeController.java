@@ -26,7 +26,6 @@ public class NoticeController {
 
     @RequestMapping(value = "/notice_detail", method = RequestMethod.GET)
     public String notice_detail(Model model, @RequestParam(defaultValue ="1")int noticeNUM) {
-        //List<NoticeDTO> noticeDTO=noticeDAO.showOne(noticeNUM);
         model.addAttribute("noticeNUM", noticeNUM);
         NoticeDTO noticeDTO = noticeDAO.selectByNoticeNUM(noticeNUM);
 
@@ -46,6 +45,13 @@ public class NoticeController {
 
 
         return "notice_subview";
+    }
+    @RequestMapping(value = "/noticeList", method = RequestMethod.GET)
+    public String noticeList(Model model, @RequestParam(defaultValue ="1")int noticeNUM) {
+        List<NoticeDTO> noticeList=noticeDAO.showAll();
+        model.addAttribute("noticeList", noticeList);
+
+        return ("noticeList");
     }
 
     @RequestMapping(value="/noticeAdd", method=RequestMethod.GET)

@@ -76,13 +76,34 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 </div>
 <div>
     <form action="${pageContext.request.contextPath}/adminRegister" method="post" enctype="multipart/form-data">
-        관리자ID:<input class="form-control" id="inputStaffNUM" type="text" name="inputStaffNUM"/>
-        관리자PW:<input class="form-control" id="inputStaffPW" type="text" name="inputStaffPW"/>
-        관리자이름:<input class="form-control" id="inputStaffName" type="text" name="inputStaffName"/>
-        관리자주민등록번호:<input class="form-control" id="inputStaffID" type="text" name="inputStaffID"/>
-        관리자주소:<input class="form-control" id="inputStaffAddr" type="text" name="inputStaffAddr"/>
-        관리자휴대폰번호:<input class="form-control" id="inputStaffPhone" type="text" name="inputStaffPhone"/>
-        관리자부서:<input class="form-control" id="inputStaffDepartment" type="text" name="inputStaffDepartment"/>
+        <div class="mb-3">
+            <label for="inputStaffNUM" class="form-label">관리자 ID</label>
+            <input type="text" class="form-control" id="inputStaffNUM" placeholder="ID" name="inputStaffNUM"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputStaffPW" class="form-label">관리자 PW</label>
+            <input type="text" class="form-control" id="inputStaffPW" placeholder="PW" name="inputStaffPW"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputStaffName" class="form-label">관리자 이름</label>
+            <input type="text" class="form-control" id="inputStaffName" placeholder="이름" name="inputStaffName"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputStaffID" class="form-label">관리자 주민등록번호</label>
+            <input type="text" class="form-control" id="inputStaffID" placeholder="000000-0000000" name="inputStaffID"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputStaffAddr" class="form-label">관리자 주소</label>
+            <input type="text" class="form-control" id="inputStaffAddr" placeholder="주소" name="inputStaffAddr"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputStaffPhone" class="form-label">관리자 휴대폰번호</label>
+            <input type="text" class="form-control" id="inputStaffPhone" placeholder="000-0000-0000" name="inputStaffPhone"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputStaffDepartment" class="form-label">관리자 부서</label>
+            <input type="text" class="form-control" id="inputStaffDepartment" placeholder="부서명" name="inputStaffDepartment"/>
+        </div>
         <input type="submit" value="관리자 추가">
     </form>
 </div>

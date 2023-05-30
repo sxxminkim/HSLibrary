@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 @Controller
@@ -107,10 +105,11 @@ public class BookController {
     }
     //deleting books
     @RequestMapping(value = "/bookDelete", method = RequestMethod.GET)
-    public String bookDelete(Model model) {
-        List<BookDTO> bookList = bookDAO.showAll();
+    public String bookDelete(Model model, @RequestParam(defaultValue ="가123")String bookID) {
+        model.addAttribute("bookID", bookID);
+        BookDTO bookDTO = bookDAO.selectByBookID(bookID);
 
-        model.addAttribute("bookList", bookList);
+        model.addAttribute("bookDTO", bookDTO);
 
         return "bookDelete";
     }
@@ -187,10 +186,11 @@ public class BookController {
 
     //updating books
     @RequestMapping(value = "/bookUpdate", method = RequestMethod.GET)
-    public String bookUpdate(Model model) {
-        List<BookDTO> bookList = bookDAO.showAll();
+    public String bookUpdate(Model model, @RequestParam(defaultValue ="가123")String bookID) {
+        model.addAttribute("bookID", bookID);
+        BookDTO bookDTO = bookDAO.selectByBookID(bookID);
 
-        model.addAttribute("bookList", bookList);
+        model.addAttribute("bookDTO", bookDTO);
 
         return "bookUpdate";
     }
