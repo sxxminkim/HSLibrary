@@ -53,7 +53,7 @@
 </div>
 <div class="container">
     <table class="table" id="videoRoomTable">
-        <thead>
+        <thead class="table-light">
         <tr>
             <th>시청각실 번호</th>
             <th>시청각실 이름</th>
