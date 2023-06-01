@@ -27,14 +27,6 @@ public class HomeController {
     MemberDAO memberDAO;
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String index(Model model){
-        List<BookDTO> paperBookList=bookDAO.showPaper();
-        List<BookDTO> eBookList=bookDAO.showEbook();
-        List<VideoDTO> videoList=videoDAO.showAll();
-        List<NoticeDTO> noticeList=noticeDAO.showAll();
-        model.addAttribute("bookList",paperBookList);
-        model.addAttribute("eBookList",eBookList);
-        model.addAttribute("videoList",videoList);
-        model.addAttribute("noticeList", noticeList);
 
         //home-page
         return ("index");
@@ -42,19 +34,19 @@ public class HomeController {
 
     @RequestMapping(value="/adminIndex", method= RequestMethod.GET)
     public String adminIndex(Model model){
-        List<BookDTO> bookList=bookDAO.showAll();
-        List<VideoDTO> videoList=videoDAO.showAll();
-        List<NoticeDTO> noticeList=noticeDAO.showAll();
-        List<MemberDTO> bookBlackList=memberDAO.showBook();
-        List<MemberDTO> videoBlackList=memberDAO.showVideo();
-        model.addAttribute("bookList",bookList);
-        model.addAttribute("videoList",videoList);
-        model.addAttribute("noticeList", noticeList);
-        model.addAttribute("bookBlackList", bookBlackList);
-        model.addAttribute("videoBlackList", videoBlackList);
 
         //home-page
         return ("adminIndex");
+    }
+    @RequestMapping(value="/allList", method= RequestMethod.GET)
+    public String allList(Model model){
+        List<BookDTO> bookList=bookDAO.showAll();
+        List<VideoDTO> videoList=videoDAO.showAll();
+        model.addAttribute("bookList", bookList);
+        model.addAttribute("videoList", videoList);
+
+
+        return ("allList");
     }
 
     @Bean

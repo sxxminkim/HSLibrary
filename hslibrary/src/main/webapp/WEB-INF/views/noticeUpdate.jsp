@@ -39,34 +39,20 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
-<div>
-    <a href="./noticeAdd">공지사항 등록</a>
-    <a href="./noticeDelete">공지사항 삭제</a>
-    <a href="./noticeUpdate">공지사항 수정</a>
-</div>
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>공지 번호</th>
-            <th>제목</th>
-            <th>날짜</th>
-            <th>작성자</th>
-            <th>공지 링크</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="noticeDTO" items="${noticeList}">
-            <tr>
-                <td>${noticeDTO.noticeNUM}</td>
-                <td>${noticeDTO.noticeTitle}</td>
-                <td>${noticeDTO.noticeDate}</td>
-                <td>${noticeDTO.noticeAuthor}</td>
-                <td><input type="button" value="자세히" onclick="location.href='${pageContext.request.contextPath}/notice_subview?noticeNUM=${noticeDTO.noticeNUM}'" /></td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="text-center">
+        <div class="p-4 p-md-5 mb-4 rounded">
+            <h1 class="display-4 mt-5 mb-4">공지번호 ${noticeDTO.noticeNUM}의 공지입니다.</h1>
+            <div>
+                <p class="lead my-3">${noticeDTO.noticeNUM}</p>
+                <p class="lead my-3">${noticeDTO.noticeTitle}</p>
+                <p class="lead my-3">${noticeDTO.noticeDate}</p>
+                <p class="lead my-3">${noticeDTO.noticeAuthor}</p>
+                <p class="lead my-3">${noticeDTO.noticeMain}</p>
+                <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/noticeList'" />
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container">
     <form action="${pageContext.request.contextPath}/noticeUpdate" method="post" enctype="multipart/form-data">
@@ -76,5 +62,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         내용:<input class="form-control" id="inputNoticeMain" type="text" name="inputNoticeMain"/>
         <input type="submit" value="공지사항 수정">
     </form>
+</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

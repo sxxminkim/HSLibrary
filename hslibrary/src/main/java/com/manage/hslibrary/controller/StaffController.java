@@ -1,7 +1,8 @@
 package com.manage.hslibrary.controller;
 
-import com.manage.hslibrary.DTO.MemberDTO;
-import com.manage.hslibrary.DTO.StaffDTO;
+import com.manage.hslibrary.DTO.*;
+import com.manage.hslibrary.DAO.*;
+import com.manage.hslibrary.service.*;
 import com.manage.hslibrary.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,13 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.*;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import com.manage.hslibrary.DAO.StaffDAO;
-import com.manage.hslibrary.service.StaffService;
 @ComponentScan(basePackages={"com.manage.hslibrary.DTO.StaffDTO"})
 @Controller
 public class StaffController {

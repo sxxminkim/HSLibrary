@@ -28,14 +28,13 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 <div class="container">
     <div class="text-center">
         <div class="p-4 p-md-5 mb-4 rounded">
-            <h1 class="display-4 mt-5 mb-4">공지번호 ${noticeDTO.noticeNUM}의 공지입니다.</h1>
+            <h1 class="display-4 mt-5 mb-4">시청각실 정보를 확인하세요.</h1>
             <div>
-                <p class="lead my-3">${noticeDTO.noticeNUM}</p>
-                <p class="lead my-3">${noticeDTO.noticeTitle}</p>
-                <p class="lead my-3">${noticeDTO.noticeDate}</p>
-                <p class="lead my-3">${noticeDTO.noticeAuthor}</p>
-                <p class="lead my-3">${noticeDTO.noticeMain}</p>
-                <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/'" />
+                <p class="lead my-3">방 번호: ${videoRoomDTO.vid_roomNUM}</p>
+                <p class="lead my-3">방 이름: ${videoRoomDTO.vid_roomName}</p>
+                <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/VideoRoomAdd'" />
+                <input type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/VideoRoomDelete?vid_roomNUM=${videoRoomDTO.vid_roomNUM}'" />
+                <input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/VideoRoomUpdate?vid_roomNUM=${videoRoomDTO.vid_roomNUM}'" />
             </div>
         </div>
     </div>

@@ -104,93 +104,22 @@ public class BookController {
 
     }
     //deleting books
-    @RequestMapping(value = "/bookDelete", method = RequestMethod.GET)
-    public String bookDelete(Model model, @RequestParam(defaultValue ="가123")String bookID) {
-        model.addAttribute("bookID", bookID);
-        BookDTO bookDTO = bookDAO.selectByBookID(bookID);
-
-        model.addAttribute("bookDTO", bookDTO);
-
-        return "bookDelete";
-    }
-
-    // deleting books
-    @PostMapping(value = "/bookDelete")
-    public void bookDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        try {
-            String inputBookID = request.getParameter("inputBookID");
-            String inputBookName = request.getParameter("inputBookName");
-            String inputBookNameConfirm = request.getParameter("inputBookNameConfirm");
-            BookDTO bookDTO = bookDAO.selectByBookID(inputBookID);
-            BookRentDTO bookRentDTO = bookRentDAO.selectByBookID(inputBookID);
-
-            if (bookRentDTO != null) // 대여한 사람이 있다는 것
-                throw new AlreadyExistingException("해당 도서를 대여한 회원이 있습니다.");
-
-
-            if (bookDTO == null)
-                throw new NotExistingException("존재하지 않는 도서입니다.");
-            else {
-                if (bookDTO.getBookName().equals(inputBookName)) {
-                    if (inputBookName.equals(inputBookNameConfirm)) {
-                        bookService.deleteBook(bookDTO);
-
-                        response.sendRedirect("./bookDelete");
-                    } else
-                        throw new NotMatchingException("확인 제목과 맞지 않습니다.");
-                } else
-                    throw new NotExistingException("책의 제목이 맞지 않습니다.");
-            }
-        } catch (NotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('확인 제목과 맞지 않습니다.'); location.href='./bookDelete';</script>");
-
-            out.flush();
-
-            response.sendRedirect("./bookDelete");
-
-        } catch (NotExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('존재하지 않는 도서입니다.'); location.href='./bookDelete';</script>");
-
-            out.flush();
-
-
-        } catch (ConfirmNotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('책의 제목이 맞지 않습니다.'); location.href='./bookDelete';</script>");
-
-            out.flush();
-
-        }
-
-        catch (AlreadyExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('해당 도서를 대여한 회원이 있습니다.'); location.href='/bookDelete';</script>");
-
-            out.flush();
-        }
+    @RequestMapping(value="/bookDelete", method = RequestMethod.GET)
+    public String bookDelete(Model model, @RequestParam(defaultValue ="1")String bookID) throws Exception {
+        BookDTO bookDTO=bookDAO.selectByBookID(bookID);
+        bookService.deleteBook(bookDTO);
+        return "redirect:bookAdd";
     }
 
     //updating books
     @RequestMapping(value = "/bookUpdate", method = RequestMethod.GET)
-    public String bookUpdate(Model model, @RequestParam(defaultValue ="가123")String bookID) {
+    public String bookUpdate(Model model, @RequestParam(defaultValue ="1")String bookID) {
         model.addAttribute("bookID", bookID);
         BookDTO bookDTO = bookDAO.selectByBookID(bookID);
 
         model.addAttribute("bookDTO", bookDTO);
+        System.out.println(bookID);
+
 
         return "bookUpdate";
     }
@@ -231,7 +160,7 @@ public class BookController {
 
             System.out.println(bookDTO.toString());
 
-            response.sendRedirect("./bookUpdate");
+            response.sendRedirect("./bookAdd");
         } catch (NotExistingException ex) {
             response.setContentType("text/html; charset=UTF-8");
 
@@ -321,138 +250,45 @@ public class BookController {
         }
 
     }
-    @RequestMapping(value = "/bookReturn", method = RequestMethod.GET)
-    public String bookReturn(Model model) {
-        List<BookRentDTO> bookRentList = bookRentDAO.showAll();
-
-        model.addAttribute("bookRentList", bookRentList);
-
-        return "bookReturn";
+    @RequestMapping(value="/bookReturn", method = RequestMethod.GET)
+    public String bookReturn(Model model, @RequestParam(defaultValue ="1")String bookRentalNUM) throws Exception {
+        BookRentDTO bookRentDTO=bookRentDAO.selectByBookRentalNUM(bookRentalNUM);
+        bookRentService.returnBook(bookRentDTO);
+        return "redirect:bookRent";
     }
-
-    // deleting books
-    @PostMapping(value = "/bookReturn")
-    public void bookReturn(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        try {
-            String inputBookRentNUM = request.getParameter("inputBookRentNUM");
-            String inputBookID = request.getParameter("inputBookID");
-            String inputBookIDConfirm = request.getParameter("inputBookIDConfirm");
-            BookRentDTO bookRentDTO = bookRentDAO.selectByBookRentalNUM(inputBookRentNUM);
-
-            if (bookRentDTO == null)
-                throw new NotExistingException("대출중인 도서가 아닙니다.");
-            else {
-                if (bookRentDTO.getBookID().equals(inputBookID)) {
-                    if (inputBookID.equals(inputBookIDConfirm)) {
-                        bookRentService.returnBook(bookRentDTO);
-
-                        response.sendRedirect("./bookReturn");
-                    } else
-                        throw new NotMatchingException("확인 도서 번호와 맞지 않습니다.");
-                } else
-                    throw new NotExistingException("도서 번호가 맞지 않습니다.");
-            }
-        } catch (NotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('확인 도서 번호와 맞지 않습니다.'); location.href='./bookReturn';</script>");
-
-            out.flush();
-
-            response.sendRedirect("./bookReturn");
-
-        } catch (NotExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('대출중인 도서가 아닙니다.'); location.href='./bookReturn';</script>");
-
-            out.flush();
-
-
-        } catch (ConfirmNotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('도서 번호가 맞지 않습니다.'); location.href='./bookReturn';</script>");
-
-            out.flush();
-
-        }
-
-    }
-
-    //updating books
-    @RequestMapping(value = "/bookExtend", method = RequestMethod.GET)
-    public String bookExtend(Model model) {
-        List<BookRentDTO> bookRentList = bookRentDAO.showAll();
-
-        model.addAttribute("bookRentList", bookRentList);
-
-        return "bookExtend";
-    }
-
-    //updating books
-    @PostMapping(value = "/bookExtend")
-    public void bookExtend(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        try {
-            String inputBookRentNUM = request.getParameter("inputBookRentNUM");
-            String inputBookID = request.getParameter("inputBookID");
-            String inputClientNUM = request.getParameter("inputClientNUM");
-
-
-            BookRentDTO bookRentDTO = bookRentDAO.selectByBookRentalNUM(inputBookRentNUM);
-
-            if (bookRentDTO == null)
-                throw new NotExistingException("연장할 도서가 없습니다.");
-
-            if (inputBookRentNUM.equals("") || inputBookID.equals("") || inputClientNUM.equals(""))
-                throw new FillOutInformationException("모든 정보를 입력해주세요.");
-
-
-            bookRentDTO = new BookRentDTO(inputBookRentNUM, inputBookID, inputClientNUM);
-
-            bookRentDTO = bookRentService.extendBook(bookRentDTO);
-
-            System.out.println(bookRentDTO.toString());
-
-            response.sendRedirect("./bookExtend");
-        } catch (NotExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('연장할 도서가 없습니다.'); location.href='./bookExtend';</script>");
-
-            out.flush();
-
-
-
-        } catch (FillOutInformationException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('모든 정보를 입력해주세요.'); location.href='./bookExtend';</script>");
-
-            out.flush();
-
-        }
+    @RequestMapping(value="/bookExtend", method = RequestMethod.GET)
+    public String bookExtend(Model model, @RequestParam(defaultValue ="1")String bookRentalNUM) throws Exception {
+        BookRentDTO bookRentDTO=bookRentDAO.selectByBookRentalNUM(bookRentalNUM);
+        bookRentService.extendBook(bookRentDTO);
+        return "redirect:bookRent";
     }
 
     @RequestMapping(value = "/book_detail", method = RequestMethod.GET)
     public String book_detail(Model model, @RequestParam(defaultValue ="1")String bookID) {
-        //List<NoticeDTO> noticeDTO=noticeDAO.showOne(noticeNUM);
         model.addAttribute("bookID", bookID);
         BookDTO bookDTO = bookDAO.selectByBookID(bookID);
 
         model.addAttribute("bookDTO", bookDTO);
 
         return "book_detail";
+    }
+    @RequestMapping(value = "/book_subview", method = RequestMethod.GET)
+    public String book_subview(Model model, @RequestParam(defaultValue ="1")String bookID) {
+        model.addAttribute("bookID", bookID);
+        BookDTO bookDTO = bookDAO.selectByBookID(bookID);
+
+        model.addAttribute("bookDTO", bookDTO);
+
+        return "book_subview";
+    }
+    @RequestMapping(value = "/bookRent_detail", method = RequestMethod.GET)
+    public String bookRent_detail(Model model, @RequestParam(defaultValue ="1")String bookRentalNUM) {
+        model.addAttribute("bookRentalNUM", bookRentalNUM);
+        BookRentDTO bookRentDTO = bookRentDAO.selectByBookRentalNUM(bookRentalNUM);
+
+        model.addAttribute("bookRentDTO", bookRentDTO);
+
+        return "bookRent_detail";
     }
 
 }

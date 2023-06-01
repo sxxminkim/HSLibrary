@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -93,90 +94,26 @@ public class VideoController {
         }
 
     }
-    //deleting books
-    @RequestMapping(value = "/videoDelete", method = RequestMethod.GET)
-    public String videoDelete(Model model) {
-        List<VideoDTO> videoList = videoDAO.showAll();
-
-        model.addAttribute("videoList", videoList);
-
-        return "videoDelete";
+    //deleting videos
+    @RequestMapping(value="/videoDelete", method = RequestMethod.GET)
+    public String videoDelete(Model model, @RequestParam(defaultValue ="1")String videoID) throws Exception {
+        VideoDTO videoDTO=videoDAO.selectByVideoID(videoID);
+        videoService.deleteVideo(videoDTO);
+        return "redirect:videoAdd";
     }
-
-    // deleting books
-    @PostMapping(value = "/videoDelete")
-    public void videoDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        try {
-            String inputVideoID = request.getParameter("inputVideoID");
-            String inputVideoName = request.getParameter("inputVideoName");
-            String inputVideoNameConfirm = request.getParameter("inputVideoNameConfirm");
-
-            VideoDTO videoDTO = videoDAO.selectByVideoID(inputVideoID);
-            VideoRentDTO videoRentDTO = videoRentDAO.selectByVideoID(inputVideoID);
-
-            if (videoRentDTO == null) // 대여한 사람이 있다는 것
-                throw new AlreadyExistingException("해당 도서를 대여한 회원이 있습니다.");
-
-            if (videoDTO == null)
-                throw new NotExistingException("존재하지 않는 도서입니다.");
-            else {
-                if (videoDTO.getVideoName().equals(inputVideoName)) {
-                    if (inputVideoName.equals(inputVideoNameConfirm)) {
-                        videoService.deleteVideo(videoDTO);
-
-                        response.sendRedirect("./videoDelete");
-                    } else
-                        throw new NotMatchingException("확인 제목과 맞지 않습니다.");
-                } else
-                    throw new NotExistingException("영상의 제목이 맞지 않습니다.");
-            }
-        } catch (NotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('확인 제목과 맞지 않습니다.'); location.href='/videoDelete';</script>");
-
-            out.flush();
-        } catch (NotExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('존재하지 않는 영상입니다.'); location.href='/videoDelete';</script>");
-
-            out.flush();
-        } catch (ConfirmNotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('영상의 제목이 맞지 않습니다.'); location.href='/videoDelete';</script>");
-
-            out.flush();
-        }
-        catch (AlreadyExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('해당 도서를 대여한 회원이 있습니다.'); location.href='/admin/book/delete';</script>");
-
-            out.flush();
-        }
-    }
-
-    //updating video
+    //updating videos
     @RequestMapping(value = "/videoUpdate", method = RequestMethod.GET)
-    public String videoUpdate(Model model) {
-        List<VideoDTO> videoList = videoDAO.showAll();
+    public String videoUpdate(Model model, @RequestParam(defaultValue ="1")String videoID) {
+        model.addAttribute("videoID", videoID);
+        VideoDTO videoDTO = videoDAO.selectByVideoID(videoID);
 
-        model.addAttribute("videoList", videoList);
+        model.addAttribute("videoDTO", videoDTO);
+        System.out.println(videoID);
+
 
         return "videoUpdate";
     }
-
-    //updating books
+    //updating videos
     @PostMapping(value = "/videoUpdate")
     public void bookUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
@@ -206,7 +143,7 @@ public class VideoController {
 
             System.out.println(videoDTO.toString());
 
-            response.sendRedirect("./videoUpdate");
+            response.sendRedirect("./videoAdd");
         } catch (NotExistingException ex) {
             response.setContentType("text/html; charset=UTF-8");
 
@@ -225,6 +162,7 @@ public class VideoController {
             out.flush();
         }
     }
+    //videoRent
     @RequestMapping(value = "/videoRent", method = RequestMethod.GET)
     public String videoRent(Model model) {
         List<VideoRentDTO> videoRentList = videoRentDAO.showAll();
@@ -237,20 +175,21 @@ public class VideoController {
 
         return "videoRent";
     }
-
-    // book rent
+    // videoRent
     @PostMapping(value = "/videoRent")
     public void videoRent(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            String inputVideoRentNUM = request.getParameter("inputBookRentNUM");
-            String inputVideoID = request.getParameter("inputBookID");
+            String inputVideoRentNUM = request.getParameter("inputVideoRentNUM");
+            String inputVideoID = request.getParameter("inputVideoID");
             String inputClientNUM = request.getParameter("inputClientNUM");
 
             VideoRentDTO videoRentDTO = videoRentDAO.selectByVideoID(inputVideoID);
-            //
+            VideoRentDTO _videoRentDTO= videoRentDAO.selectByClientNUM(inputClientNUM);
 
             if (videoRentDTO != null)
                 throw new AlreadyExistingException("이미 누군가 빌려간 영상입니다.");
+            if (_videoRentDTO !=null)
+                throw new NotAvailableException("이미 대출한 회원입니다.");
 
             if (inputVideoRentNUM.equals("") || inputVideoID.equals("") || inputClientNUM.equals(""))
                 throw new FillOutInformationException("모든 정보를 입력해주세요.");
@@ -262,6 +201,7 @@ public class VideoController {
             System.out.println(videoRentDTO.toString());
 
             response.sendRedirect("./videoRent");
+
         } catch (AlreadyExistingException ex) {
             response.setContentType("text/html; charset=UTF-8");
 
@@ -280,130 +220,58 @@ public class VideoController {
 
             out.flush();
 
+        }catch (NotAvailableException ex) {
+            response.setContentType("text/html; charset=UTF-8");
+
+            PrintWriter out = response.getWriter();
+
+            out.println("<script>alert('이미 대출한 회원입니다.'); location.href='./videoRent';</script>");
+
+            out.flush();
         }
 
     }
-    @RequestMapping(value = "/videoReturn", method = RequestMethod.GET)
-    public String videoReturn(Model model) {
-        List<VideoRentDTO> videoRentList = videoRentDAO.showAll();
-
-        model.addAttribute("videoRentList", videoRentList);
-
-        return "videoReturn";
+    @RequestMapping(value="/videoReturn", method = RequestMethod.GET)
+    public String videoReturn(Model model, @RequestParam(defaultValue ="1")String videoRentalNUM) throws Exception {
+        VideoRentDTO videoRentDTO=videoRentDAO.selectByVideoRentalNUM(videoRentalNUM);
+        videoRentService.returnVideo(videoRentDTO);
+        return "redirect:videoRent";
+    }
+    @RequestMapping(value="/videoExtend", method = RequestMethod.GET)
+    public String videoExtend(Model model, @RequestParam(defaultValue ="1")String videoRentalNUM) throws Exception {
+        VideoRentDTO videoRentDTO=videoRentDAO.selectByVideoRentalNUM(videoRentalNUM);
+        videoRentService.extendVideo(videoRentDTO);
+        return "redirect:videoRent";
     }
 
-    // deleting books
-    @PostMapping(value = "/videoReturn")
-    public void videoReturn(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        try {
-            String inputVideoRentNUM = request.getParameter("inputBookID");
-            String inputVideoID = request.getParameter("inputBookName");
-            String inputVideoIDConfirm = request.getParameter("inputBookNameConfirm");
-            VideoRentDTO videoRentDTO = videoRentDAO.selectByVideoRentalNUM(inputVideoRentNUM);
+    @RequestMapping(value = "/video_detail", method = RequestMethod.GET)
+    public String video_detail(Model model, @RequestParam(defaultValue ="1")String videoID) {
+        //List<NoticeDTO> noticeDTO=noticeDAO.showOne(noticeNUM);
+        model.addAttribute("videoID", videoID);
+        VideoDTO videoDTO = videoDAO.selectByVideoID(videoID);
 
-            if (videoRentDTO == null)
-                throw new NotExistingException("대출중인 도서가 아닙니다.");
-            else {
-                if (videoRentDTO.getVideoID().equals(inputVideoID)) {
-                    if (inputVideoID.equals(inputVideoIDConfirm)) {
-                        videoRentService.returnVideo(videoRentDTO);
+        model.addAttribute("videoDTO", videoDTO);
 
-                        response.sendRedirect("./videoReturn");
-                    } else
-                        throw new NotMatchingException("확인 영상 번호와 맞지 않습니다.");
-                } else
-                    throw new NotExistingException("영상 번호가 맞지 않습니다.");
-            }
-        } catch (NotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('확인 영상 번호와 맞지 않습니다.'); location.href='./videoReturn';</script>");
-
-            out.flush();
-
-            response.sendRedirect("./videoReturn");
-
-        } catch (NotExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('대출중인 영상이 아닙니다.'); location.href='./videoReturn';</script>");
-
-            out.flush();
-
-
-        } catch (ConfirmNotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('영상 번호가 맞지 않습니다.'); location.href='./videoReturn';</script>");
-
-            out.flush();
-
-        }
-
+        return "video_detail";
     }
+    @RequestMapping(value = "/video_subview", method = RequestMethod.GET)
+    public String video_subview(Model model, @RequestParam(defaultValue ="1")String videoID) {
+        //List<NoticeDTO> noticeDTO=noticeDAO.showOne(noticeNUM);
+        model.addAttribute("videoID", videoID);
+        VideoDTO videoDTO = videoDAO.selectByVideoID(videoID);
 
-    //updating books
-    @RequestMapping(value = "/videoExtend", method = RequestMethod.GET)
-    public String videoExtend(Model model) {
-        List<VideoRentDTO> videoRentList = videoRentDAO.showAll();
+        model.addAttribute("videoDTO", videoDTO);
 
-        model.addAttribute("videoRentList", videoRentList);
-
-        return "videoExtend";
+        return "video_subview";
     }
+    @RequestMapping(value = "/videoRent_detail", method = RequestMethod.GET)
+    public String videoRent_detail(Model model, @RequestParam(defaultValue ="1")String videoRentalNUM) {
+        model.addAttribute("videoRentalNUM", videoRentalNUM);
+        VideoRentDTO videoRentDTO = videoRentDAO.selectByVideoRentalNUM(videoRentalNUM);
 
-    //updating books
-    @PostMapping(value = "/videoExtend")
-    public void videoExtend(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        try {
-            String inputVideoRentNUM = request.getParameter("inputBookRentalNUM");
-            String inputVideoID = request.getParameter("inputBookID");
-            String inputClientNUM = request.getParameter("inputClientNUM");
+        model.addAttribute("videoRentDTO", videoRentDTO);
 
-
-            VideoRentDTO videoRentDTO = videoRentDAO.selectByVideoRentalNUM(inputVideoRentNUM);
-
-            if (videoRentDTO == null)
-                throw new NotExistingException("연장할 영상이 없습니다.");
-
-            if (inputVideoRentNUM.equals("") || inputVideoID.equals("") || inputClientNUM.equals(""))
-                throw new FillOutInformationException("모든 정보를 입력해주세요.");
-
-
-            videoRentDTO = new VideoRentDTO(inputVideoRentNUM, inputVideoID, inputClientNUM);
-
-            videoRentDTO = videoRentService.extendVideo(videoRentDTO);
-
-            System.out.println(videoRentDTO.toString());
-
-            response.sendRedirect("./videoExtend");
-        } catch (NotExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('연장할 영상이 없습니다.'); location.href='./videoExtend';</script>");
-
-            out.flush();
-
-        } catch (FillOutInformationException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('모든 정보를 입력해주세요.'); location.href='./videoExtend';</script>");
-
-            out.flush();
-
-        }
+        return "videoRent_detail";
     }
-
-
 
 }

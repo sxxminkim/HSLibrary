@@ -50,7 +50,7 @@ public class VidRoomRentDAO {
         jdbcTemplate.update(
                 "INSERT INTO videoRoomRental(videoRoomRentalNUM, clientNUM, vid_roomNUM, videoRoomRental_start, videoRoomRental_end" +
                         ") VALUES('"+ vidRoomRentDTO.getVideoRoomRentalNUM() + "', '" + vidRoomRentDTO.getClientNUM() + "', '" + vidRoomRentDTO.getVid_roomNUM()
-                        + "', NOW(), NOW();");
+                        + "', NOW(), NOW());");
     }
 
     public void ReturnVidRoom(VidRoomRentDTO _vidRoomRentDTO) {

@@ -1,10 +1,7 @@
 package com.manage.hslibrary.controller;
 
-import com.manage.hslibrary.DAO.MemberDAO;
-import com.manage.hslibrary.DTO.BookDTO;
-import com.manage.hslibrary.DTO.MemberDTO;
-import com.manage.hslibrary.DTO.NoticeDTO;
-import com.manage.hslibrary.DTO.VideoDTO;
+import com.manage.hslibrary.DAO.*;
+import com.manage.hslibrary.DTO.*;
 import com.manage.hslibrary.exception.*;
 import com.manage.hslibrary.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +23,10 @@ public class MemberController {
     MemberService memberService;
     @Autowired
     MemberDAO memberDAO;
+    @Autowired
+    BookDAO bookDAO;
+    @Autowired
+    VideoDAO videoDAO;
 
     @RequestMapping(value = "/memberAdd", method = RequestMethod.GET)
     public String memberAdd(Model model) {
@@ -86,78 +88,29 @@ public class MemberController {
         }
 
     }
-    //deleting books
-    @RequestMapping(value = "/memberDelete", method = RequestMethod.GET)
-    public String memberDelete(Model model) {
-        List<MemberDTO> memberList = memberDAO.showAll();
-
-        model.addAttribute("memberList", memberList);
-
-        return "memberDelete";
+    //deleting members
+    @RequestMapping(value="/memberDelete", method = RequestMethod.GET)
+    public String memberDelete(Model model, @RequestParam(defaultValue ="1")String clientNUM) throws Exception {
+        MemberDTO memberDTO=memberDAO.selectByClientNUM(clientNUM);
+        memberService.deleteMember(memberDTO);
+        return "redirect:memberAdd";
     }
 
-    // deleting books
-    @PostMapping(value = "/memberDelete")
-    public void memberDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        try {
-            String inputClientNUM = request.getParameter("inputClientNUM");
-            String inputClientName = request.getParameter("inputClientName");
-            String inputClientNameConfirm = request.getParameter("inputClientNameConfirm");
-
-            MemberDTO memberDTO = memberDAO.selectByClientNUM(inputClientNUM);
-
-            if (memberDTO == null)
-                throw new NotExistingException("존재하지 않는 회원입니다.");
-            else {
-                if (memberDTO.getClientName().equals(inputClientName)) {
-                    if (inputClientName.equals(inputClientNameConfirm)) {
-                        memberService.deleteMember(memberDTO);
-
-                        response.sendRedirect("./memberDelete");
-                    } else
-                        throw new NotMatchingException("확인 이름과 맞지 않습니다.");
-                } else
-                    throw new NotExistingException("회원의 이름이 맞지 않습니다.");
-            }
-        } catch (NotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('확인 이름과 맞지 않습니다.'); location.href='/memberDelete';</script>");
-
-            out.flush();
-        } catch (NotExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('존재하지 않는 회원입니다.'); location.href='/memberDelete';</script>");
-
-            out.flush();
-        } catch (ConfirmNotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('회원의 이름이 맞지 않습니다.'); location.href='/memberDelete';</script>");
-
-            out.flush();
-        }
-
-    }
 
     //updating client information
     @RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
-    public String memberUpdate(Model model) {
-        List<MemberDTO> memberList = memberDAO.showAll();
+    public String memberUpdate(Model model, @RequestParam(defaultValue ="1")String clientNUM) {
+        model.addAttribute("clientNUM", clientNUM);
+        MemberDTO memberDTO = memberDAO.selectByClientNUM(clientNUM);
 
-        model.addAttribute("memberList", memberList);
+        model.addAttribute("memberDTO", memberDTO);
+        System.out.println(clientNUM);
+
 
         return "memberUpdate";
     }
 
-    //updating books
+    //updating client Information
     @PostMapping(value = "/memberUpdate")
     public void bookUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
@@ -186,7 +139,7 @@ public class MemberController {
 
             System.out.println(memberDTO.toString());
 
-            response.sendRedirect("./memberUpdate");
+            response.sendRedirect("./memberAdd");
         } catch (NotExistingException ex) {
             response.setContentType("text/html; charset=UTF-8");
 
@@ -205,6 +158,8 @@ public class MemberController {
             out.flush();
         }
     }
+
+    //연체회원
     @RequestMapping(value="/delayList", method= RequestMethod.GET)
     public String delayList(Model model){
         List<MemberDTO> bookBlackList=memberDAO.showBook();
@@ -214,5 +169,17 @@ public class MemberController {
 
         //home-page
         return ("delayList");
+    }
+    //회원 상세보기 - 수정/삭제 method 포함
+    @RequestMapping(value = "/member_detail", method = RequestMethod.GET)
+    public String member_detail(Model model, @RequestParam(defaultValue ="1")String clientNUM) {
+        model.addAttribute("clientNUM", clientNUM);
+        MemberDTO memberDTO = memberDAO.selectByClientNUM(clientNUM);
+
+        model.addAttribute("memberDTO", memberDTO);
+        System.out.println(clientNUM);
+
+
+        return "member_detail";
     }
 }

@@ -7,10 +7,7 @@ import com.manage.hslibrary.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -78,6 +75,8 @@ public class NoticeController {
 
             noticeDTO = noticeService.addNotice(noticeDTO);
 
+            System.out.println(noticeDTO.toString());
+
 
             response.sendRedirect("./noticeAdd");
         }
@@ -94,59 +93,21 @@ public class NoticeController {
         }
 
     }
-    @RequestMapping(value="/noticeDelete", method=RequestMethod.GET)
-    public String noticeDelete(Model model)
-    {
-        List<NoticeDTO> noticeList=noticeDAO.showAll();
-        model.addAttribute("noticeList", noticeList);
-        return "noticeDelete";
+    @RequestMapping(value = "/noticeDelete", method = RequestMethod.GET)
+    public String noticeDelete(Model model, @RequestParam(defaultValue ="1")int noticeNUM) {
+        NoticeDTO noticeDTO = noticeDAO.selectByNoticeNUM(noticeNUM);
+        noticeService.deleteNotice(noticeDTO);
+        return "redirect:noticeAdd";
     }
-    @PostMapping(value = "/noticeDelete")
-    public void noticeDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        try {
-            String inputNoticeNUM = request.getParameter("inputNoticeNUM");
-            String inputNoticeNUMConfirm = request.getParameter("inputNoticeNUMConfirm");
-            NoticeDTO noticeDTO = noticeDAO.selectByNoticeNUM(Integer.parseInt(inputNoticeNUM));
+
+    @RequestMapping(value = "/noticeUpdate", method = RequestMethod.GET)
+    public String noticeUpdate(Model model, @RequestParam(defaultValue ="1")int noticeNUM) {
+        model.addAttribute("noticeNUM", noticeNUM);
+        NoticeDTO noticeDTO = noticeDAO.selectByNoticeNUM(noticeNUM);
+
+        model.addAttribute("noticeDTO", noticeDTO);
 
 
-            if (noticeDTO == null)
-                throw new NotExistingException("존재하지 않는 공지입니다.");
-            else {
-                if (inputNoticeNUM.equals(inputNoticeNUMConfirm)) {
-                        noticeService.deleteNotice(noticeDTO);
-
-                        response.sendRedirect("./noticeDelete");
-                    } else
-                        throw new NotMatchingException("확인 번호와 맞지 않습니다.");
-
-            }
-
-        } catch (NotMatchingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('확인 번호와 맞지 않습니다.'); location.href='./noticeDelete';</script>");
-
-            out.flush();
-
-            response.sendRedirect("./noticeDelete");
-
-        } catch (NotExistingException ex) {
-            response.setContentType("text/html; charset=UTF-8");
-
-            PrintWriter out = response.getWriter();
-
-            out.println("<script>alert('존재하지 않는 공지입니다.'); location.href='./noticeDelete';</script>");
-
-            out.flush();
-        }
-    }
-    @RequestMapping(value="/noticeUpdate", method=RequestMethod.GET)
-    public String noticeUpdate(Model model)
-    {
-        List<NoticeDTO> noticeList=noticeDAO.showAll();
-        model.addAttribute("noticeList", noticeList);
         return "noticeUpdate";
     }
     @PostMapping(value = "/noticeUpdate")
@@ -171,7 +132,7 @@ public class NoticeController {
             noticeDTO = noticeService.updateNotice(noticeDTO);
 
 
-            response.sendRedirect("./noticeUpdate");
+            response.sendRedirect("./noticeAdd");
         } catch (NotExistingException ex) {
             response.setContentType("text/html; charset=UTF-8");
 

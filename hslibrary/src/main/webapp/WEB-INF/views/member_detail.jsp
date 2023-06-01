@@ -25,10 +25,6 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     </script>
 </head>
 <body>
-<header>
-    <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
-    <button><a href="<c:url value="./adminIndex"/>">홈</a></button>
-</header>
 <jsp:include page="navbar.jsp"></jsp:include>
 <%
     // 세션값 가져오기
@@ -39,42 +35,25 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
-<h2>영상연장페이지입니다.</h2>
-<div>
-    <a href="./videoRent">영상대출</a>
-    <a href="./videoReturn">영상반납</a>
-    <a href="./videoExtend">영상연장</a>
+
+<div class="container">
+    <div class="text-center">
+        <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+            <h1 class="display-4 mt-5 mb-4">수정/삭제하려는 회원 정보를 확인해보세요.</h1>
+            <div>
+                <p class="lead my-3">회원ID: ${memberDTO.clientNUM}</p>
+                <p class="lead my-3">회원이름: ${memberDTO.clientName}</p>
+                <p class="lead my-3">주민등록번호: ${memberDTO.clientID}</p>
+                <p class="lead my-3">휴대폰번호: ${memberDTO.clientPhone}</p>
+                <p class="lead my-3">회원 주소: ${memberDTO.clientAddr}</p>
+                <p class="lead my-3">회원 이메일: ${memberDTO.clientEmail}</p>
+                <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/memberAdd'" />
+                <input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/memberUpdate?clientNUM=${memberDTO.clientNUM}'" />
+                <input type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/memberDelete?clientNUM=${memberDTO.clientNUM}'" />
+            </div>
+        </div>
+    </div>
 </div>
-<div style="float:left;margin-right:20px">
-    <table>
-        <thead>
-        <th>영상대출번호</th>
-        <th>영상번호</th>
-        <th>회원번호</th>
-        <th>대출일</th>
-        <th>반납예정일</th>
-        </thead>
-        <tbody>
-        <c:forEach var="videoRentDTO" items="${videoRentList}">
-            <tr>
-                <td>${videoRentDTO.videoRentalNUM}</td>
-                <td>${videoRentDTO.videoID}</td>
-                <td>${videoRentDTO.clientNUM}</td>
-                <td>${videoRentDTO.videoRental_start}</td>
-                <td>${videoRentDTO.videoRental_end}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
-<hr>
-<div>
-    <form action="${pageContext.request.contextPath}/videoExtend" method="post" enctype="multipart/form-data">
-        영상대출번호:<input class="form-control" id="inputVideoRentNUM" type="text" name="inputVideoRentNUM"/>
-        영상번호:<input class="form-control" id="inputVideoID" type="text" name="inputVideoID"/>
-        회원번호:<input class="form-control" id="inputClientNUM" type="text" name="inputClientNUM"/>
-        <input type="submit" value="영상 연장">
-    </form>
-</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

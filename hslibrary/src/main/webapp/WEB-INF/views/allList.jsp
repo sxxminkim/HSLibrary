@@ -13,10 +13,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>무릉서원 로그인</title>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>무릉서원</title>
     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -27,7 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
-            $('#bookDelayTable').DataTable({
+            $('#bookTable').DataTable({
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -36,7 +32,7 @@
             });
         });
         $(document).ready(function () {
-            $('#videoDelayTable').DataTable({
+            $('#videoTable').DataTable({
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -47,73 +43,77 @@
     </script>
 </head>
 <body>
-<jsp:include page="navbar.jsp"></jsp:include>
-<%
-    // 세션값 가져오기
-    if (session.getAttribute("loginStaffName") == null)
-    {
-        // Object 타입이므로 다운캐스팅
-        response.sendRedirect("./login");
-        session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
-    }
-%>
 <div class="container">
     <div class="text-center">
         <div class="p-4 p-md-5 mb-4 rounded">
-            <h1 class="display-4 mt-5 mb-4">연체 회원</h1>
+            <h1 class="display-4 mt-5 mb-4">자료 검색</h1>
             <div>
-                <a href="${pageContext.request.contextPath}/memberAdd">회원관리</a>
+                <a href="${pageContext.request.contextPath}/noticeList">공지사항</a>
             </div>
         </div>
     </div>
 </div>
 <div class="container">
-    <table id="bookDelayTable">
+    <table id="bookTable">
         <thead>
         <tr>
-            <th>회원ID</th>
-            <th>회원이름</th>
-            <th>회원주민등록번호</th>
-            <th>회원휴대폰번호</th>
-            <th>회원주소</th>
-            <th>회원이메일</th>
+            <th>별치기호</th>
+            <th>제목</th>
+            <th>권</th>
+            <th>출간 판</th>
+            <th>출간 연도</th>
+            <th>ISBN</th>
+            <th>저자</th>
+            <th>출판사</th>
+            <th>분류</th>
+            <th>종이책(1)/ebook(2)</th>
+            <th>자세히</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="memberDTO" items="${bookBlackList}">
+        <c:forEach var="bookDTO" items="${bookList}">
             <tr>
-                <td>${memberDTO.clientNUM}</td>
-                <td>${memberDTO.clientName}</td>
-                <td>${memberDTO.clientID}</td>
-                <td>${memberDTO.clientPhone}</td>
-                <td>${memberDTO.clientAddr}</td>
-                <td>${memberDTO.clientEmail}</td>
+                <td>${bookDTO.bookID}</td>
+                <td>${bookDTO.bookName}</td>
+                <td>${bookDTO.bookVolume}</td>
+                <td>${bookDTO.bookEdition}</td>
+                <td>${bookDTO.bookYear}</td>
+                <td>${bookDTO.bookISBN}</td>
+                <td>${bookDTO.bookWriter}</td>
+                <td>${bookDTO.bookCompany}</td>
+                <td>${bookDTO.bookGenre}</td>
+                <td>${bookDTO.bookType}</td>
+                <td><input type="button" value="자세히" onclick="location.href='${pageContext.request.contextPath}/book_subview?bookID=${bookDTO.bookID}'" /></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
 <div class="container">
-    <table id="videoDelayTable">
+    <table id="videoTable">
         <thead>
         <tr>
-            <th>회원ID</th>
-            <th>회원이름</th>
-            <th>회원주민등록번호</th>
-            <th>회원휴대폰번호</th>
-            <th>회원주소</th>
-            <th>회원이메일</th>
+            <th>영상번호</th>
+            <th>영상제목</th>
+            <th>감독</th>
+            <th>배급사</th>
+            <th>개봉연도</th>
+            <th>장르</th>
+            <th>시리즈</th>
+            <th>자세히</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="memberDTO" items="${videoBlackList}">
+        <c:forEach var="videoDTO" items="${videoList}">
             <tr>
-                <td>${memberDTO.clientNUM}</td>
-                <td>${memberDTO.clientName}</td>
-                <td>${memberDTO.clientID}</td>
-                <td>${memberDTO.clientPhone}</td>
-                <td>${memberDTO.clientAddr}</td>
-                <td>${memberDTO.clientEmail}</td>
+                <td>${videoDTO.videoID}</td>
+                <td>${videoDTO.videoName}</td>
+                <td>${videoDTO.videoDirector}</td>
+                <td>${videoDTO.videoCompany}</td>
+                <td>${videoDTO.videoRelease}</td>
+                <td>${videoDTO.videoGenre}</td>
+                <td>${videoDTO.videoSequel}</td>
+                <td><input type="button" value="자세히" onclick="location.href='${pageContext.request.contextPath}/video_subview?videoID=${videoDTO.videoID}'" /></td>
             </tr>
         </c:forEach>
         </tbody>

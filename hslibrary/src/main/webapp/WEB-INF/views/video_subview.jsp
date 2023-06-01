@@ -27,16 +27,16 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 <body>
 <div class="container">
     <div class="text-center">
-        <div class="p-4 p-md-5 mb-4 rounded">
-            <h1 class="display-4 mt-5 mb-4">공지번호 ${noticeDTO.noticeNUM}의 공지입니다.</h1>
-            <div>
-                <p class="lead my-3">${noticeDTO.noticeNUM}</p>
-                <p class="lead my-3">${noticeDTO.noticeTitle}</p>
-                <p class="lead my-3">${noticeDTO.noticeDate}</p>
-                <p class="lead my-3">${noticeDTO.noticeAuthor}</p>
-                <p class="lead my-3">${noticeDTO.noticeMain}</p>
-                <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/'" />
-            </div>
+        <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+            <h1 class="display-4 mt-5 mb-4">영상 상세 설명</h1>
+            <p class="lead my-3">영상번호: ${videoDTO.videoID}</p>
+            <p class="lead my-3">제목: ${videoDTO.videoName}</p>
+            <p class="lead my-3">감독: ${videoDTO.videoDirector}</p>
+            <p class="lead my-3">배급사: ${videoDTO.videoCompany}</p>
+            <p class="lead my-3">개봉연도: ${videoDTO.videoRelease}</p>
+            <p class="lead my-3">분류: $${videoDTO.videoGenre}</p>
+            <p class="lead my-3">시리즈: ${videoDTO.videoSequel}</p>
+            <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/allList'" />
         </div>
     </div>
 </div>

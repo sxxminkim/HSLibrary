@@ -13,16 +13,15 @@ public class NoticeDTO {
     private String noticeMain;
     private String noticeAuthor;
 
-    public NoticeDTO(String NoticeTitle, String NoticeMain, String NoticeAuthor)
+    public NoticeDTO(String NoticeTitle, String NoticeAuthor, String NoticeMain)
     {
         //adding notice info
         //this.noticeNUM=0;
         this.noticeTitle=NoticeTitle;
-        this.noticeMain=NoticeMain;
         this.noticeAuthor=NoticeAuthor;
-
+        this.noticeMain=NoticeMain;
     }
-    public NoticeDTO(int NoticeNUM, String NoticeTitle, String NoticeMain, String NoticeAuthor,
+    public NoticeDTO(int NoticeNUM, String NoticeTitle, String NoticeAuthor, String NoticeMain,
                      Date NoticeDate)
     {
         //getting notice information
@@ -72,5 +71,11 @@ public class NoticeDTO {
 
     public void setNoticeAuthor(String noticeAuthor) {
         this.noticeAuthor = noticeAuthor;
+    }
+
+    @Override
+    public String toString(){
+        return "NoticeDTO [noticeTitle= "+noticeTitle+", noticeAuthor= "+noticeAuthor+", noticeMain= "
+                +noticeMain+"]";
     }
 }

@@ -41,7 +41,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
 %>
 <div class="container">
     <div class="text-center">
-        <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+        <div class="p-4 p-md-5 mb-4 rounded">
             <h1 class="display-4 mt-5 mb-4">책 상세 설명</h1>
             <p class="lead my-3">별치기호: ${bookDTO.bookID}</p>
             <p class="lead my-3">제목: ${bookDTO.bookName}</p>
@@ -54,10 +54,12 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             <p class="lead my-3">출간 판: ${bookDTO.bookEdition}</p>
             <p class="lead my-3">(잡지 호: )${bookDTO.bookIssue}</p>
             <p class="lead my-3">줄거리: ${bookDTO.bookSummary}</p>
+            <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/bookAdd'" />
+            <input type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/bookDelete?bookID=${bookDTO.bookID}'" />
         </div>
     </div>
     <div class="container">
-        <form action="${pageContext.request.contextPath}/bookAdd" method="post" enctype="multipart/form-data">
+        <form action="${pageContext.request.contextPath}/bookUpdate" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="bookID" class="form-label">별치기호</label>
                 <input type="text" class="form-control" id="bookID" placeholder="bookID" name="inputBookID"/>
@@ -106,9 +108,10 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
                 <label for="inputBookType" class="form-label">종이책(1)/전자책(2)</label>
                 <input type="text" class="form-control" id="inputBookType" placeholder="ID" name="inputBookType"/>
             </div>
-            <input type="submit" value="도서 추가">
+            <input type="submit" value="도서 수정">
         </form>
     </div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

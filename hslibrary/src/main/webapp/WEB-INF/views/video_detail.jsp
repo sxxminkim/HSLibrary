@@ -11,8 +11,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <meta charset="UTF-8">
     <title>무릉서원</title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-
 pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
@@ -25,10 +25,6 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     </script>
 </head>
 <body>
-<header>
-    <button><a href="<c:url value="/logout"/>">로그아웃</a></button>
-    <button><a href="<c:url value="./adminIndex"/>">홈</a></button>
-</header>
 <jsp:include page="navbar.jsp"></jsp:include>
 <%
     // 세션값 가져오기
@@ -39,44 +35,23 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
     }
 %>
-<h2>무릉서원 영상 삭제 페이지입니다.</h2>
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>영상번호</th>
-            <th>영상제목</th>
-            <th>감독</th>
-            <th>배급사</th>
-            <th>개봉연도</th>
-            <th>장르</th>
-            <th>시리즈</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="videoDTO" items="${videoList}">
-            <tr>
-                <td>${videoDTO.videoID}</td>
-                <td>${videoDTO.videoName}</td>
-                <td>${videoDTO.videoDirector}</td>
-                <td>${videoDTO.videoCompany}</td>
-                <td>${videoDTO.videoRelease}</td>
-                <td>${videoDTO.videoGenre}</td>
-                <td>${videoDTO.videoSequel}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="text-center">
+        <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+            <h1 class="display-4 mt-5 mb-4">영상 상세 설명</h1>
+            <p class="lead my-3">영상번호: ${videoDTO.videoID}</p>
+            <p class="lead my-3">제목: ${videoDTO.videoName}</p>
+            <p class="lead my-3">감독: ${videoDTO.videoDirector}</p>
+            <p class="lead my-3">배급사: ${videoDTO.videoCompany}</p>
+            <p class="lead my-3">개봉연도: ${videoDTO.videoRelease}</p>
+            <p class="lead my-3">분류: $${videoDTO.videoGenre}</p>
+            <p class="lead my-3">시리즈: ${videoDTO.videoSequel}</p>
+            <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/videoAdd'" />
+            <input type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/videoDelete?videoID=${videoDTO.videoID}'" />
+            <input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/videoUpdate?videoID=${videoDTO.videoID}'" />
+        </div>
+    </div>
 </div>
-<div>
-    <form action="${pageContext.request.contextPath}/videoDelete" method="post" enctype="multipart/form-data">
-        videoID:<input class="form-control" id="inputVideoID" type="text" name="inputVideoID"/>
-        영상제목:<input class="form-control" id="inputVideoName" type="text" name="inputVideoName"/>
-        영상제목확인:<input class="form-control" id="inputVideoNameConfirm" type="text" name="inputVideoNameConfirm"/>
-        <input type="submit" value="영상 삭제">
-    </form>
-</div>
-
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

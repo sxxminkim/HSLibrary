@@ -25,6 +25,16 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
     </script>
 </head>
 <body>
+<jsp:include page="navbar.jsp"></jsp:include>
+<%
+    // 세션값 가져오기
+    if (session.getAttribute("loginStaffName") == null)
+    {
+        // Object 타입이므로 다운캐스팅
+        response.sendRedirect("./login");
+        session.setAttribute("loginMsg", "로그인 후 이용해주세요.");
+    }
+%>
 <div class="container">
     <div class="text-center">
         <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
@@ -40,10 +50,12 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             <p class="lead my-3">출간 판: ${bookDTO.bookEdition}</p>
             <p class="lead my-3">(잡지 호: )${bookDTO.bookIssue}</p>
             <p class="lead my-3">줄거리: ${bookDTO.bookSummary}</p>
-            <p class="lead my-3">대출을 원하신다면 도서관에서 관리자에게 문의하세요.</p>
-            <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/'" />
+            <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/bookAdd'" />
+            <input type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/bookDelete?bookID=${bookDTO.bookID}'" />
+            <input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/bookUpdate?bookID=${bookDTO.bookID}'" />
         </div>
     </div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

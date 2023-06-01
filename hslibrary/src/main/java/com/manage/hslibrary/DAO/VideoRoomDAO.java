@@ -39,7 +39,7 @@ public class VideoRoomDAO {
         this.videoRoomDTO = _videoRoomDTO;
 
         jdbcTemplate.update("INSERT INTO videoRoom(vid_roomNUM, vid_roomName) VALUES('" + videoRoomDTO.getVid_roomNUM() + "', '"
-                + videoRoomDTO.getVid_roomName()+"', '"+"');");
+                + videoRoomDTO.getVid_roomName()+"');");
     }
 
     public void deleteVideoRoom(VideoRoomDTO _videoRoomDTO) {
