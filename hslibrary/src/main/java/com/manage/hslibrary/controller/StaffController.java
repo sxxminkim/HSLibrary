@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -28,11 +25,12 @@ public class StaffController {
     @Autowired
     StaffService staffService;
 
+    //login
     @RequestMapping (value="/login", method= RequestMethod.GET)
     public String login() {
         return "login";
     }
-
+    //login
     @PostMapping(value="/login")
     public void memberLogin(HttpServletRequest request, HttpServletResponse response){
         try {
@@ -74,7 +72,7 @@ public class StaffController {
     }
     //admin register(admin add)
     @RequestMapping(value = "/adminRegister", method = RequestMethod.GET)
-    public String admin_admin_add(Model model) {
+    public String adminRegister(Model model) {
         List<StaffDTO> memberList = staffDAO.showAll();
 
         model.addAttribute("memberList", memberList);
@@ -84,7 +82,7 @@ public class StaffController {
 
     // admin add
     @PostMapping(value = "/adminRegister")
-    public void admin_book_add(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void adminRegister(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             String inputStaffNUM = request.getParameter("inputStaffNUM");
             String inputStaffPW = request.getParameter("inputStaffPW");
@@ -133,6 +131,7 @@ public class StaffController {
             out.flush();
         }
     }
+    //deleting admin
     @RequestMapping(value = "/adminDelete", method = RequestMethod.GET)
     public String adminDelete(Model model) {
         List<StaffDTO> memberList = staffDAO.showAll();
@@ -142,7 +141,7 @@ public class StaffController {
         return "adminDelete";
     }
 
-    // deleting books
+    // deleting admin
     @PostMapping(value = "/adminDelete")
     public void adminDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
@@ -192,41 +191,69 @@ public class StaffController {
         }
 
     }
-    //changing password
-    @RequestMapping(value = "/changePW", method = RequestMethod.GET)
-    public String adminChangePW() {
-        return "adminChangePW";
+    //updating admin information
+    @RequestMapping(value = "/adminUpdate", method = RequestMethod.GET)
+    public String adminUpdate(Model model, @RequestParam(defaultValue ="1")String staffNUM) {
+        model.addAttribute("staffNUM", staffNUM);
+        StaffDTO staffDTO = staffDAO.selectByStaffNUM(staffNUM);
+
+        model.addAttribute("staffDTO", staffDTO);
+        System.out.println(staffNUM);
+
+        return "adminUpdate";
     }
 
-    @PostMapping("/adminChangePW")
-    public void adminChangePW(HttpSession session, HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    // updating admin information
+    @PostMapping(value = "/adminUpdate")
+    public void adminUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            StaffDTO staffDTO = (StaffDTO) session.getAttribute("loginMemberDTO");
+            String inputStaffNUM = request.getParameter("inputStaffNUM");
+            String inputStaffPW = request.getParameter("inputStaffPW");
+            String inputStaffName = request.getParameter("inputStaffName");
+            String inputStaffID = request.getParameter("inputStaffID");
+            String inputStaffAddr = request.getParameter("inputStaffAddr");
+            String inputStaffPhone = request.getParameter("inputStaffPhone");
+            String inputStaffDepartment = request.getParameter("inputStaffDepartment");
 
-            String inputOldPW = request.getParameter("inputOldPW");
-            String inputNewPW = request.getParameter("inputNewPW");
-            String inputNewPWConfirm = request.getParameter("inputNewPWConfirm");
 
-            if (staffDTO.getStaffPW().equals(inputOldPW)) {
-                if (inputNewPW.equals(inputNewPWConfirm)) {
-                    staffDAO.updatePassword(staffDTO, inputNewPW);
+            StaffDTO staffDTO = staffDAO.selectByStaffNUM(inputStaffNUM);
 
-                    response.sendRedirect("./adminIndex");
-                } else
-                    throw new NotMatchingException("비밀번호가 맞지 않습니다.");
-            } else
-                throw new NotMatchingException("비밀번호가 맞지 않습니다.");
+            if (staffDTO == null)
+                throw new NotExistingException("존재하지 않는 관리자입니다.");
 
-        } catch (NotMatchingException ex) {
+            if (inputStaffNUM.equals("") || inputStaffPW.equals("") || inputStaffName.equals("")
+                    || inputStaffID.equals("") || inputStaffAddr.equals("")|| inputStaffPhone.equals("")
+                    || inputStaffDepartment.equals(""))
+                throw new FillOutInformationException("모든 정보를 입력해주세요.");
+
+
+
+            staffDTO = new StaffDTO(inputStaffNUM, inputStaffPW, inputStaffName,
+                    inputStaffID, inputStaffAddr, inputStaffPhone, inputStaffDepartment);
+
+            staffDTO = staffService.updateStaff(staffDTO);
+
+            System.out.println(staffDTO.toString());
+
+            response.sendRedirect("./adminRegister");
+        } catch (NotExistingException ex) {
             response.setContentType("text/html; charset=UTF-8");
 
             PrintWriter out = response.getWriter();
 
-            out.println("<script>alert('비밀번호가 맞지 않습니다.'); location.href='./adminChangePW';</script>");
+            out.println("<script>alert('존재하지 않는 관리자입니다.'); location.href='/adminUpdate';</script>");
+
+            out.flush();
+        } catch (FillOutInformationException ex) {
+            response.setContentType("text/html; charset=UTF-8");
+
+            PrintWriter out = response.getWriter();
+
+            out.println("<script>alert('모든 정보를 입력해주세요.'); location.href='/adminUpdate';</script>");
 
             out.flush();
         }
     }
+
 }
 

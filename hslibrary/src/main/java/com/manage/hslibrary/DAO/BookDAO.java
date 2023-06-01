@@ -23,6 +23,7 @@ public class BookDAO {
             return null;
         }
     }
+    //viewing all books
     public List<BookDTO> showAll() {
         List<BookDTO> result = jdbcTemplate.query("SELECT * FROM book;", (rs, rowNum) -> {
             BookDTO bookDTO = new BookDTO(rs.getString("bookID"), rs.getString("bookName"), rs.getString("bookWriter"),
@@ -34,6 +35,7 @@ public class BookDAO {
         });
         return result;
     }
+    //viewing paper books only
     public List<BookDTO> showPaper() {
         List<BookDTO> result = jdbcTemplate.query("SELECT * FROM book WHERE bookType=1;", (rs, rowNum) -> {
             BookDTO bookDTO = new BookDTO(rs.getString("bookID"), rs.getString("bookName"), rs.getString("bookWriter"),
@@ -45,6 +47,7 @@ public class BookDAO {
         });
         return result;
     }
+    //viewing e-books
     public List<BookDTO> showEbook() {
         List<BookDTO> result = jdbcTemplate.query("SELECT * FROM book WHERE bookType=2;", (rs, rowNum) -> {
             BookDTO bookDTO = new BookDTO(rs.getString("bookID"), rs.getString("bookName"), rs.getString("bookWriter"),
@@ -56,7 +59,7 @@ public class BookDAO {
         });
         return result;
     }
-
+    //adding new book
     public void insertBook(BookDTO _bookDTO) {
         this.bookDTO = _bookDTO;
 
@@ -68,13 +71,13 @@ public class BookDAO {
                         + "', '" + bookDTO.getBookVolume() + "', '"  + bookDTO.getBookIssue() +"', '" + bookDTO.getBookSummary() +"', '"+
                         bookDTO.getBookType()+"', "+"NOW());");
     }
-
+    //deleting book
     public void deleteBook(BookDTO _bookDTO) {
         this.bookDTO = _bookDTO;
 
         jdbcTemplate.update("DELETE FROM book WHERE bookID='" + bookDTO.getBookID() + "';");
     }
-
+    //updating book information
     public void updateBook(BookDTO _bookDTO) {
         this.bookDTO = _bookDTO;
 

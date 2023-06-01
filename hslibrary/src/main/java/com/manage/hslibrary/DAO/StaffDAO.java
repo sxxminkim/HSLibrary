@@ -26,6 +26,7 @@ public class StaffDAO {
             return null;
         }
     }
+    //viewing all staffs
     public List<StaffDTO> showAll() {
         // viewing all admin
         List<StaffDTO> result = jdbcTemplate.query("SELECT * FROM staff_Information;", (rs, rowNum) -> {
@@ -37,7 +38,7 @@ public class StaffDAO {
         return result;
     }
 
-
+    //adding new staffs
     public void insertStaff(StaffDTO _staffDTO) {
         // adding admin
         this.staffDTO = _staffDTO;
@@ -46,21 +47,22 @@ public class StaffDAO {
                 + staffDTO.getStaffPW()+"', '"+ staffDTO.getStaffID() + "', '" + staffDTO.getStaffName() +"', '" + staffDTO.getStaffAddr() +"', '" + staffDTO.getStaffPhone() + "', '" + staffDTO.getStaffDepartment() +"');");
     }
 
-
-    public void updatePassword(StaffDTO _staffDTO, String newPassword) {
-        // 비밀번호 업데이트
-        this.staffDTO = _staffDTO;
-
-        jdbcTemplate.update(
-                "UPDATE staff_Information SET staffPW='" + newPassword + "' WHERE staffNUM='" + staffDTO.getStaffNUM() + "';");
-    }
-
+    //deleting staff
     public void deleteStaff(StaffDTO _staffDTO) {
         this.staffDTO = _staffDTO;
 
         jdbcTemplate.update("DELETE FROM staff_Information WHERE staffNUM='" + staffDTO.getStaffNUM() + "';");
 
     }
+    //updating staff information
+    public void updateStaff(StaffDTO _memberDTO) {
+        this.staffDTO = _memberDTO;
+
+        jdbcTemplate.update("UPDATE staff_Information SET staffPW='" + staffDTO.getStaffPW() + "', staffName='" + staffDTO.getStaffName()
+                + "', staffID='" + staffDTO.getStaffID() + "', staffAddr='" + staffDTO.getStaffAddr() + "', staffPhone='"
+                + staffDTO.getStaffPhone() + "', staffDepartment='" + staffDTO.getStaffDepartment() +"'WHERE staffNUM='" + staffDTO.getStaffNUM() + "';");
+    }
+
 }
 
 

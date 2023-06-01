@@ -1,11 +1,9 @@
 package com.manage.hslibrary.DAO;
 import com.manage.hslibrary.DTO.NoticeDTO;
 import org.springframework.jdbc.core.*;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -41,8 +39,8 @@ public class NoticeDAO {
         } catch(Exception Ex){
             return null;
         }
-
     }
+    //viewing all notices
     public List<NoticeDTO> showAll() {
         // viewing all notice
         List<NoticeDTO> result = jdbcTemplate.query("SELECT * FROM Notice;", (rs, rowNum) -> {
@@ -52,7 +50,7 @@ public class NoticeDAO {
         });
         return result;
     }
-
+    //adding new notice
     public void insertNotice(NoticeDTO _noticeDTO) {
         // adding notice
         this.noticeDTO = _noticeDTO;
@@ -60,13 +58,14 @@ public class NoticeDAO {
         jdbcTemplate.update("INSERT INTO Notice(NoticeTitle, NoticeAuthor, NoticeMain, NoticeDate) VALUES('"
                 + noticeDTO.getNoticeTitle()+"', '"+ noticeDTO.getNoticeAuthor() + "', '" + noticeDTO.getNoticeMain() +"', " +"NOW());");
     }
-
+    //deleting notice
     public void deleteNotice(NoticeDTO _noticeDTO) {
         //deleting notice
         this.noticeDTO = _noticeDTO;
 
         jdbcTemplate.update("DELETE FROM Notice WHERE NoticeNum='" + noticeDTO.getNoticeNUM() + "';");
     }
+    //updating notice
     public void updateNotice(NoticeDTO _noticeDTO) {
         //updating notice
         this.noticeDTO = _noticeDTO;

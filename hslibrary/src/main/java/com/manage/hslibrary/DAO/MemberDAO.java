@@ -26,6 +26,7 @@ public class MemberDAO {
             return null;
         }
     }
+    //viewing all members
     public List<MemberDTO> showAll() {
         // viewing all admin
         List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM client_Information;", (rs, rowNum) -> {
@@ -35,16 +36,18 @@ public class MemberDAO {
         });
         return result;
     }
+    //viewing book delays
     public List<MemberDTO> showBook(){
-        List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM client_Information INNER JOIN bookRental on client_Information.clientNUM = bookRental.clientNUM WHERE bookRental_end>NOW();", (rs, rowNum) -> {
+        List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM client_Information INNER JOIN bookRental on client_Information.clientNUM = bookRental.clientNUM WHERE bookRental_end<NOW();", (rs, rowNum) -> {
             MemberDTO memberDTO = new MemberDTO(rs.getString("clientNUM"), rs.getString("clientName"), rs.getString("clientID"),
                     rs.getString("clientPhone"),rs.getString("clientAddr"), rs.getString("clientEmail"));
             return memberDTO;
         });
         return result;
     }
+    //viewing video delays
     public List<MemberDTO> showVideo(){
-        List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM client_Information INNER JOIN videoRental on client_Information.clientNUM = videoRental.clientNUM WHERE videoRental_end>NOW();", (rs, rowNum) -> {
+        List<MemberDTO> result = jdbcTemplate.query("SELECT * FROM client_Information INNER JOIN videoRental on client_Information.clientNUM = videoRental.clientNUM WHERE videoRental_end<NOW();", (rs, rowNum) -> {
             MemberDTO memberDTO = new MemberDTO(rs.getString("clientNUM"), rs.getString("clientName"), rs.getString("clientID"),
                     rs.getString("clientPhone"),rs.getString("clientAddr"), rs.getString("clientEmail"));
             return memberDTO;
@@ -52,7 +55,7 @@ public class MemberDAO {
         return result;
     }
 
-
+    //adding new member
     public void insertMember(MemberDTO _memberDTO) {
         // adding admin
         this.memberDTO = _memberDTO;
@@ -61,13 +64,14 @@ public class MemberDAO {
                 + memberDTO.getClientName()+"', '"+ memberDTO.getClientID() + "', '" + memberDTO.getClientPhone() +"', '" + memberDTO.getClientAddr() +"', '" + memberDTO.getClientEmail() + "', " + "NOW());");
     }
 
-
+    //deleting member
     public void deleteMember(MemberDTO _memberDTO) {
         this.memberDTO = _memberDTO;
 
         jdbcTemplate.update("DELETE FROM client_Information WHERE clientNUM='" + memberDTO.getClientNUM() + "';");
 
     }
+    //updating member information
     public void updateMember(MemberDTO _memberDTO) {
         this.memberDTO = _memberDTO;
 

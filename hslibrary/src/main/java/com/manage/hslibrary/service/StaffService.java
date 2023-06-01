@@ -44,14 +44,7 @@ public class StaffService {
 
         return staffDTO;
     }
-    /*
-    public StaffDTO changePassword(StaffDTO _staffDTO, StringBuffer newPassword) {
-        // 비밀번호 수정
-        memberDAO.updatePassword(_staffDTO, newPassword.toString());
-
-        return memberDAO.selectByID(_staffDTO.getStaffID());
-    }
-     */
+    //deleting admin
     public void deleteStaff(StaffDTO _staffDTO) { // deleting books
         StaffDTO staffDTO = staffDAO.selectByStaffNUM(_staffDTO.getStaffNUM());
 
@@ -61,4 +54,19 @@ public class StaffService {
             staffDAO.deleteStaff(staffDTO);
         }
     }
+    //updating admin
+    public StaffDTO updateStaff(StaffDTO _staffDTO) { //updating book
+        StaffDTO staffDTO = staffDAO.selectByStaffNUM(_staffDTO.getStaffNUM());
+
+        if (staffDTO == null) { //The staff doesn't exist
+            System.out.println("No staff to update");
+
+            return null;
+        } else { // The staff exists
+            staffDAO.updateStaff(_staffDTO);
+
+            return _staffDTO;
+        }
+    }
+
 }
