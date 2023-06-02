@@ -47,6 +47,12 @@ public class HomeController {
 
         return ("allList");
     }
+    @RequestMapping(value="/map", method= RequestMethod.GET)
+    public String map(Model model){
+
+        //map
+        return ("map");
+    }
 
     @Bean
     public ViewResolver viewResolver(){

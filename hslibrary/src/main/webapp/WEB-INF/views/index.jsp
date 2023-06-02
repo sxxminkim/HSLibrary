@@ -36,11 +36,35 @@
         </div>
     </div>
 </div>
-<div class="" id="main">
-    <div class="text-center">
-        <div class="p-4 p-md-5 mb-4 rounded" style="color:black">
-            <p class="lead my-3">일반 이용자라면 여기로 이동해주세요</p>
-            <button><a href="<c:url value="/noticeList"/>" > 바로가기 </a></button>
+<!--바로가기 카드-->
+<div class="container mt-15 text-center">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">공지사항</h5>
+                    <p class="card-text">일반 회원도 공지사항을 확인할 수 있습니다.</p>
+                    <a href="${pageContext.request.contextPath}/noticeList" class="btn btn-primary">바로가기</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">자료검색</h5>
+                    <p class="card-text">일반 이용자도 자료검색을 할 수 있습니다.</p>
+                    <a href="${pageContext.request.contextPath}/allList" class="btn btn-primary">바로가기</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">오시는 길</h5>
+                    <p class="card-text">무릉서원 오시는 길 안내</p>
+                    <a href="${pageContext.request.contextPath}/map" class="btn btn-primary">바로가기</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
