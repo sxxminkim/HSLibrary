@@ -62,7 +62,7 @@
         </div>
     </div>
 </div>
-<div>
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/adminUpdate" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputStaffNUM" class="form-label">관리자 ID</label>
@@ -92,7 +92,7 @@
             <label for="inputStaffDepartment" class="form-label">관리자 부서</label>
             <input type="text" class="form-control" id="inputStaffDepartment" placeholder="부서명" name="inputStaffDepartment"/>
         </div>
-        <input type="submit" value="관리자 수정">
+        <input class="btn btn-primary" type="submit" value="관리자 수정">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

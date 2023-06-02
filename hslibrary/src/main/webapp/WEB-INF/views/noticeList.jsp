@@ -24,6 +24,7 @@
     <script>
         $(document).ready(function () {
             $('#noticeTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -45,8 +46,8 @@
     </div>
 </div>
 <div class="container">
-    <table class="table" id="noticeTable">
-        <thead>
+    <table class="table table-striped" id="noticeTable">
+        <thead class="table-light">
         <tr>
             <th>공지 번호</th>
             <th>제목</th>

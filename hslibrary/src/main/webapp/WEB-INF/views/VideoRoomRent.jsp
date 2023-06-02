@@ -27,6 +27,7 @@
     <script>
         $(document).ready(function () {
             $('#vidRoomTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -36,6 +37,7 @@
         });
         $(document).ready(function () {
             $('#memberTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -77,7 +79,7 @@
     </div>
 </div>
 <div style="float:left;margin-right:20px">
-    <table id="vidRoomTable">
+    <table class="table table-striped" id="vidRoomTable">
         <thead>
         <tr>
             <th>시청각실 번호</th>
@@ -95,8 +97,8 @@
     </table>
 </div>
 <div style="float:left;margin-right:20px">
-    <table id="memberTable">
-        <thead>
+    <table class="table table-striped" id="memberTable">
+        <thead class="table-light">
         <th>clientNUM</th>
         <th>회원이름</th>
         <th>전화번호</th>
@@ -115,8 +117,8 @@
     </table>
 </div>
 <div class="container">
-    <table id="vidRoomRentTable">
-        <thead>
+    <table class="table table-striped" id="vidRoomRentTable">
+        <thead class="table-light">
         <tr>
             <th>시청각실 대여번호</th>
             <th>시청각실 번호</th>
@@ -136,21 +138,21 @@
         </tbody>
     </table>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/VideoRoomRent" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputVidRoomRentNUM" class="form-label">대여번호</label>
-            <input type="text" class="form-control" id="inputVidRoomRentNUM" placeholder="영상대여번호" name="inputVidRoomRentNUM"/>
+            <input type="text" class="form-control" id="inputVidRoomRentNUM" placeholder="대여번호" name="inputVidRoomRentNUM"/>
         </div>
         <div class="mb-3">
             <label for="inputVidRoomNUM" class="form-label">영상실 번호</label>
-            <input type="text" class="form-control" id="inputVidRoomNUM" placeholder="영상대여번호" name="inputVidRoomNUM"/>
+            <input type="text" class="form-control" id="inputVidRoomNUM" placeholder="영상실 번호" name="inputVidRoomNUM"/>
         </div>
         <div class="mb-3">
             <label for="inputClientNUM" class="form-label">대여자 ID</label>
-            <input type="text" class="form-control" id="inputClientNUM" placeholder="영상대여번호" name="inputClientNUM"/>
+            <input type="text" class="form-control" id="inputClientNUM" placeholder="대여자 ID" name="inputClientNUM"/>
         </div>
-        <input type="submit" value="시청각실 대여">
+        <input class="btn btn-primary" type="submit" value="시청각실 대여">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

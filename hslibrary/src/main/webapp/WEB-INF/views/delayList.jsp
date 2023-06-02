@@ -28,6 +28,7 @@
     <script>
         $(document).ready(function () {
             $('#bookDelayTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -37,6 +38,7 @@
         });
         $(document).ready(function () {
             $('#videoDelayTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -68,8 +70,8 @@
     </div>
 </div>
 <div class="container">
-    <table id="bookDelayTable">
-        <thead>
+    <table class="table table-striped" id="bookDelayTable">
+        <thead class="table-light">
         <tr>
             <th>회원ID</th>
             <th>회원이름</th>
@@ -94,8 +96,8 @@
     </table>
 </div>
 <div class="container">
-    <table id="videoDelayTable">
-        <thead>
+    <table class="table table-striped" id="videoDelayTable">
+        <thead class="table-light">
         <tr>
             <th>회원ID</th>
             <th>회원이름</th>

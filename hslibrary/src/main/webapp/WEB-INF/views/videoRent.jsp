@@ -24,6 +24,7 @@
     <script>
         $(document).ready(function () {
             $('#videoTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -33,6 +34,7 @@
         });
         $(document).ready(function () {
             $('#memberTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -42,6 +44,7 @@
         });
         $(document).ready(function () {
             $('#videoRentTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -71,7 +74,7 @@
     </div>
 </div>
 <div style="float:left;margin-right:20px">
-    <table id="videoTable">
+    <table class="table table-striped" id="videoTable">
         <thead>
         <th>videoID</th>
         <th>영상제목</th>
@@ -91,8 +94,8 @@
     </table>
 </div>
 <div style="float:left;margin-right:20px">
-    <table id="memberTable">
-        <thead>
+    <table class="table table-striped" id="memberTable">
+        <thead class="table-light">
         <th>clientNUM</th>
         <th>회원이름</th>
         <th>전화번호</th>
@@ -112,7 +115,7 @@
 </div>
 <div class="container">
     <table id="videoRentTable">
-        <thead>
+        <thead class="table-light">
         <th>영상대출번호</th>
         <th>영상번호</th>
         <th>회원번호</th>
@@ -134,7 +137,7 @@
         </tbody>
     </table>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/videoRent" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputVideoRentNUM" class="form-label">영상대출번호</label>
@@ -148,7 +151,7 @@
             <label for="inputClientNUM" class="form-label">아이디</label>
             <input type="text" class="form-control" id="inputClientNUM" placeholder="ID" name="inputClientNUM"/>
         </div>
-        <input type="submit" value="영상 대출">
+        <input class="btn btn-primary" type="submit" value="영상 대출">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

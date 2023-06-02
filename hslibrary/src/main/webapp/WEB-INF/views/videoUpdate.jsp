@@ -51,7 +51,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/videoUpdate" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="videoID" class="form-label">영상번호</label>
@@ -63,25 +63,25 @@
         </div>
         <div class="mb-3">
             <label for="inputVideoDirector" class="form-label">감독</label>
-            <input type="text" class="form-control" id="inputVideoDirector" placeholder="ID" name="inputVideoDirector"/>
+            <input type="text" class="form-control" id="inputVideoDirector" placeholder="감독" name="inputVideoDirector"/>
         </div>
         <div class="mb-3">
             <label for="inputVideoCompany" class="form-label">배급사</label>
-            <input type="text" class="form-control" id="inputVideoCompany" placeholder="ID" name="inputVideoCompany"/>
+            <input type="text" class="form-control" id="inputVideoCompany" placeholder="배급사" name="inputVideoCompany"/>
         </div>
         <div class="mb-3">
             <label for="inputVideoRelease" class="form-label">개봉연도</label>
-            <input type="text" class="form-control" id="inputVideoRelease" placeholder="ID" name="inputVideoRelease"/>
+            <input type="text" class="form-control" id="inputVideoRelease" placeholder="개봉연도" name="inputVideoRelease"/>
         </div>
         <div class="mb-3">
             <label for="inputVideoGenre" class="form-label">장르</label>
-            <input type="text" class="form-control" id="inputVideoGenre" placeholder="ID" name="inputVideoGenre"/>
+            <input type="text" class="form-control" id="inputVideoGenre" placeholder="장르" name="inputVideoGenre"/>
         </div>
         <div class="mb-3">
             <label for="inputVideoSequel" class="form-label">시리즈</label>
-            <input type="text" class="form-control" id="inputVideoSequel" placeholder="ID" name="inputVideoSequel"/>
+            <input type="text" class="form-control" id="inputVideoSequel" placeholder="시리즈" name="inputVideoSequel"/>
         </div>
-        <input type="submit" value="영상 수정">
+        <input class="btn btn-primary" type="submit" value="영상 수정">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

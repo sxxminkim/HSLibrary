@@ -24,6 +24,7 @@
     <script>
         $(document).ready(function () {
             $('#bookTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -34,7 +35,41 @@
     </script>
 </head>
 <body>
-<jsp:include page="navbar.jsp"></jsp:include>
+<!--navbar-->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/adminIndex">무릉서원</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/memberAdd">회원관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/bookAdd">도서관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/videoAdd">영상관리</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/bookRent">도서대여/반납/연장</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/videoRent">영상대여/반납/연장</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/VideoRoomRent">영상관람실</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/noticeAdd">공지사항</a>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-light ml-3"><a href="<c:url value="/logout"/>" > logout </a></button>
+        </div>
+    </div>
+</nav>
 <%
     // 세션값 가져오기
     if (session.getAttribute("loginStaffName") == null)
@@ -52,42 +87,45 @@
     </div>
 </div>
 <div class="container">
-    <table id="bookTable">
-        <thead>
-        <tr>
-            <th>별치기호</th>
-            <th>제목</th>
-            <th>권</th>
-            <th>출간 판</th>
-            <th>출간 연도</th>
-            <th>ISBN</th>
-            <th>저자</th>
-            <th>출판사</th>
-            <th>분류</th>
-            <th>종이책(1)/ebook(2)</th>
-            <th>자세히</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="bookDTO" items="${bookList}">
+    <!--반응형테이블-->
+    <div class="table-responsive">
+        <table class="table table-striped" id="bookTable">
+            <thead class="table-light">
             <tr>
-                <td>${bookDTO.bookID}</td>
-                <td>${bookDTO.bookName}</td>
-                <td>${bookDTO.bookVolume}</td>
-                <td>${bookDTO.bookEdition}</td>
-                <td>${bookDTO.bookYear}</td>
-                <td>${bookDTO.bookISBN}</td>
-                <td>${bookDTO.bookWriter}</td>
-                <td>${bookDTO.bookCompany}</td>
-                <td>${bookDTO.bookGenre}</td>
-                <td>${bookDTO.bookType}</td>
-                <td><input type="button" value="자세히" onclick="location.href='${pageContext.request.contextPath}/book_detail?bookID=${bookDTO.bookID}'" /></td>
+                <th>별치기호</th>
+                <th>제목</th>
+                <th>권</th>
+                <th>출간 판</th>
+                <th>출간 연도</th>
+                <th>ISBN</th>
+                <th>저자</th>
+                <th>출판사</th>
+                <th>분류</th>
+                <th>종이책(1)/ebook(2)</th>
+                <th>자세히</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <c:forEach var="bookDTO" items="${bookList}">
+                <tr>
+                    <td>${bookDTO.bookID}</td>
+                    <td>${bookDTO.bookName}</td>
+                    <td>${bookDTO.bookVolume}</td>
+                    <td>${bookDTO.bookEdition}</td>
+                    <td>${bookDTO.bookYear}</td>
+                    <td>${bookDTO.bookISBN}</td>
+                    <td>${bookDTO.bookWriter}</td>
+                    <td>${bookDTO.bookCompany}</td>
+                    <td>${bookDTO.bookGenre}</td>
+                    <td>${bookDTO.bookType}</td>
+                    <td><input type="button" value="자세히" onclick="location.href='${pageContext.request.contextPath}/book_detail?bookID=${bookDTO.bookID}'" /></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/bookAdd" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="bookID" class="form-label">별치기호</label>
@@ -95,39 +133,39 @@
         </div>
         <div class="mb-3">
             <label for="inputBookName" class="form-label">제목</label>
-            <input type="text" class="form-control" id="inputBookName" placeholder="ID" name="inputBookName"/>
+            <input type="text" class="form-control" id="inputBookName" placeholder="제목" name="inputBookName"/>
         </div>
         <div class="mb-3">
             <label for="inputBookWriter" class="form-label">저자</label>
-            <input type="text" class="form-control" id="inputBookWriter" placeholder="ID" name="inputBookWriter"/>
+            <input type="text" class="form-control" id="inputBookWriter" placeholder="저자" name="inputBookWriter"/>
         </div>
         <div class="mb-3">
             <label for="inputBookGenre" class="form-label">분류</label>
-            <input type="text" class="form-control" id="inputBookGenre" placeholder="ID" name="inputBookGenre"/>
+            <input type="text" class="form-control" id="inputBookGenre" placeholder="분류" name="inputBookGenre"/>
         </div>
         <div class="mb-3">
             <label for="inputBookCompany" class="form-label">출판사</label>
-            <input type="text" class="form-control" id="inputBookCompany" placeholder="ID" name="inputBookCompany"/>
+            <input type="text" class="form-control" id="inputBookCompany" placeholder="출판사" name="inputBookCompany"/>
         </div>
         <div class="mb-3">
             <label for="inputBookISBN" class="form-label">ISBN</label>
-            <input type="text" class="form-control" id="inputBookISBN" placeholder="ID" name="inputBookISBN"/>
+            <input type="text" class="form-control" id="inputBookISBN" placeholder="ISBN" name="inputBookISBN"/>
         </div>
         <div class="mb-3">
             <label for="inputBookYear" class="form-label">출간연도</label>
-            <input type="text" class="form-control" id="inputBookYear" placeholder="ID" name="inputBookYear"/>
+            <input type="text" class="form-control" id="inputBookYear" placeholder="출간연도" name="inputBookYear"/>
         </div>
         <div class="mb-3">
             <label for="inputBookEdition" class="form-label">출간판</label>
-            <input type="text" class="form-control" id="inputBookEdition" placeholder="ID" name="inputBookEdition"/>
+            <input type="text" class="form-control" id="inputBookEdition" placeholder="출간판" name="inputBookEdition"/>
         </div>
         <div class="mb-3">
             <label for="inputBookVolume" class="form-label">권</label>
-            <input type="text" class="form-control" id="inputBookVolume" placeholder="ID" name="inputBookVolume"/>
+            <input type="text" class="form-control" id="inputBookVolume" placeholder="권" name="inputBookVolume"/>
         </div>
         <div class="mb-3">
             <label for="inputBookIssue" class="form-label">(잡지) 호</label>
-            <input type="text" class="form-control" id="inputBookIssue" placeholder="ID" name="inputBookIssue"/>
+            <input type="text" class="form-control" id="inputBookIssue" placeholder="(잡지) 호" name="inputBookIssue"/>
         </div>
         <div class="mb-3">
             <label for="inputBookSummary" class="form-label">줄거리</label>
@@ -135,9 +173,9 @@
         </div>
         <div class="mb-3">
             <label for="inputBookType" class="form-label">종이책(1)/전자책(2)</label>
-            <input type="text" class="form-control" id="inputBookType" placeholder="ID" name="inputBookType"/>
+            <input type="text" class="form-control" id="inputBookType" placeholder="종이책(1)/전자책(2)" name="inputBookType"/>
         </div>
-        <input type="submit" value="도서 추가">
+        <input class="btn btn-primary" type="submit" value="도서 추가">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

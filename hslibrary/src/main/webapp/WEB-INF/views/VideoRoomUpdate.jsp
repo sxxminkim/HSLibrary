@@ -49,7 +49,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/VideoRoomUpdate" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputVidRoomNUM" class="form-label">시청각실 번호</label>
@@ -59,7 +59,7 @@
             <label for="inputVidRoomName" class="form-label">시청각실 이름</label>
             <input type="text" class="form-control" id="inputVidRoomName" placeholder="시청각실 이름" name="inputVidRoomName">
         </div>
-        <input type="submit" value="시청각실 수정">
+        <input class="btn btn-primary" type="submit" value="시청각실 수정">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

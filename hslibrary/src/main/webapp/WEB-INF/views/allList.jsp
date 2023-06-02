@@ -24,6 +24,7 @@
     <script>
         $(document).ready(function () {
             $('#bookTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -33,6 +34,7 @@
         });
         $(document).ready(function () {
             $('#videoTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -54,8 +56,8 @@
     </div>
 </div>
 <div class="container">
-    <table id="bookTable">
-        <thead>
+    <table class="table table-striped" id="bookTable">
+        <thead class="table-light">
         <tr>
             <th>별치기호</th>
             <th>제목</th>

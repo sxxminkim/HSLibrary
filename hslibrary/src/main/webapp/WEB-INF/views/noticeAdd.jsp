@@ -23,6 +23,7 @@
     <script>
         $(document).ready(function () {
             $('#noticeTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -51,8 +52,8 @@
     </div>
 </div>
 <div class="container">
-    <table id="noticeTable">
-        <thead>
+    <table class="table table-striped" id="noticeTable">
+        <thead class="table-light">
         <tr>
             <th>공지 번호</th>
             <th>제목</th>
@@ -74,7 +75,7 @@
         </tbody>
     </table>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/noticeAdd" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputNoticeTitle" class="form-label">제목</label>
@@ -88,7 +89,7 @@
             <label for="inputNoticeMain" class="form-label">내용</label>
             <textarea class="form-control" id="inputNoticeMain" rows="3"  name="inputNoticeMain"></textarea>
         </div>
-        <input type="submit" value="공지사항 등록">
+        <input class="btn btn-primary" type="submit" value="공지사항 등록">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

@@ -23,6 +23,7 @@
     <script>
         $(document).ready(function () {
             $('#memberTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -56,8 +57,8 @@
 </div>
 
 <div class="container">
-    <table class="table" id="memberTable">
-        <thead>
+    <table class="table table-striped" id="memberTable">
+        <thead class="table-light">
         <tr>
             <th>회원ID</th>
             <th>회원이름</th>
@@ -83,7 +84,7 @@
         </tbody>
     </table>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/memberAdd" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputClientNUM" class="form-label">회원ID</label>
@@ -109,7 +110,7 @@
             <label for="inputClientEmail" class="form-label">회원이메일</label>
             <input type="text" class="form-control" id="inputClientEmail" placeholder="example@email.com" name="inputClientEmail">
         </div>
-        <input type="submit" value="회원 추가">
+        <input class="btn btn-primary" type="submit" value="회원 추가">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

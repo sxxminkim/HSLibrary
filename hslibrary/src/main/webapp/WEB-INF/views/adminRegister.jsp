@@ -14,9 +14,6 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>무릉서원</title>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <title>무릉서원</title>
     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -59,8 +56,8 @@
     </div>
 </div>
 <div class="container">
-    <table id="staffTable">
-        <thead>
+    <table class="table table-striped" id="staffTable">
+        <thead class="table-light">
         <tr>
             <th>관리자ID</th>
             <th>관리자PW</th>
@@ -88,7 +85,7 @@
         </tbody>
     </table>
 </div>
-<div>
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/adminRegister" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputStaffNUM" class="form-label">관리자 ID</label>
@@ -118,7 +115,7 @@
             <label for="inputStaffDepartment" class="form-label">관리자 부서</label>
             <input type="text" class="form-control" id="inputStaffDepartment" placeholder="부서명" name="inputStaffDepartment"/>
         </div>
-        <input type="submit" value="관리자 추가">
+        <input class="btn btn-primary" type="submit" value="관리자 추가">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

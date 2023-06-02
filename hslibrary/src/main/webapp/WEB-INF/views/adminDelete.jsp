@@ -27,6 +27,7 @@
     <script>
         $(document).ready(function () {
             $('#staffTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -59,8 +60,8 @@
     </div>
 </div>
 <div class="container">
-    <table id="staffTable">
-        <thead>
+    <table class="table table-striped" id="staffTable">
+        <thead class="table-light">
         <tr>
             <th>관리자ID</th>
             <th>관리자PW</th>
@@ -86,12 +87,21 @@
         </tbody>
     </table>
 </div>
-<div>
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/adminDelete" method="post" enctype="multipart/form-data">
-        관리자ID:<input class="form-control" id="inputStaffNUM" type="text" name="inputStaffNUM"/>
-        관리자이름:<input class="form-control" id="inputStaffName" type="text" name="inputStaffName"/>
-        관리자이름 확인:<input class="form-control" id="inputStaffNameConfirm" type="text" name="inputStaffNameConfirm"/>
-        <input type="submit" value="관리자 삭제">
+        <div class="mb-3">
+            <label for="inputStaffNUM" class="form-label">관리자ID</label>
+            <input type="text" class="form-control" id="inputStaffNUM" placeholder="ID" name="inputStaffNUM"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputStaffName" class="form-label">관리자이름</label>
+            <input type="text" class="form-control" id="inputStaffName" placeholder="이름" name="inputStaffName"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputStaffNameConfirm" class="form-label">관리자이름 확인</label>
+            <input type="text" class="form-control" id="inputStaffNameConfirm" placeholder="관리자이름 확인" name="inputStaffNameConfirm"/>
+        </div>
+        <input class="btn btn-primary" type="submit" value="관리자 삭제">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

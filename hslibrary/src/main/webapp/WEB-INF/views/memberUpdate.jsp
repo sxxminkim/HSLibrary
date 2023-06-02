@@ -63,7 +63,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/memberUpdate" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputClientNUM" class="form-label">회원ID</label>
@@ -89,7 +89,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             <label for="inputClientEmail" class="form-label">회원이메일</label>
             <input type="text" class="form-control" id="inputClientEmail" placeholder="example@email.com" name="inputClientEmail">
         </div>
-        <input type="submit" value="회원 수정">
+        <input class="btn btn-primary" type="submit" value="회원 수정">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

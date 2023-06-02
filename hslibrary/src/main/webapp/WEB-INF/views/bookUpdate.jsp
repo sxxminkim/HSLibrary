@@ -58,7 +58,7 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             <input type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/bookDelete?bookID=${bookDTO.bookID}'" />
         </div>
     </div>
-    <div class="container">
+    <div class="container col-6 mx-auto mt-5">
         <form action="${pageContext.request.contextPath}/bookUpdate" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="bookID" class="form-label">별치기호</label>
@@ -66,39 +66,39 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             </div>
             <div class="mb-3">
                 <label for="inputBookName" class="form-label">제목</label>
-                <input type="text" class="form-control" id="inputBookName" placeholder="ID" name="inputBookName"/>
+                <input type="text" class="form-control" id="inputBookName" placeholder="제목" name="inputBookName"/>
             </div>
             <div class="mb-3">
                 <label for="inputBookWriter" class="form-label">저자</label>
-                <input type="text" class="form-control" id="inputBookWriter" placeholder="ID" name="inputBookWriter"/>
+                <input type="text" class="form-control" id="inputBookWriter" placeholder="저자" name="inputBookWriter"/>
             </div>
             <div class="mb-3">
                 <label for="inputBookGenre" class="form-label">분류</label>
-                <input type="text" class="form-control" id="inputBookGenre" placeholder="ID" name="inputBookGenre"/>
+                <input type="text" class="form-control" id="inputBookGenre" placeholder="분류" name="inputBookGenre"/>
             </div>
             <div class="mb-3">
                 <label for="inputBookCompany" class="form-label">출판사</label>
-                <input type="text" class="form-control" id="inputBookCompany" placeholder="ID" name="inputBookCompany"/>
+                <input type="text" class="form-control" id="inputBookCompany" placeholder="출판사" name="inputBookCompany"/>
             </div>
             <div class="mb-3">
                 <label for="inputBookISBN" class="form-label">ISBN</label>
-                <input type="text" class="form-control" id="inputBookISBN" placeholder="ID" name="inputBookISBN"/>
+                <input type="text" class="form-control" id="inputBookISBN" placeholder="ISBN" name="inputBookISBN"/>
             </div>
             <div class="mb-3">
                 <label for="inputBookYear" class="form-label">출간연도</label>
-                <input type="text" class="form-control" id="inputBookYear" placeholder="ID" name="inputBookYear"/>
+                <input type="text" class="form-control" id="inputBookYear" placeholder="출간연도" name="inputBookYear"/>
             </div>
             <div class="mb-3">
                 <label for="inputBookEdition" class="form-label">출간판</label>
-                <input type="text" class="form-control" id="inputBookEdition" placeholder="ID" name="inputBookEdition"/>
+                <input type="text" class="form-control" id="inputBookEdition" placeholder="출간판" name="inputBookEdition"/>
             </div>
             <div class="mb-3">
                 <label for="inputBookVolume" class="form-label">권</label>
-                <input type="text" class="form-control" id="inputBookVolume" placeholder="ID" name="inputBookVolume"/>
+                <input type="text" class="form-control" id="inputBookVolume" placeholder="권" name="inputBookVolume"/>
             </div>
             <div class="mb-3">
                 <label for="inputBookIssue" class="form-label">(잡지) 호</label>
-                <input type="text" class="form-control" id="inputBookIssue" placeholder="ID" name="inputBookIssue"/>
+                <input type="text" class="form-control" id="inputBookIssue" placeholder="(잡지) 호" name="inputBookIssue"/>
             </div>
             <div class="mb-3">
                 <label for="inputBookSummary" class="form-label">줄거리</label>
@@ -106,9 +106,9 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
             </div>
             <div class="mb-3">
                 <label for="inputBookType" class="form-label">종이책(1)/전자책(2)</label>
-                <input type="text" class="form-control" id="inputBookType" placeholder="ID" name="inputBookType"/>
+                <input type="text" class="form-control" id="inputBookType" placeholder="종이책(1)/전자책(2)" name="inputBookType"/>
             </div>
-            <input type="submit" value="도서 수정">
+            <input class="btn btn-primary" type="submit" value="도서 수정">
         </form>
     </div>
 </div>

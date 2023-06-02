@@ -54,13 +54,21 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/noticeUpdate" method="post" enctype="multipart/form-data">
-        공지번호:<input class="form-control" id="inputNoticeNUM" type="text" name="inputNoticeNUM"/>
-        제목:<input class="form-control" id="inputNoticeTitle" type="text" name="inputNoticeTitle"/>
-        작성자:<input class="form-control" id="inputNoticeAuthor" type="text" name="inputNoticeAuthor"/>
-        내용:<input class="form-control" id="inputNoticeMain" type="text" name="inputNoticeMain"/>
-        <input type="submit" value="공지사항 수정">
+        <div class="mb-3">
+            <label for="inputNoticeTitle" class="form-label">제목</label>
+            <input type="text" class="form-control" id="inputNoticeTitle" placeholder="제목" name="inputNoticeTitle">
+        </div>
+        <div class="mb-3">
+            <label for="inputNoticeAuthor" class="form-label">글쓴이</label>
+            <input type="text" class="form-control" id="inputNoticeAuthor" placeholder="글쓴이" name="inputNoticeAuthor">
+        </div>
+        <div class="mb-3">
+            <label for="inputNoticeMain" class="form-label">내용</label>
+            <textarea class="form-control" id="inputNoticeMain" rows="3"  name="inputNoticeMain"></textarea>
+        </div>
+        <input class="btn btn-primary" type="submit" value="공지사항 수정">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

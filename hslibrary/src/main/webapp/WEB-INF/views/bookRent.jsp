@@ -27,6 +27,7 @@
     <script>
         $(document).ready(function () {
             $('#bookTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -36,6 +37,7 @@
         });
         $(document).ready(function () {
             $('#memberTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -45,6 +47,7 @@
         });
         $(document).ready(function () {
             $('#bookRentTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -73,8 +76,8 @@
     </div>
 </div>
 <div style="float:left;margin-right:20px">
-<table id="bookTable">
-    <thead>
+<table class="table table-striped" id="bookTable">
+    <thead class="table-light">
         <th>bookID</th>
         <th>책제목</th>
         <th>지은이</th>
@@ -93,8 +96,8 @@
 </table>
 </div>
 <div style="float:left;margin-right:20px">
-    <table id="memberTable">
-        <thead>
+    <table class="table table-striped" id="memberTable">
+        <thead class="table-light">
         <th>clientNUM</th>
         <th>회원이름</th>
         <th>전화번호</th>
@@ -113,8 +116,8 @@
     </table>
 </div>
 <div class="container">
-    <table id="bookRentTable">
-        <thead>
+    <table class="table table-striped" id="bookRentTable">
+        <thead class="table-light">
         <th>도서대출번호</th>
         <th>도서번호</th>
         <th>회원번호</th>
@@ -136,7 +139,7 @@
         </tbody>
     </table>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/bookRent" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputBookRentNUM" class="form-label">도서대출번호</label>
@@ -150,7 +153,7 @@
             <label for="inputClientNUM" class="form-label">아이디</label>
             <input type="text" class="form-control" id="inputClientNUM" placeholder="ID" name="inputClientNUM"/>
         </div>
-        <input type="submit" value="도서 대출">
+        <input class="btn btn-primary" type="submit" value="도서 대출">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

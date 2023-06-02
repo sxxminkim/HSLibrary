@@ -24,6 +24,7 @@
     <script>
         $(document).ready(function () {
             $('#videoTable').DataTable({
+                "pageLength": 5,
                 lengthChange: true,
                 searching: true,
                 ordering: true,
@@ -52,8 +53,8 @@
     </div>
 </div>
 <div class="container">
-    <table class="table" id="videoRoomTable">
-        <thead>
+    <table class="table table-striped" id="videoRoomTable">
+        <thead class="table-light">
         <tr>
             <th>시청각실 번호</th>
             <th>시청각실 이름</th>
@@ -71,7 +72,7 @@
         </tbody>
     </table>
 </div>
-<div class="container">
+<div class="container col-6 mx-auto mt-5">
     <form action="${pageContext.request.contextPath}/VideoRoomAdd" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputVidRoomNUM" class="form-label">시청각실 번호</label>
@@ -81,7 +82,7 @@
             <label for="inputVidRoomName" class="form-label">시청각실 이름</label>
             <input type="text" class="form-control" id="inputVidRoomName" placeholder="시청각실 이름" name="inputVidRoomName">
         </div>
-        <input type="submit" value="시청각실 추가">
+        <input class="btn btn-primary" type="submit" value="시청각실 추가">
     </form>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
