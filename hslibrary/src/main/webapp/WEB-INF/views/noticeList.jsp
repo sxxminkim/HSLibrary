@@ -54,8 +54,6 @@
             <th>날짜</th>
             <th>작성자</th>
             <th>공지 링크</th>
-            <th>수정</th>
-            <th>삭제</th>
         </tr>
         </thead>
         <tbody>
