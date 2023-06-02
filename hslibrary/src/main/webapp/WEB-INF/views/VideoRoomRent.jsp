@@ -78,7 +78,7 @@
         </div>
     </div>
 </div>
-<div style="float:left;margin-right:20px">
+<div style="float:left;margin-left:350px; margin-right:300px">
     <table class="table table-striped" id="vidRoomTable">
         <thead>
         <tr>
@@ -116,7 +116,8 @@
         </tbody>
     </table>
 </div>
-<div class="container">
+
+<div class="container"style="margin-top:30px">
     <table class="table table-striped" id="vidRoomRentTable">
         <thead class="table-light">
         <tr>

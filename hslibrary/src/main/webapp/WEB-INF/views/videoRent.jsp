@@ -73,7 +73,7 @@
         </div>
     </div>
 </div>
-<div style="float:left;margin-right:20px">
+<div style="float:left;margin-left:300px;margin-right:200px">
     <table class="table table-striped" id="videoTable">
         <thead>
         <th>videoID</th>
