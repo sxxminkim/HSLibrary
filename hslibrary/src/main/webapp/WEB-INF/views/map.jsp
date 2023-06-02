@@ -21,12 +21,12 @@
 <script>
 
     var map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.582615, 127.010841), // 잠실 롯데월드를 중심으로 하는 지도
+        center: new naver.maps.LatLng(37.582615, 127.010841), // 무릉서원을 중심으로 하는 지도
         zoom: 17
     });
 
     var marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(37.582615, 127.010841),
+        position: new naver.maps.LatLng(37.582615, 127.010841), //무릉서원 위치에 마커 찍기
         map: map
     });
 
