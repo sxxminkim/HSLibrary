@@ -117,7 +117,7 @@
     </table>
 </div>
 
-<div class="container"style="margin-top:30px">
+<div class="container" style="margin-top:30px">
     <table class="table table-striped" id="vidRoomRentTable">
         <thead class="table-light">
         <tr>
