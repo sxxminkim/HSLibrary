@@ -41,8 +41,8 @@
         <div class="p-4 p-md-5 mb-4 rounded">
             <h1 class="display-4 mt-5 mb-4">관리자 정보 수정</h1>
             <div>
-                <a href="${pageContext.request.contextPath}/memberAdd">회원 추가</a>
-                <a href="${pageContext.request.contextPath}/adminDelete">관리자 삭제</a>
+                <a href="${pageContext.request.contextPath}/adminAdd" class="btn btn-primary">관리자 추가</a>
+                <a href="${pageContext.request.contextPath}/adminDelete" class="btn btn-primary">관리자 삭제</a>
             </div>
         </div>
     </div>

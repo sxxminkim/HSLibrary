@@ -53,8 +53,8 @@
         <div class="p-4 p-md-5 mb-4 rounded">
             <h1 class="display-4 mt-5 mb-4">퇴사한 관리자를 삭제하세요.</h1>
             <div>
-                <a href="${pageContext.request.contextPath}/adminRegister">관리자 추가</a>
-                <a href="${pageContext.request.contextPath}/adminDelete">관리자 삭제</a>
+                <a href="${pageContext.request.contextPath}/adminRegister" class="btn btn-primary">관리자 추가</a>
+                <a href="${pageContext.request.contextPath}/adminUpdate" class="btn btn-primary">관리자 수정</a>
             </div>
         </div>
     </div>

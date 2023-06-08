@@ -80,7 +80,6 @@ xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="a
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <!--없어도 됩니다-->
                     <h5 class="card-title">검색서비스</h5>
                     <p class="card-text">무릉서원의 도서/영상 데이터베이스를 통해 검색을 지원합니다.</p>
                     <a href="${pageContext.request.contextPath}/allList" class="btn btn-primary">바로가기</a>

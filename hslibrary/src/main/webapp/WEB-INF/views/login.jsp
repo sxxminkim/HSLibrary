@@ -62,7 +62,7 @@
 </head>
 <body>
     <div class="login">
-        <h1 class="text-center">Please sign in</h1>
+        <h1 class="text-center">로그인하세요</h1>
         <form name="login" method="post" action="login">
             <div class="form-group">
                 <label class="form-label" for="inputStaffNUM">ID</label>
@@ -73,13 +73,7 @@
                 <label class="form-label" for="inputPW">비밀번호</label>
                 <input class="form-control" type="password" id="inputPW" name="inputPW">
             </div>
-<!--
-            <div class="form-group form-check">
-                <input class="form-check-input" type="checkbox" id="check">
-                <label class="form-check-label" for="check">Remember me</label>
-            </div>
--->
-            <input class="btn btn-success w-100" type="submit" value="Sign in">
+            <input class="btn btn-success w-100" type="submit" value="로그인">
         </form>
     </div>
 </body>

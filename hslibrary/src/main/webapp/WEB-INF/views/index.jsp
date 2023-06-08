@@ -19,7 +19,7 @@
     <style>
         #main{
             width:100%;
-            height:100%
+            height:100%;
             background-image: url( "assets/bg1.jpg" );
             color:#ffffff;
         }
@@ -32,7 +32,7 @@
         <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
             <h1 class="display-4 mt-5 mb-4">무릉서원 관리자 시스템</h1>
             <p class="lead my-3">관리자이신가요? 로그인</p>
-            <button><a href="<c:url value="/login"/>" > login </a></button>
+            <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">login</a>
         </div>
     </div>
 </div>
@@ -50,13 +50,15 @@
         <div class="carousel-caption d-none d-md-block">
           <h5>공지사항</h5>
           <p>무릉서원의 공지사항을 확인해보세요.</p>
+            <a href="${pageContext.request.contextPath}/noticeList" class="btn btn-primary">바로가기</a>
         </div>
       </div>
       <div class="carousel-item">
         <img src="assets/booksearch.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h5>자료검색</h5>
-          <p>도서와 영상등 무릉서원의 자료들을 검색해보세요.</p>
+          <p>도서와 영상 등 무릉서원의 자료들을 검색해보세요.</p>
+            <a href="${pageContext.request.contextPath}/allList" class="btn btn-primary">바로가기</a>
         </div>
       </div>
       <div class="carousel-item">
@@ -64,6 +66,7 @@
         <div class="carousel-caption d-none d-md-block">
           <h5>오시는 길</h5>
           <p>오시는 길을 확인해보세요.</p>
+            <a href="${pageContext.request.contextPath}/map" class="btn btn-primary">바로가기</a>
         </div>
       </div>
     </div>
@@ -76,39 +79,6 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-
-<!--바로가기 카드-->
-<div class="container mt-15 text-center">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">공지사항</h5>
-                    <p class="card-text">일반 회원도 공지사항을 확인할 수 있습니다.</p>
-                    <a href="${pageContext.request.contextPath}/noticeList" class="btn btn-primary">바로가기</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">자료검색</h5>
-                    <p class="card-text">일반 이용자도 자료검색을 할 수 있습니다.</p>
-                    <a href="${pageContext.request.contextPath}/allList" class="btn btn-primary">바로가기</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">오시는 길</h5>
-                    <p class="card-text">무릉서원 오시는 길 안내</p>
-                    <a href="${pageContext.request.contextPath}/map" class="btn btn-primary">바로가기</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

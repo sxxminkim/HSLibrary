@@ -50,7 +50,7 @@
         <div class="p-4 p-md-5 mb-4 rounded">
             <h1 class="display-4 mt-5 mb-4">자료 검색</h1>
             <div>
-                <a href="${pageContext.request.contextPath}/noticeList">공지사항</a>
+                <a href="${pageContext.request.contextPath}/noticeList" class="btn btn-primary">공지사항</a>
             </div>
         </div>
     </div>
