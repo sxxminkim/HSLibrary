@@ -56,6 +56,7 @@
     </div>
 </div>
 <div class="container">
+    <h2 class="display-4 mt-5 mb-4">도서 검색</h2>
     <table class="table table-striped" id="bookTable">
         <thead class="table-light">
         <tr>
@@ -92,6 +93,7 @@
     </table>
 </div>
 <div class="container">
+    <h2 class="display-4 mt-5 mb-4">영상 검색</h2>
     <table id="videoTable">
         <thead>
         <tr>
